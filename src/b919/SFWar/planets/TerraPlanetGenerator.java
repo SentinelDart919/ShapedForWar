@@ -36,7 +36,7 @@ public class TerraPlanetGenerator extends PlanetGenerator {
     float heightScl = 1.01f;
     boolean genLakes = true;
     public float getSizeScl(){
-        return 12200;
+        return 11000;
     }
 
     float rawHeight(Vec3 position){

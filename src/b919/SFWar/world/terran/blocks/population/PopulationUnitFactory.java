@@ -16,7 +16,9 @@ import mindustry.world.meta.StatUnit;
 public class PopulationUnitFactory extends PopulationBlock {
     public Seq<UnitPlan> plans = new Seq<>();
     public float produceTime = 600f;
-
+    /**Copy and paste of the vanilla UnitFactory but with population usage*/
+    //TODO make inheritance for RTS like Factories, with Queue system, maybe also a way to detects units to make the factory always craft X amount of units,
+    // so if on of that unit dies it makes a new one
     public PopulationUnitFactory(String name) {
         super(name);
         hasItems = true;

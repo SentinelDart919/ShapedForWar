@@ -71,9 +71,9 @@ public class PopulationHouse extends PopulationBlock {
             return distributors.size > 0;
         }
 
-        @Override
+        /*@Override
         public boolean shouldConsume() {
             return population < populationCapacity;
-        }
+        }*/ // old function now is on super class
     }
 }

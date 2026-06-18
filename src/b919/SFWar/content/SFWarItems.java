@@ -6,15 +6,19 @@ import mindustry.type.Item;
 public class SFWarItems {
     public static Item
             //general items
-            uranium, enrichedUranium, ferrum, steel, chromium, sulfur, gunpowder,
+            uranium,ruby, enrichedUranium, ferrum, steel, chromium, sulfur, gunpowder,
     //terran
-            foodRations, heavyAlloy, armorPlates, heavyArmorPlates, smallCase, mediumCase, bigCase, commonAmmo, HEAmmo, APAmmo, ArtilleryRounds, uraniumAmmo,
-    uraniumPlates, nuclearFuel, depletedNuclearFuel,
+            foodRations, heavyAlloy, armorPlates, heavyArmorPlates, smallCase, mediumCase, bigCase,
+            commonAmmo, HEAmmo, APAmmo, ArtilleryRounds, uraniumAmmo,
+            uraniumPlates, nuclearFuel, depletedNuclearFuel,
     //biomass
-    flesh, denseTissues, biomass;
+            flesh, denseTissues, biomass;
     //Precursors?
+    //Nebulae
+
     public static void load(){
         uranium = new Item("uranium", Color.valueOf("000000")){{}};
+        ruby = new Item("ruby", Color.valueOf("000000")){{}};
         enrichedUranium = new Item("enriched-uranium", Color.valueOf("000000")){{}};
         ferrum = new Item("ferrum", Color.valueOf("000000")){{}};
         steel = new Item("steel", Color.valueOf("000000")){{}};

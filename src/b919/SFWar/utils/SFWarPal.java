@@ -1,4 +1,4 @@
-package b919.SFWar.content;
+package b919.SFWar.utils;
 
 import arc.graphics.*;
 

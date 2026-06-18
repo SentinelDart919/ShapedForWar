@@ -2,7 +2,7 @@ apply plugin: "java"
 
 version = '1.0'
 
-sourceSets.main.java.srcDirs = ["src", "FlameOut/src"]
+sourceSets.main.java.srcDirs = ["src"]
 
 repositories{
     mavenCentral()

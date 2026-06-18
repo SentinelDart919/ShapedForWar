@@ -1,4 +1,4 @@
-package b919.SFWar.content;
+package b919.SFWar.utils;
 
 import arc.graphics.*;
 import arc.graphics.g2d.*;
@@ -9,6 +9,8 @@ import mindustry.*;
 import mindustry.entities.*;
 import mindustry.graphics.*;
 
+import static arc.Core.atlas;
+import static arc.math.Angles.randLenVectors;
 import static arc.math.Interp.*;
 import static arc.graphics.g2d.Draw.*;
 
@@ -149,7 +151,17 @@ public class SFWarFX{
                 Fill.circle(v1.x, v1.y, scl);
             }
         }
-    });
+    }),
+
+    fallingLeaves = new Effect(450f, 150f, e ->{
+        color(e.color, e.color, e.fslope());
+        alpha(e.fslope() * 3f);
+
+        float drift = -20f * e.fin() * 4f;
+        randLenVectors(e.id, 1, 30f + e.finpow() * 40f, (x, y) -> {
+            Draw.rect(atlas.find("minedusty-tree-prop3"), e.x + x + drift, e.y + y + drift, 16f, 16f, e.fin() * 360f);
+        });
+    }).layer(Layer.darkness + 1);
 
     static float biasSlope(float fin, float bias){
         return (fin < bias ? (fin / bias) : 1f - (fin - bias) / (1f - bias));

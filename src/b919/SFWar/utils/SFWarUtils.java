@@ -1,9 +1,8 @@
-package b919.SFWar.content;
+package b919.SFWar.utils;
 
 import arc.func.*;
 import arc.math.*;
 import arc.math.geom.*;
-import arc.math.geom.QuadTree.*;
 import arc.struct.*;
 import mindustry.*;
 import mindustry.core.*;

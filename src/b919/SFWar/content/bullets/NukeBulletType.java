@@ -4,9 +4,12 @@ import arc.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
-import arc.math.geom.*;
 import arc.util.Tmp;
-import b919.SFWar.content.*;
+import b919.SFWar.utils.SFWarFX;
+import b919.SFWar.utils.SFWarSFX;
+import b919.SFWar.utils.SFWarSounds;
+import b919.SFWar.utils.SFWarPal;
+import b919.SFWar.utils.SFWarUtils;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.entities.*;
@@ -16,8 +19,8 @@ import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.world.blocks.defense.*;
 
-public class ScatheNukeBulletType extends BasicBulletType{
-    public ScatheNukeBulletType(float speed, float damage){
+public class NukeBulletType extends BasicBulletType{
+    public NukeBulletType(float speed, float damage){
         super(speed, damage, "missile-large");
         backColor = trailColor = hitColor = SFWarPal.red;
         frontColor = SFWarPal.red.cpy().mul(2f);
@@ -32,7 +35,7 @@ public class ScatheNukeBulletType extends BasicBulletType{
         lifetime = 60f;
 
         despawnHit = true;
-        collidesTiles = false;
+        collidesTiles = true;
 
         hitEffect = Fx.massiveExplosion;
         despawnEffect = Fx.none;
@@ -71,23 +74,42 @@ public class ScatheNukeBulletType extends BasicBulletType{
     @Override
     public void hit(Bullet b, float x, float y){
         super.hit(b, x, y);
-        float bx = b.x, by = b.y;
+        createNukeExplosion(b.x, b.y, b.team, b.rotation());
+    }
+
+    @Override
+    public void hitTile(Bullet b, Building build, float x, float y, float initialHealth, boolean direct){
+        super.hitTile(b, build, x, y, initialHealth, direct);
+        createNukeExplosion(b.x, b.y, b.team, b.rotation());
+    }
+    @Override
+    public void hitEntity(Bullet b, Hitboxc entity, float health){
+        super.hitEntity(b, entity, health);
+        createNukeExplosion(b.x, b.y, b.team, b.rotation());
+    }
+    @Override
+    public void despawned(Bullet b){
+        super.despawned(b);
+        createNukeExplosion(b.x, b.y, b.team, b.rotation());
+    }
+
+    public static void createNukeExplosion(float x, float y, Team team, float rotation){
 
         if(SFWarSounds.desNukeHit != null){
-            int sid1 = SFWarSounds.desNukeHit.at(bx, by, 1f, 2f);
+            int sid1 = SFWarSounds.desNukeHit.at(x, y, 1f, 2f);
             Core.audio.protect(sid1, true);
-            float fall = Mathf.pow(Mathf.clamp(1f - SFWarSounds.desNukeHit.calcFalloff(bx, by) * 1.1f), 1.5f);
-            int sid2 = SFWarSounds.desNukeHitFar.play(fall * 2f, 1f, SFWarSounds.desNukeHit.calcPan(bx, by));
+            float fall = Mathf.pow(Mathf.clamp(1f - SFWarSounds.desNukeHit.calcFalloff(x, y) * 1.1f), 1.5f);
+            int sid2 = SFWarSounds.desNukeHitFar.play(fall * 2f, 1f, SFWarSounds.desNukeHit.calcPan(x, y));
             Core.audio.protect(sid2, true);
         }
 
         float[] arr = new float[360 * 3];
-        SFWarUtils.rayCastCircle(b.x, b.y, 480f, t -> (t.block().isStatic() || t.block() instanceof Wall) && !Mathf.within(b.x, b.y, t.worldx(), t.worldy(), 150f), t -> {
-            float dst = 1f - Mathf.clamp(Mathf.dst(bx, by, t.x * Vars.tilesize, t.y * Vars.tilesize) / 480f);
+        SFWarUtils.rayCastCircle(x, y, 480f, t -> (t.block().isStatic() || t.block() instanceof Wall) && !Mathf.within(x, y, t.worldx(), t.worldy(), 150f), t -> {
+            float dst = 1f - Mathf.clamp(Mathf.dst(x, y, t.x * Vars.tilesize, t.y * Vars.tilesize) / 480f);
             if(Mathf.chance(Mathf.pow(dst, 2f) * 0.75f)) Fires.create(t);
         }, t -> {
             float nx = t.x * Vars.tilesize, ny = t.y * Vars.tilesize;
-            float ang = Angles.angle(bx, by, nx, ny);
+            float ang = Angles.angle(x, y, nx, ny);
 
             SFWarFX.desNukeShockSmoke.at(nx, ny, ang);
         }, bl -> {
@@ -104,26 +126,26 @@ public class ScatheNukeBulletType extends BasicBulletType{
             }
         }, arr);
 
-        SFWarUtils.scanEnemies(b.team, b.x, b.y, 480f, true, true, t -> {
+        SFWarUtils.scanEnemies(team, x, y, 480f, true, true, t -> {
             if(t instanceof Unit u){
-                float damageScl = SFWarUtils.inRayCastCircle(bx, by, arr, u);
+                float damageScl = SFWarUtils.inRayCastCircle(x, y, arr, u);
 
                 if(damageScl > 0){
-                    Tmp.v2.trns(Angles.angle(bx, by, u.x, u.y), (16f + 5f / u.mass()) * damageScl);
+                    Tmp.v2.trns(Angles.angle(x, y, u.x, u.y), (16f + 5f / u.mass()) * damageScl);
                     u.vel.add(Tmp.v2);
 
                     float ud = (u.maxHealth / 10f + 10000f) * damageScl;
                     u.damage(ud);
 
-                    SFWarFX.desNukeVaporize.at(u.x, u.y, u.angleTo(bx, by) + 180f, u.hitSize / 2f);
+                    SFWarFX.desNukeVaporize.at(u.x, u.y, u.angleTo(x, y) + 180f, u.hitSize / 2f);
                 }
             }else if(t instanceof Building bl){
-                float damageScl = SFWarUtils.inRayCastCircle(bx, by, arr, bl);
+                float damageScl = SFWarUtils.inRayCastCircle(x, y, arr, bl);
                 if(damageScl > 0){
-                    if(t.within(bx, by, 150f + bl.hitSize() / 2f)){
+                    if(t.within(x, y, 150f + bl.hitSize() / 2f)){
                         bl.damage((bl.maxHealth / 10f + 10000f) * damageScl);
 
-                        SFWarFX.desNukeVaporize.at(bl.x, bl.y, bl.angleTo(bx, by) + 180f, bl.hitSize() / 2f);
+                        SFWarFX.desNukeVaporize.at(bl.x, bl.y, bl.angleTo(x, y) + 180f, bl.hitSize() / 2f);
                     }else{
                         float bd = (bl.maxHealth / 10f + 10000f) * damageScl;
                         bl.damage(bd);
@@ -143,9 +165,24 @@ public class ScatheNukeBulletType extends BasicBulletType{
             }
         });
 
-        Effect.shake(60f, 120f, b.x, b.y);
-        SFWarFX.desNukeShockwave.at(b.x, b.y, 480f);
-        SFWarFX.desNuke.at(b.x, b.y, 479f, arr);
+        Effect.shake(60f, 120f, x, y);
+        SFWarFX.desNukeShockwave.at(x, y, 480f);
+        SFWarFX.desNuke.at(x, y, 479f, arr);
+
+        if(SFWarSFX.inst != null){
+            SFWarSFX.inst.impactFrames(x, y, rotation, 53f, false, () -> {
+                for(int i = 0; i < arr.length; i++){
+                    float len1 = arr[i], len2 = arr[(i + 1) % arr.length];
+                    float ang1 = (i / (float)arr.length) * 360f;
+                    float ang2 = ((i + 1f) / arr.length) * 360f;
+
+                    float x1 = Mathf.cosDeg(ang1) * len1, y1 = Mathf.sinDeg(ang1) * len1;
+                    float x2 = Mathf.cosDeg(ang2) * len2, y2 = Mathf.sinDeg(ang2) * len2;
+
+                    Fill.tri(x, y, x + x1, y + y1, x + x2, y + y2);
+                }
+            });
+        }
 
         Draw.draw(Layer.end - 1, () -> {
             for(int i = 0; i < arr.length; i++){
@@ -156,7 +193,7 @@ public class ScatheNukeBulletType extends BasicBulletType{
                 float x1 = Mathf.cosDeg(ang1) * len1, y1 = Mathf.sinDeg(ang1) * len1;
                 float x2 = Mathf.cosDeg(ang2) * len2, y2 = Mathf.sinDeg(ang2) * len2;
 
-                Fill.tri(bx, by, bx + x1, by + y1, bx + x2, by + y2);
+                Fill.tri(x, y, x + x1, y + y1, x + x2, y + y2);
             }
         });
     }

@@ -37,7 +37,12 @@ public class PopulationManager {
     }
     /** Removes an amount of population CAPACITY to the team */
     public static void removeCapacity(Team team, int amount) {
-        get(team).capacity -= amount;
+        get(team).capacity = Math.max(0, get(team).capacity - amount);
+    }
+
+    /** Clears all population data for all teams. Called when a new world loads */
+    public static void clear() {
+        data.clear();
     }
 
     private static class PopData {

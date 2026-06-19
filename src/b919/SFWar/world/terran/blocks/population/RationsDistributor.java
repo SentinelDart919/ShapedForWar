@@ -96,7 +96,6 @@ public class RationsDistributor extends Block {
                 int idx = (transferIndex + i) % connectedHouses.size;
                 PopulationHouse.PopulationHouseBuild house = connectedHouses.get(idx);
                 if (house != null && house.isAdded() &&
-                    house.population < ((PopulationBlock) house.block).populationCapacity &&
                     house.items.get(item) < house.block.itemCapacity) {
                     items.remove(item, 1);
                     house.distributorDeliver(item, 1);

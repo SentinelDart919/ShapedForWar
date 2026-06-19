@@ -10,6 +10,7 @@ import b919.SFWar.content.blocks.TerranBlocks;
 import b919.SFWar.ui.PopulationDisplay;
 import b919.SFWar.utils.SFWarSFX;
 import b919.SFWar.utils.SFWarSounds;
+import b919.SFWar.world.terran.blocks.population.PopulationManager;
 import mindustry.Vars;
 import mindustry.game.EventType;
 import mindustry.mod.*;
@@ -18,6 +19,7 @@ public class SFWarMain extends Mod{
 
     public SFWarMain(){
         Log.info("Shaped For War loaded.");
+        Events.on(EventType.WorldLoadBeginEvent.class, e -> PopulationManager.clear());
         Events.on(EventType.FileTreeInitEvent.class, e -> Core.app.post(SFWarSounds::load));
         Events.on(EventType.ContentInitEvent.class, e -> Core.app.post(() -> {
             if (!Vars.headless) {

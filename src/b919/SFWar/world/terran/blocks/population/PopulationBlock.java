@@ -1,5 +1,6 @@
 package b919.SFWar.world.terran.blocks.population;
 
+import arc.util.io.*;
 import mindustry.gen.*;
 import mindustry.graphics.Pal;
 import mindustry.ui.Bar;
@@ -75,23 +76,39 @@ public class PopulationBlock extends Block {
             return populationCapacity - population;
         }
 
-        public boolean addPopulation(int amount) {
-            if (population + amount > populationCapacity) return false;
+        public void addPopulation(int amount) {
+            if (population + amount > populationCapacity) return;
             population += amount;
             PopulationManager.addPopulation(team, amount);
-            return true;
         }
 
-        public boolean removePopulation(int amount) {
-            if (population < amount) return false;
+        public void removePopulation(int amount) {
+            if (population < amount) return;
             population -= amount;
             PopulationManager.removePopulation(team, amount);
-            return true;
         }
 
         @Override
         public boolean shouldConsume() {
             return population < populationCapacity;
+        }
+
+        @Override
+        public void write(Writes write) {
+            super.write(write);
+            write.i(population);
+        }
+
+        @Override
+        public void read(Reads read, byte revision) {
+            super.read(read, revision);
+            population = read.i();
+            if (populationCapacity > 0) {
+                PopulationManager.addCapacity(team, populationCapacity);
+            }
+            if (population > 0) {
+                PopulationManager.addPopulation(team, population);
+            }
         }
     }
 }

@@ -5,6 +5,8 @@ import b919.SFWar.content.SFWarItems;
 import b919.SFWar.world.terran.blocks.population.PopulationHouse;
 import b919.SFWar.world.terran.blocks.population.PopulationUnitFactory;
 import b919.SFWar.world.terran.blocks.population.RationsDistributor;
+import b919.SFWar.world.production.SolarCrafter;
+import mindustry.content.Liquids;
 import mindustry.content.UnitTypes;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
@@ -17,7 +19,8 @@ public class TerranBlocks {
     public static Block
             terranHouse,
             terranBarracks,
-            terranRationsDistributor;
+            terranRationsDistributor,
+            terranGreenHouse;
 
     public static void load() {
         terranHouse = new PopulationHouse("terran-house") {{
@@ -49,6 +52,17 @@ public class TerranBlocks {
             transferTime = 60f;
             size = 1;
             health = 400;
+        }};
+
+        terranGreenHouse = new SolarCrafter("terran-green-house"){{
+            requirements(Category.production, BuildVisibility.shown, with());
+            outputItem = new ItemStack(SFWarItems.foodRations, 1);
+            size = 2;
+            health = 400;
+            minEfficiency = 0;
+            hasItems = true;
+            consumeLiquid(Liquids.water, 0.45f / 60f);
+            consumePower(2f);
         }};
     }
 }

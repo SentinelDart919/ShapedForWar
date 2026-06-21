@@ -4,7 +4,8 @@ import arc.math.Mathf;
 import arc.scene.ui.layout.Table;
 import arc.struct.Seq;
 import arc.util.Structs;
-import mindustry.gen.Building;
+import arc.util.io.*;
+import mindustry.gen.*;
 import mindustry.graphics.Pal;
 import mindustry.type.Item;
 import mindustry.type.ItemStack;
@@ -37,11 +38,6 @@ public class PopulationUnitFactory extends PopulationBlock {
     @Override
     public void init() {
         super.init();
-        int maxCost = 0;
-        for (UnitPlan p : plans) {
-            if (p.populationCost > maxCost) maxCost = p.populationCost;
-        }
-        if (populationCapacity < maxCost) populationCapacity = maxCost;
     }
 
     @Override
@@ -126,7 +122,8 @@ public class PopulationUnitFactory extends PopulationBlock {
             float spawnX = x + Mathf.cosDeg(angle) * (size * 8f + 4f);
             float spawnY = y + Mathf.sinDeg(angle) * (size * 8f + 4f);
 
-            plan.unit.spawn(team, spawnX, spawnY);
+            Unit spawned = plan.unit.spawn(team, spawnX, spawnY);
+            PopulationManager.registerUnitIdCost(spawned.id, plan.populationCost);
         }
 
         @Override
@@ -159,6 +156,20 @@ public class PopulationUnitFactory extends PopulationBlock {
         public boolean acceptItem(Building source, Item item) {
             return currentPlan != -1 && items.get(item) < getMaximumAccepted(item) &&
                     Structs.contains(plans.get(currentPlan).requirements, stack -> stack.item == item);
+        }
+
+        @Override
+        public void write(Writes write) {
+            super.write(write);
+            write.i(currentPlan);
+            write.f(progress);
+        }
+
+        @Override
+        public void read(Reads read, byte revision) {
+            super.read(read, revision);
+            currentPlan = read.i();
+            progress = read.f();
         }
     }
 }

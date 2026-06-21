@@ -10,6 +10,7 @@ import b919.SFWar.content.blocks.TerranBlocks;
 import b919.SFWar.ui.PopulationDisplay;
 import b919.SFWar.utils.SFWarSFX;
 import b919.SFWar.utils.SFWarSounds;
+import b919.SFWar.world.terran.blocks.population.PopulationHouse;
 import b919.SFWar.world.terran.blocks.population.PopulationManager;
 import mindustry.Vars;
 import mindustry.game.EventType;
@@ -20,6 +21,29 @@ public class SFWarMain extends Mod{
     public SFWarMain(){
         Log.info("Shaped For War loaded.");
         Events.on(EventType.WorldLoadBeginEvent.class, e -> PopulationManager.clear());
+        //unit population stuff required, without this it is impossible to remove population when a unit dies, there are simple ways
+        //but can be buggy or inefficient,
+        Events.on(EventType.UnitDestroyEvent.class, e -> {
+            int cost = PopulationManager.getUnitIdCost(e.unit.id);
+            if (cost > 0) {
+                PopulationManager.removeUnitIdCost(e.unit.id);
+                for (PopulationHouse.PopulationHouseBuild house : PopulationHouse.getHouses(e.unit.team())) {
+                    if (house.population >= cost) {
+                        house.removePopulation(cost);
+                        cost = 0;
+                        break;
+                    }
+                }
+                if (cost > 0) {
+                    for (PopulationHouse.PopulationHouseBuild house : PopulationHouse.getHouses(e.unit.team())) {
+                        if (house.population > 0) {
+                            house.removePopulation(cost);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
         Events.on(EventType.FileTreeInitEvent.class, e -> Core.app.post(SFWarSounds::load));
         Events.on(EventType.ContentInitEvent.class, e -> Core.app.post(() -> {
             if (!Vars.headless) {
@@ -37,13 +61,13 @@ public class SFWarMain extends Mod{
 
     @Override
     public void loadContent(){
-        Log.info("Loading content.");
         SFWarPlanets.load();
         SFWarItems.load();
         //SFWarBlocks.load();
         TerranBlocks.load();
         NebulaeBlocks.load();
         SFWarDebugBlocks.load();
+        Log.info("Ready for Action");
     }
 
 }

@@ -39,10 +39,25 @@ public class PopulationManager {
     public static void removeCapacity(Team team, int amount) {
         get(team).capacity = Math.max(0, get(team).capacity - amount);
     }
+    //Pop. stuff for Units
+    private static final ObjectMap<Integer, Integer> unitIdCost = new ObjectMap<>();
+    /** Adds Units ID and Unit Population cost to the unitIdCost list*/
+    public static void registerUnitIdCost(int unitId, int cost) {
+        unitIdCost.put(unitId, cost);
+    }
+    /** Gets the cost of population of the unit depending on it's id*/
+    public static int getUnitIdCost(int unitId) {
+        return unitIdCost.get(unitId, 0);
+    }
+    /** Removes the unit from the list*/
+    public static void removeUnitIdCost(int unitId) {
+        unitIdCost.remove(unitId);
+    }
 
     /** Clears all population data for all teams. Called when a new world loads */
     public static void clear() {
         data.clear();
+        unitIdCost.clear();
     }
 
     private static class PopData {

@@ -1,8 +1,10 @@
 package b919.SFWar.world.terran.blocks.population;
 
+import arc.struct.ObjectMap;
 import arc.struct.Seq;
 import arc.util.Time;
 import arc.util.io.*;
+import mindustry.game.Team;
 import mindustry.gen.*;
 import mindustry.graphics.Pal;
 import mindustry.type.Item;
@@ -31,11 +33,30 @@ public class PopulationHouse extends PopulationBlock {
             );
         });
     }
+/** Creates an Array "PopulationHouseBuild" with all houses built */
+    private static final ObjectMap<Team, Seq<PopulationHouseBuild>> houses = new ObjectMap<>();
+/** Gets the data of the PopulationHouseBuild Array*/
+    public static Seq<PopulationHouseBuild> getHouses(Team team) {
+        return houses.get(team, Seq::new);
+    }
 
     public class PopulationHouseBuild extends PopulationBuild {
         public float generationProgress = 0f;
         public float starvationTimer = 0f;
         public Seq<RationsDistributor.RationsDistributorBuild> distributors = new Seq<>();
+
+        @Override
+        public void created() { //adds the building to the houses Array
+            super.created();
+            houses.get(team, Seq::new).add(this);
+        }
+
+        @Override
+        public void onRemoved() { //removes it from the array
+            Seq<PopulationHouseBuild> seq = houses.get(team);
+            if (seq != null) seq.remove(this);
+            super.onRemoved();
+        }
 
         @Override
         public void updateTile() {

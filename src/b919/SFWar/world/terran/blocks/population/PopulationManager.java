@@ -17,13 +17,10 @@ public class PopulationManager {
         return get(team).available;
     }
     /** Gives you an int with all the population CAPACITY of the team. */
-    public static int getAvailable(Team team) {
-        return get(team).available;
-    }
-
     public static int getCapacity(Team team) {
         return get(team).capacity;
     }
+    /** Gives you an int with all the population PENDING of the team. */
 
     public static int getPending(Team team) {
         return get(team).pending;

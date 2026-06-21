@@ -105,7 +105,7 @@ public class PopulationUnitFactory extends PopulationBlock {
 
         public boolean canProduce(UnitPlan plan) {
             if (plan == null) return false;
-            if (PopulationManager.getPopulation(team) < plan.populationCost) return false;
+            if (!PopulationManager.canConsumePopulation(team, plan.populationCost)) return false;
             for (ItemStack req : plan.requirements) {
                 if (!items.has(req.item, req.amount)) return false;
             }
@@ -116,7 +116,7 @@ public class PopulationUnitFactory extends PopulationBlock {
             for (ItemStack req : plan.requirements) {
                 items.remove(req.item, req.amount);
             }
-            PopulationManager.removePopulation(team, plan.populationCost);
+            PopulationManager.consumePopulation(team, plan.populationCost);
 
             float angle = rotation * 90f;
             float spawnX = x + Mathf.cosDeg(angle) * (size * 8f + 4f);

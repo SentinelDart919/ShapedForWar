@@ -55,12 +55,7 @@ public class PopulationBlock extends Block {
 
         @Override
         public void onRemoved() {
-            if (population > 0) {
-                PopulationManager.removePopulation(team, population);
-            }
-            if (populationCapacity > 0) {
-                PopulationManager.removeCapacity(team, populationCapacity);
-            }
+            PopulationManager.onHouseDestroyed(team, populationCapacity, population);
             super.onRemoved();
         }
 

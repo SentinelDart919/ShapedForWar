@@ -10,7 +10,6 @@ import b919.SFWar.content.blocks.TerranBlocks;
 import b919.SFWar.ui.PopulationDisplay;
 import b919.SFWar.utils.SFWarSFX;
 import b919.SFWar.utils.SFWarSounds;
-import b919.SFWar.world.terran.blocks.population.PopulationHouse;
 import b919.SFWar.world.terran.blocks.population.PopulationManager;
 import mindustry.Vars;
 import mindustry.game.EventType;
@@ -27,21 +26,7 @@ public class SFWarMain extends Mod{
             int cost = PopulationManager.getUnitIdCost(e.unit.id);
             if (cost > 0) {
                 PopulationManager.removeUnitIdCost(e.unit.id);
-                for (PopulationHouse.PopulationHouseBuild house : PopulationHouse.getHouses(e.unit.team())) {
-                    if (house.population >= cost) {
-                        house.removePopulation(cost);
-                        cost = 0;
-                        break;
-                    }
-                }
-                if (cost > 0) {
-                    for (PopulationHouse.PopulationHouseBuild house : PopulationHouse.getHouses(e.unit.team())) {
-                        if (house.population > 0) {
-                            house.removePopulation(cost);
-                            break;
-                        }
-                    }
-                }
+                PopulationManager.returnPopulation(e.unit.team(), cost);
             }
         });
         Events.on(EventType.FileTreeInitEvent.class, e -> Core.app.post(SFWarSounds::load));

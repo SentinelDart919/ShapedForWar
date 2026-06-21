@@ -41,23 +41,23 @@ public class PopulationManager {
         PopData d = get(team);
         d.available = Math.max(0, d.available - amount);
     }
-
+    /** Checks if you can consume Population (available pop should be > than amount) */
     public static boolean canConsumePopulation(Team team, int amount) {
         return get(team).available >= amount;
     }
-
+    /** Consumes the population (removes amount to available pop) */
     public static void consumePopulation(Team team, int amount) {
         get(team).available -= amount;
     }
-
+    /** Adds available population, this adds raw population to the team, doesn't check if there is pending pop*/
     public static void returnPopulation(Team team, int amount) {
         get(team).available += amount;
     }
-
+    /** Adds population capacity*/
     public static void addCapacity(Team team, int amount) {
         get(team).capacity += amount;
     }
-
+    /** Removes the population capacity and available population of the house*/
     public static void onHouseDestroyed(Team team, int houseCap, int houseGen) {
         PopData d = get(team);
         d.capacity -= houseCap;
@@ -89,8 +89,8 @@ public class PopulationManager {
     }
 
     private static class PopData {
-        public int capacity = 0;
-        public int available = 0;
-        public int pending = 0;
+        public int capacity = 0;// Capacity, not usable pop
+        public int available = 0;// usable pop
+        public int pending = 0;// literally negative pop this if your house gets destroyed and you got units
     }
 }

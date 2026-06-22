@@ -6,10 +6,15 @@ import mindustry.type.Liquid;
 public class SFWarLiquids {
     public static Liquid
             blood,
-            gaseousNyctar;
+            liquidNyctar ,gaseousNyctar;
     public static void load(){
         blood = new Liquid("blood", Color.valueOf("000000")){{}};
-        gaseousNyctar = new Liquid("gaseous-nyctar", Color.valueOf("000000")){{}};
+        liquidNyctar = new Liquid("liquid-nyctar", Color.valueOf("7d00ab")){{
+
+        }};
+        gaseousNyctar = new Liquid("gaseous-nyctar", Color.valueOf("ab1ae0")){{
+            gas = true;
+        }};
     }
 }
 

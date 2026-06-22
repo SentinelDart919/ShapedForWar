@@ -12,12 +12,14 @@ public class SFWarItems {
             commonAmmo, HEAmmo, APAmmo, ArtilleryRounds, uraniumAmmo,
             uraniumPlates, nuclearFuel, depletedNuclearFuel,
     //biomass
-            flesh, denseTissues, biomass;
+            flesh, denseTissues, biomass,
     //Precursors?
     //Nebulae
-
+            nyctoSteel, solidifiedNyctar;
     public static void load(){
-        uranium = new Item("uranium", Color.valueOf("000000")){{}};
+        uranium = new Item("uranium", Color.valueOf("000000")){{
+            radioactivity = 100;
+        }};
         ruby = new Item("ruby", Color.valueOf("000000")){{}};
         enrichedUranium = new Item("enriched-uranium", Color.valueOf("000000")){{}};
         ferrum = new Item("ferrum", Color.valueOf("000000")){{}};
@@ -44,5 +46,8 @@ public class SFWarItems {
         flesh = new Item("flesh", Color.valueOf("000000")){{}};
         denseTissues = new Item("dense-tissues", Color.valueOf("000000")){{}};
         biomass = new Item("biomass", Color.valueOf("000000")){{}};
+        //Nebulae
+        nyctoSteel = new Item("nycto-steel", Color.valueOf("ab1ae0")){{}};
+        solidifiedNyctar = new Item("solidified-nyctar", Color.valueOf("8e00c2")){{}};
     }
 }

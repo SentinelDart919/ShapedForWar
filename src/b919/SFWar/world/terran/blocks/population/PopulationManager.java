@@ -2,12 +2,13 @@ package b919.SFWar.world.terran.blocks.population;
 
 import arc.struct.ObjectMap;
 import mindustry.game.Team;
+import mindustry.gen.Groups;
 
 public class PopulationManager {
     /** Used to Access Team Data or Pop. Manager Data*/
     private static final ObjectMap<Team, PopData> data = new ObjectMap<>();
-    /** Unit cost list*/
-    private static final ObjectMap<Integer, Integer> unitIdCost = new ObjectMap<>();
+    /** Unit type cost list (unittype name -> cost)*/
+    private static final ObjectMap<String, Integer> unitTypeCost = new ObjectMap<>();
     /** Gives access to PopData */
     private static PopData get(Team team) {
         return data.get(team, PopData::new);
@@ -68,24 +69,29 @@ public class PopulationManager {
         }
     }
 
-    //Pop. stuff for Units
-    /** Adds Units ID and Unit Population cost to the unitIdCost list*/
-    public static void registerUnitIdCost(int unitId, int cost) {
-        unitIdCost.put(unitId, cost);
+    /** Registers a unit types population cost by type name*/
+    public static void registerUnitTypeCost(String typeName, int cost) {
+        unitTypeCost.put(typeName, cost);
     }
-    /** Gets the cost of population of the unit depending on it's id*/
-    public static int getUnitIdCost(int unitId) {
-        return unitIdCost.get(unitId, 0);
+
+    /** Gets the population cost for a unit type by name(string)*/
+    public static int getUnitTypeCost(String typeName) {
+        return unitTypeCost.get(typeName, 0);
     }
-    /** Removes the unit from the list*/
-    public static void removeUnitIdCost(int unitId) {
-        unitIdCost.remove(unitId);
+
+    /** Re-registers population consumption for all alive units after map load*/
+    public static void reloadUnitCosts() {
+        Groups.unit.each(u -> {
+            int cost = unitTypeCost.get(u.type.name, 0);
+            if (cost > 0) {
+                consumePopulation(u.team, cost);
+            }
+        });
     }
 
     /** Clears all population data for all teams. Called when a new world loads */
     public static void clear() {
         data.clear();
-        unitIdCost.clear();
     }
 
     private static class PopData {

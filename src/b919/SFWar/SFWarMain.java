@@ -19,13 +19,13 @@ public class SFWarMain extends Mod{
 
     public SFWarMain(){
         Log.info("Shaped For War loaded.");
-        Events.on(EventType.WorldLoadBeginEvent.class, e -> PopulationManager.clear());
         //unit population stuff required, without this it is impossible to remove population when a unit dies, there are simple ways
         //but can be buggy or inefficient,
+        Events.on(EventType.WorldLoadBeginEvent.class, e -> PopulationManager.clear());
+        Events.on(EventType.WorldLoadEndEvent.class, e -> Core.app.post(PopulationManager::reloadUnitCosts));
         Events.on(EventType.UnitDestroyEvent.class, e -> {
-            int cost = PopulationManager.getUnitIdCost(e.unit.id);
+            int cost = PopulationManager.getUnitTypeCost(e.unit.type.name);
             if (cost > 0) {
-                PopulationManager.removeUnitIdCost(e.unit.id);
                 PopulationManager.returnPopulation(e.unit.team(), cost);
             }
         });

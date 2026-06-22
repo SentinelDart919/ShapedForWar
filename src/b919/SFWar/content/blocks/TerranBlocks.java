@@ -6,6 +6,7 @@ import b919.SFWar.world.terran.blocks.population.PopulationHouse;
 import b919.SFWar.world.terran.blocks.population.PopulationUnitFactory;
 import b919.SFWar.world.terran.blocks.population.RationsDistributor;
 import b919.SFWar.world.production.SolarCrafter;
+import mindustry.content.Items;
 import mindustry.content.Liquids;
 import mindustry.content.UnitTypes;
 import mindustry.type.Category;
@@ -36,10 +37,13 @@ public class TerranBlocks {
         terranBarracks = new PopulationUnitFactory("terran-barracks") {{
             requirements(Category.units, BuildVisibility.shown, with());
             plans = Seq.with(
-                    new PopulationUnitFactory.UnitPlan(UnitTypes.dagger, 600f, 1,
-                            ItemStack.with(SFWarItems.steel, 15, SFWarItems.commonAmmo, 10))
+                    new UnitPlan(UnitTypes.dagger, 600f, 1,
+                            ItemStack.with(SFWarItems.steel, 15, SFWarItems.commonAmmo, 10)),
+                    new UnitPlan(UnitTypes.nova, 800f, 1,
+                            ItemStack.with(SFWarItems.armorPlates, 30, SFWarItems.commonAmmo, 20)),
+                    new UnitPlan(UnitTypes.mace, 1000f, 2,
+                            ItemStack.with(SFWarItems.armorPlates, 45, Items.pyratite, 30))
             );
-            itemCapacity = 60;
             size = 2;
             health = 800;
         }};

@@ -48,6 +48,7 @@ public class SFWarMain extends Mod{
     public void loadContent(){
         SFWarPlanets.load();
         SFWarItems.load();
+        SFWarLiquids.load();
         //SFWarBlocks.load();
         TerranBlocks.load();
         NebulaeBlocks.load();

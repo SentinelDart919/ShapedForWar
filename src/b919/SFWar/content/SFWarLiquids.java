@@ -21,7 +21,7 @@ public class SFWarLiquids {
             coolant = true;
             moveThroughBlocks = false;
             incinerable = false;
-            effect = StatusEffects.electrified;
+            effect = StatusEffects.shocked;
         }};
         gaseousNyctar = new Liquid("gaseous-nyctar", Color.valueOf("ab1ae0")){{
             gas = true;
@@ -31,7 +31,7 @@ public class SFWarLiquids {
             explosiveness = 0.2f;
             viscosity = 0.1f;
             blockReactive = false;
-            coolant = false;
+            coolant = true;
             moveThroughBlocks = false;
             incinerable = false;
         }};

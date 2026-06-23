@@ -5,9 +5,10 @@ import mindustry.world.Block;
 import mindustry.world.blocks.defense.ForceProjector;
 import mindustry.world.blocks.storage.CoreBlock;
 import mindustry.world.meta.BuildVisibility;
-// import mindustry.type*;
-// import mindustry.type.unit*;
-// import b919.SFWar.content.units.NebulaeUnits;
+import mindustry.type.*; // this will import the classes in this package but not the classes in subpackages
+import mindustry.type.unit.*; // this is not for units this is to set entities, not units
+import mindustry.content.UnitTypes; //this is for units
+import b919.SFWar.content.units.NebulaeUnits;
 
 import static mindustry.type.ItemStack.with;
 
@@ -24,7 +25,7 @@ public class NebulaeBlocks {
             size = 6;
 
             unitCapModifier = 32;
-            // unitType = UnitTypes.gamma;
+            unitType = UnitTypes.gamma;
         }};
         castellumLucis = new CoreBlock("castellum-lucis"){{
             requirements(Category.effect, BuildVisibility.shown, with());

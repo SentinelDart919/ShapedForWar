@@ -62,16 +62,14 @@ public class NebulaeBlocks {
             size = 4;
         }};
         nyxPanelSmall = new SolarGenerator("nyx-panel-small"){{
-            requirements(Category.effect, BuildVisibility.shown, with());
-
+            requirements(Category.power, BuildVisibility.shown, with());
             size = 1;
-            powerProduction = 0.24f;
+            powerProduction = 0.12f;
         }};
         nyxPanel = new SolarGenerator("nyx-panel"){{
-            requirements(Category.effect, BuildVisibility.shown, with());
-
+            requirements(Category.power, BuildVisibility.shown, with());
             size = 3;
-            powerProduction = 3.2f;
+            powerProduction = 1.6f;
         }};
 
     }

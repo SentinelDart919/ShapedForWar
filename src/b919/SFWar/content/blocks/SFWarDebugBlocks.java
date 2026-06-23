@@ -25,11 +25,12 @@ import mindustry.world.consumers.ConsumeLiquid;
 import mindustry.world.draw.DrawTurret;
 import mindustry.world.meta.BuildVisibility;
 import mindustry.world.meta.Env;
+import mindustry.world.blocks.defense.OverdriveProjector;
 
 import static mindustry.type.ItemStack.with;
 
 public class SFWarDebugBlocks {
-    public static Block aliveTree, scathe2, superDuo, scatheNuke;
+    public static Block aliveTree, scathe2, superDuo, scatheNuke, debugTohru;
 
     public static void load(){
         //aliveTree = new ItsKirby69LivingTreeBlock("alive-tree", 2, "#74d660");
@@ -335,6 +336,16 @@ public class SFWarDebugBlocks {
 
             coolant = consume(new ConsumeLiquid(Liquids.water, 15f / 60f));
             limitRange();
+        }};
+        debugTohru = new OverdriveProjector("debug-tohru"){{
+            requirements(Category.effect, BuildVisibility.sandboxOnly, with());
+            consumePower(0.50f);
+            size = 4;
+            range = 300f;
+            speedBoost = 6f;
+            useTime = 300f;
+            ambientSoundVolume = 0.16f;
+            hasBoost = false;
         }};
     }
 }

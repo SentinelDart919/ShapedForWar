@@ -63,6 +63,7 @@ public class NebulaeBlocks {
         }};
         nyxPanelSmall = new SolarGenerator("nyx-panel-small"){{
             requirements(Category.power, BuildVisibility.shown, with());
+            // reverse solar, basically
             size = 1;
             powerProduction = 0.12f;
         }};

@@ -11,13 +11,15 @@ import mindustry.content.UnitTypes; //this is for units
 import b919.SFWar.content.units.NebulaeUnits;
 import b919.SFWar.content.SFWarItems;
 import b919.SFWar.content.SFWarLiquids;
+import mindustry.world.blocks.power.*;
 
 import static mindustry.type.ItemStack.with;
 
 public class NebulaeBlocks {
     public static Block
         domusLucis, castellumLucis, arxLucis,
-        luminosityCondenser;
+        luminosityCondenser,
+        nyxPanel, nyxPanelSmall;
     public static void load(){
 
         domusLucis = new CoreBlock("domus-lucis"){{
@@ -53,6 +55,12 @@ public class NebulaeBlocks {
             sides = 20;
             shieldHealth = 3000;
             size = 4;
+        }};
+        nyxPanelSmall = new SolarGenerator("nyx-panel-small"){{
+            requirements(Category.effect, BuildVisibility.shown, with());
+
+            size = 1;
+            powerProduction = 0.24f;
         }};
 
     }

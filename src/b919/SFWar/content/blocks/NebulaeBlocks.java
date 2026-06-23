@@ -12,6 +12,7 @@ import b919.SFWar.content.units.NebulaeUnits;
 import b919.SFWar.content.SFWarItems;
 import b919.SFWar.content.SFWarLiquids;
 import mindustry.world.blocks.power.*;
+import b919.SFWar.world.terran.nebulae.blocks.power.NebulaePanel;
 
 import static mindustry.type.ItemStack.with;
 
@@ -61,13 +62,13 @@ public class NebulaeBlocks {
             shieldHealth = 3000;
             size = 4;
         }};
-        nyxPanelSmall = new SolarGenerator("nyx-panel-small"){{
+        nyxPanelSmall = new NebulaePanel("nyx-panel-small"){{
             requirements(Category.effect, BuildVisibility.shown, with());
 
             size = 1;
             powerProduction = 0.24f;
         }};
-        nyxPanel = new SolarGenerator("nyx-panel"){{
+        nyxPanel = new NebulaePanel("nyx-panel"){{
             requirements(Category.effect, BuildVisibility.shown, with());
 
             size = 3;

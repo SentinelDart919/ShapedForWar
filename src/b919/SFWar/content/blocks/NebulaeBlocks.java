@@ -1,8 +1,10 @@
 package b919.SFWar.content.blocks;
 
+import mindustry.content.Items;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.ForceProjector;
+import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.blocks.storage.CoreBlock;
 import mindustry.world.meta.BuildVisibility;
 import mindustry.type.*; // this will import the classes in this package but not the classes in subpackages
@@ -19,6 +21,8 @@ public class NebulaeBlocks {
     public static Block
             // cores
         domusLucis, castellumLucis, arxLucis,
+            // production
+        testBlock,
             // defensive
         luminosityCondenser,
             // offensive
@@ -71,6 +75,17 @@ public class NebulaeBlocks {
             requirements(Category.power, BuildVisibility.shown, with());
             size = 3;
             powerProduction = 1.6f;
+        }};
+        testBlock = new GenericCrafter("test-block"){{
+            requirements(Category.crafting, with(Items.copper, 30, Items.lead, 25));
+            outputItem = new ItemStack(Items.silicon, 1);
+            craftTime = 20f;
+            size = 2;
+            hasPower = true;
+            hasLiquids = false;
+
+            consumeItems(with(Items.coal, 1, Items.sand, 2));
+            consumePower(0.0f);
         }};
 
     }

@@ -22,7 +22,7 @@ public class NebulaeBlocks {
             // cores
         domusLucis, castellumLucis, arxLucis,
             // production
-        testBlock,
+        testBlock, testBlockTwo,
             // defensive
         luminosityCondenser,
             // offensive
@@ -85,6 +85,17 @@ public class NebulaeBlocks {
             hasLiquids = false;
 
             consumeItems(with(Items.coal, 1, Items.sand, 2));
+            consumePower(-0.01f);
+        }};
+        testBlockTwo = new GenericCrafter("test-block"){{
+            requirements(Category.crafting, with());
+            outputItem = new ItemStack(Items.silicon, 10);
+            craftTime = 120f;
+            size = 2;
+            hasPower = false;
+            hasLiquids = false;
+
+            consumeItems(with());
             consumePower(0.0f);
         }};
 

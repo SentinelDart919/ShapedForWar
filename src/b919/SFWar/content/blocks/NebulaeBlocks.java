@@ -17,8 +17,13 @@ import static mindustry.type.ItemStack.with;
 
 public class NebulaeBlocks {
     public static Block
+            // cores
         domusLucis, castellumLucis, arxLucis,
+            // defensive
         luminosityCondenser,
+            // offensive
+        seminarumStellarum, sartrixNyctar,
+            // power
         nyxPanel, nyxPanelSmall;
     public static void load(){
 
@@ -61,6 +66,12 @@ public class NebulaeBlocks {
 
             size = 1;
             powerProduction = 0.24f;
+        }};
+        nyxPanel = new SolarGenerator("nyx-panel"){{
+            requirements(Category.effect, BuildVisibility.shown, with());
+
+            size = 3;
+            powerProduction = 3.2f;
         }};
 
     }

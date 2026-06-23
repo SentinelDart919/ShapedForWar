@@ -87,7 +87,7 @@ public class NebulaeBlocks {
             consumeItems(with(Items.coal, 1, Items.sand, 2));
             consumePower(-0.01f);
         }};
-        testBlockTwo = new GenericCrafter("test-block"){{
+        testBlockTwo = new GenericCrafter("test-block-two"){{
             requirements(Category.crafting, with());
             outputItem = new ItemStack(Items.silicon, 10);
             craftTime = 120f;

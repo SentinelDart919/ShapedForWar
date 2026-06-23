@@ -15,7 +15,8 @@ public class SFWarItems {
             flesh, denseTissues, biomass,
     //Precursors?
     //Nebulae
-            nyctoSteel, solidifiedNyctar;
+            nyctoSteel, solidifiedNyctar, crystallizedGreenStardust, greenStardust,
+            crystallizedBlueStardust, blueStardust;
     public static void load(){
         uranium = new Item("uranium", Color.valueOf("000000")){{
             radioactivity = 100;

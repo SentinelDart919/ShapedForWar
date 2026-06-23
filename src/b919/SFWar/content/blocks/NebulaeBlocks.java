@@ -64,15 +64,13 @@ public class NebulaeBlocks {
         }};
         nyxPanelSmall = new NebulaePanel("nyx-panel-small"){{
             requirements(Category.effect, BuildVisibility.shown, with());
-
             size = 1;
-            powerProduction = 0.24f;
+            powerProduction = 0.12f;
         }};
         nyxPanel = new NebulaePanel("nyx-panel"){{
             requirements(Category.effect, BuildVisibility.shown, with());
-
             size = 3;
-            powerProduction = 3.2f;
+            powerProduction =1.6f;
         }};
 
     }

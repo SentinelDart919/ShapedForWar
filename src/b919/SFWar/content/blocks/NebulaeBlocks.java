@@ -23,7 +23,7 @@ public class NebulaeBlocks {
             // cores
         domusLucis, castellumLucis, arxLucis,
             // production
-        greenStardustPlant, blueStardustPlant,
+        greenStardustPlant, blueStardustPlant, gaseousNyctarPlant,
             // defensive
         luminosityCondenser,
             // offensive
@@ -100,6 +100,18 @@ public class NebulaeBlocks {
             consumeItems(with());
             consumePower(1f);
             consumeLiquid(Liquids.water, 0.1f);
+        }};
+        gaseousNyctarPlant = new GenericCrafter("gaseous-nyctar-plant"){{
+            requirements(Category.crafting, with());
+            outputLiquid = new LiquidStack(SFWarLiquids.gaseousNyctar, 6);
+            craftTime = 60f;
+            liquidCapacity = 60f;
+            size = 2;
+            hasPower = true;
+            hasLiquids = true;
+
+            consumeItems(with(Items.coal, 1, SFWarItems.greenStardust, 1));
+            consumePower(0.016f);
         }};
 
     }

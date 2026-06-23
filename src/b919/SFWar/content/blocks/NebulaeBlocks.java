@@ -5,6 +5,9 @@ import mindustry.world.Block;
 import mindustry.world.blocks.defense.ForceProjector;
 import mindustry.world.blocks.storage.CoreBlock;
 import mindustry.world.meta.BuildVisibility;
+// import mindustry.type*;
+// import mindustry.type.unit*;
+// import b919.SFWar.content.units.NebulaeUnits;
 
 import static mindustry.type.ItemStack.with;
 
@@ -16,21 +19,30 @@ public class NebulaeBlocks {
 
         domusLucis = new CoreBlock("domus-lucis"){{
             requirements(Category.effect, BuildVisibility.shown, with());
-            health = 1500 * size * size;
-            itemCapacity = 2000 * size;
+            health = 10800;
+            itemCapacity = 17000;
             size = 6;
+
+            unitCapModifier = 32;
+            // unitType = UnitTypes.gamma;
         }};
         castellumLucis = new CoreBlock("castellum-lucis"){{
             requirements(Category.effect, BuildVisibility.shown, with());
-            health = 1500 * size * size;
-            itemCapacity = 2000 * size;
+            health = 36750;
+            itemCapacity = 21000;
             size = 7;
+
+            unitCapModifier = 48;
+            // unitType = UnitTypes.gamma;
         }};
         arxLucis = new CoreBlock("arx-lucis"){{
             requirements(Category.effect, BuildVisibility.shown, with());
-            health = 1500 * size * size;
-            itemCapacity = 2000 * size;
+            health = 96000;
+            itemCapacity = 25000;
             size = 8;
+
+            unitCapModifier = 64;
+            // unitType = UnitTypes.gamma;
         }};
         luminosityCondenser = new ForceProjector("luminosity-condenser"){{
             requirements(Category.effect, BuildVisibility.shown, with());

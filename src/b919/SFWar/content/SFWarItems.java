@@ -50,5 +50,9 @@ public class SFWarItems {
         //Nebulae
         nyctoSteel = new Item("nycto-steel", Color.valueOf("ab1ae0")){{}};
         solidifiedNyctar = new Item("solidified-nyctar", Color.valueOf("8e00c2")){{}};
+        crystallizedGreenStardust = new Item("crystallized-green-stardust", Color.valueOf("8e00c2")){{}};
+        greenStardust = new Item("green-stardust", Color.valueOf("8e00c2")){{}};
+        crystallizedBlueStardust = new Item("crystallized-blue-stardust", Color.valueOf("8e00c2")){{}};
+        blueStardust = new Item("blue-stardust", Color.valueOf("8e00c2")){{}};
     }
 }

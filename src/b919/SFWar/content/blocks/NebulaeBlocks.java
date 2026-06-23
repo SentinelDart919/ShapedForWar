@@ -1,6 +1,7 @@
 package b919.SFWar.content.blocks;
 
 import mindustry.content.Items;
+import mindustry.content.Liquids;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.ForceProjector;
@@ -22,7 +23,7 @@ public class NebulaeBlocks {
             // cores
         domusLucis, castellumLucis, arxLucis,
             // production
-        testBlock, testBlockTwo,
+        greenStardustPlant, blueStardustPlant,
             // defensive
         luminosityCondenser,
             // offensive
@@ -76,27 +77,29 @@ public class NebulaeBlocks {
             size = 3;
             powerProduction = 1.6f;
         }};
-        testBlock = new GenericCrafter("test-block"){{
-            requirements(Category.crafting, with(Items.copper, 30, Items.lead, 25));
-            outputItem = new ItemStack(Items.silicon, 1);
-            craftTime = 20f;
+        greenStardustPlant = new GenericCrafter("green-stardust-plant"){{
+            requirements(Category.crafting, with());
+            outputItem = new ItemStack(SFWarItems.greenStardust, 1);
+            craftTime = 30f;
             size = 2;
             hasPower = true;
             hasLiquids = false;
 
-            consumeItems(with(Items.coal, 1, Items.sand, 2));
-            consumePower(-0.01f);
+            consumeItems(with());
+            consumePower(0.5f);
         }};
-        testBlockTwo = new GenericCrafter("test-block-two"){{
+        blueStardustPlant = new GenericCrafter("blue-stardust-plant"){{
             requirements(Category.crafting, with());
-            outputItem = new ItemStack(Items.silicon, 10);
-            craftTime = 120f;
+            outputItem = new ItemStack(SFWarItems.blueStardust, 1);
+            craftTime = 60f;
+            liquidCapacity = 60f;
             size = 2;
-            hasPower = false;
-            hasLiquids = false;
+            hasPower = hasLiquids;
+            hasLiquids = true;
 
             consumeItems(with());
-            consumePower(0.0f);
+            consumePower(1f);
+            consumeLiquid(Liquids.water, 0.1f);
         }};
 
     }

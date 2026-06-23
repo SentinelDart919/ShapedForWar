@@ -25,7 +25,7 @@ public class NebulaeBlocks {
             size = 6;
 
             unitCapModifier = 32;
-            unitType = UnitTypes.gamma;
+            unitType = UnitTypes.toxopid;
         }};
         castellumLucis = new CoreBlock("castellum-lucis"){{
             requirements(Category.effect, BuildVisibility.shown, with());
@@ -34,7 +34,7 @@ public class NebulaeBlocks {
             size = 7;
 
             unitCapModifier = 48;
-            // unitType = UnitTypes.gamma;
+            unitType = UnitTypes.toxopid;
         }};
         arxLucis = new CoreBlock("arx-lucis"){{
             requirements(Category.effect, BuildVisibility.shown, with());
@@ -43,7 +43,7 @@ public class NebulaeBlocks {
             size = 8;
 
             unitCapModifier = 64;
-            // unitType = UnitTypes.gamma;
+            unitType = UnitTypes.toxopid;
         }};
         luminosityCondenser = new ForceProjector("luminosity-condenser"){{
             requirements(Category.effect, BuildVisibility.shown, with());

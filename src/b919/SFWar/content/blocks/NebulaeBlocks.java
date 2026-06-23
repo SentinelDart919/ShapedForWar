@@ -9,6 +9,8 @@ import mindustry.type.*; // this will import the classes in this package but not
 import mindustry.type.unit.*; // this is not for units this is to set entities, not units
 import mindustry.content.UnitTypes; //this is for units
 import b919.SFWar.content.units.NebulaeUnits;
+import b919.SFWar.content.SFWarItems;
+import b919.SFWar.content.SFWarLiquids;
 
 import static mindustry.type.ItemStack.with;
 
@@ -19,7 +21,7 @@ public class NebulaeBlocks {
     public static void load(){
 
         domusLucis = new CoreBlock("domus-lucis"){{
-            requirements(Category.effect, BuildVisibility.shown, with());
+            requirements(Category.effect, BuildVisibility.shown, with(SFWarItems.solidifiedNyctar, 1));
             health = 10800;
             itemCapacity = 17000;
             size = 6;

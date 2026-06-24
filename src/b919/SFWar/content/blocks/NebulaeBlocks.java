@@ -142,6 +142,7 @@ public class NebulaeBlocks {
                         length = brange;
                         hitShake = 3f;
                         ammoMultiplier = 1f;
+                        hitColor = trailColor = Color.valueOf("27e436");
                     }}
             );
 
@@ -175,9 +176,10 @@ public class NebulaeBlocks {
                         height = 12f;
                         shrinkY = 0f;
                         homingPower = 0.25f;
+                        homingRange = 250f;
                         damage = 25;
-                        splashDamageRadius = 35f;
-                        splashDamage = 85f * 1.4f;
+                        splashDamageRadius = 50f;
+                        splashDamage = 75f;
                         hitEffect = Fx.blastExplosion;
                         despawnEffect = Fx.blastExplosion;
                         ammoMultiplier = 4f;
@@ -191,6 +193,7 @@ public class NebulaeBlocks {
                         height = 8f;
                         shrinkY = 0f;
                         homingPower = 0.10f;
+                        homingRange = 100f;
                         damage = 125;
                         splashDamageRadius = 35f;
                         splashDamage = 10f * 1.4f;
@@ -210,10 +213,10 @@ public class NebulaeBlocks {
                         -4, -1.25f, 0,
                         0, 0, 0,
                         4, -1.25f, 0,
-                        8, -25.f, 0
+                        8, -2.5f, 0
                 };
                 shots = 5;
-                shotDelay = 5f;
+                shotDelay = 3f;
             }};
 
             shootY = 4.5f;
@@ -225,6 +228,7 @@ public class NebulaeBlocks {
             scaledHealth = 480;
             shootSound = Sounds.shootMissile;
             envEnabled |= Env.space;
+            coolantMultiplier = 0.3f;
 
             limitRange(5f);
             coolant = consumeCoolant(0.3f);

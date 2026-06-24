@@ -321,7 +321,7 @@ public class NebulaeBlocks {
             maxAmmo = 10;
             ammoPerShot = 1;
             rotateSpeed = 2f;
-            reload = 60f;
+            reload = 40f;
             ammoUseEffect = Fx.casing3Double;
             recoil = 1f;
             cooldownTime = reload;
@@ -329,6 +329,7 @@ public class NebulaeBlocks {
             size = 1;
             unitSort = UnitSorts.weakest;
             envEnabled |= Env.space;
+            range = 180f;
 
             coolantMultiplier = 0.6f;
             liquidCapacity = 6f;

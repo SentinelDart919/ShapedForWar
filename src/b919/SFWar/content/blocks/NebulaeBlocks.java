@@ -103,7 +103,7 @@ public class NebulaeBlocks {
         }};
         gaseousNyctarPlant = new GenericCrafter("gaseous-nyctar-plant"){{
             requirements(Category.crafting, with());
-            outputLiquid = new LiquidStack(SFWarLiquids.gaseousNyctar, 6);
+            outputLiquid = new LiquidStack(SFWarLiquids.gaseousNyctar, 6f / 60f);
             craftTime = 60f;
             liquidCapacity = 60f;
             size = 2;

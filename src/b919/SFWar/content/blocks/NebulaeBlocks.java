@@ -187,14 +187,14 @@ public class NebulaeBlocks {
                         hitColor = backColor = trailColor = Color.valueOf("ab1ae0");
                         frontColor = Color.valueOf("8e00c2");
                     }},
-                    SFWarItems.nyctoSteel, new MissileBulletType(4.2f, 125){{
+                    SFWarItems.nyctoSteel, new MissileBulletType(4.2f, 225){{
                         width = 8f;
                         height = 8f;
                         shrinkY = 0f;
                         homingPower = 0.25f;
                         homingRange = 350f;
                         splashDamageRadius = 35f;
-                        splashDamage = 10f * 1.4f;
+                        splashDamage = 225f * 0.2f;
                         hitEffect = Fx.blastExplosion;
                         despawnEffect = Fx.blastExplosion;
                         ammoMultiplier = 4f;
@@ -275,6 +275,7 @@ public class NebulaeBlocks {
                         homingPower = 0.18f;
                         homingRange = 600f;
                         lifetime = 300f;
+                        reloadMultiplier = 0.6f;
                         buildingDamageMultiplier = 0.2f;
                         pierceDamageFactor = 0.8f;
                         pierceCap = 5;
@@ -294,12 +295,12 @@ public class NebulaeBlocks {
                         buildingDamageMultiplier = 0.2f;
                         pierceDamageFactor = 0.8f;
                         pierceCap = 5;
-                        ammoMultiplier = 1f;
+                        ammoMultiplier = 5f;
 
                         hitColor = backColor = trailColor = Pal.siliconAmmoBack;
                         frontColor = Pal.siliconAmmoFront;
                     }},
-                    SFWarItems.greenStardust, new MissileBulletType(4f, 10){{
+                    SFWarItems.greenStardust, new MissileBulletType(6f, 18){{
                         width = 6f;
                         height = 6f;
                         shrinkY = 0f;
@@ -311,10 +312,10 @@ public class NebulaeBlocks {
                         buildingDamageMultiplier = 0.2f;
                         pierceDamageFactor = 0.8f;
                         pierceCap = 5;
-                        ammoMultiplier = 1f;
+                        ammoMultiplier = 5f;
 
-                        hitColor = backColor = trailColor = Pal.siliconAmmoBack;
-                        frontColor = Pal.siliconAmmoFront;
+                        hitColor = backColor = trailColor = Color.valueOf("4bd452");
+                        frontColor = Color.valueOf("27e436");
                     }}
             );
 
@@ -329,7 +330,115 @@ public class NebulaeBlocks {
             size = 1;
             unitSort = UnitSorts.weakest;
             envEnabled |= Env.space;
-            range = 180f;
+            range = 240f;
+
+            coolantMultiplier = 0.6f;
+            liquidCapacity = 6f;
+            scaledHealth = 100;
+
+            coolant = consumeCoolant(1f);
+            depositCooldown = 2.0f;
+            consumePower(0.5f);
+        }};
+        comet = new ItemTurret("comet"){{
+
+            requirements(Category.turret, with(Items.titanium, 125, Items.lead, 250, SFWarItems.crystallizedGreenStardust, 150, SFWarItems.blueStardust, 150));
+            ammo(
+                    Items.titanium, new MissileBulletType(2f, 75){{
+                        width = 20f;
+                        height = 20f;
+                        shrinkY = 0f;
+                        homingPower = 0.10f;
+                        homingRange = 400f;
+                        lifetime = 300f;
+                        buildingDamageMultiplier = 0.2f;
+                        pierceDamageFactor = 0.8f;
+                        pierceCap = 5;
+                        ammoMultiplier = 2f;
+                        collidesAir = false;
+
+                        hitColor = backColor = trailColor = Color.valueOf("919fe7");
+                        frontColor = Color.valueOf("a4b8fa");
+                    }},
+                    Items.metaglass, new MissileBulletType(2.6f, 75){{
+                        width = 20f;
+                        height = 20f;
+                        shrinkY = 0f;
+                        homingPower = 0.14f;
+                        homingRange = 500f;
+                        lifetime = 300f;
+                        buildingDamageMultiplier = 0.2f;
+                        pierceDamageFactor = 0.8f;
+                        pierceCap = 5;
+                        ammoMultiplier = 2f;
+                        collidesGround = false;
+
+                        hitColor = backColor = trailColor = Pal.glassAmmoBack;
+                        frontColor = Pal.glassAmmoFront;
+                    }},
+                    Items.graphite, new MissileBulletType(1f, 100){{
+                        width = 22f;
+                        height = 22f;
+                        shrinkY = 0f;
+                        homingPower = 0.18f;
+                        homingRange = 600f;
+                        lifetime = 300f;
+                        reloadMultiplier = 0.6f;
+                        buildingDamageMultiplier = 0.2f;
+                        pierceDamageFactor = 0.8f;
+                        pierceCap = 5;
+                        ammoMultiplier = 1f;
+
+                        hitColor = backColor = trailColor = Pal.graphiteAmmoBack;
+                        frontColor = Pal.graphiteAmmoFront;
+                    }},
+                    Items.silicon, new MissileBulletType(3f, 90){{
+                        width = 22f;
+                        height = 22f;
+                        shrinkY = 0f;
+                        homingPower = 0.36f;
+                        homingRange = 600f;
+                        lifetime = 300f;
+                        reloadMultiplier = 1.3f;
+                        buildingDamageMultiplier = 0.2f;
+                        pierceDamageFactor = 0.8f;
+                        pierceCap = 5;
+                        ammoMultiplier = 5f;
+
+                        hitColor = backColor = trailColor = Pal.siliconAmmoBack;
+                        frontColor = Pal.siliconAmmoFront;
+                    }},
+                    SFWarItems.blueStardust, new MissileBulletType(6f, 90){{
+                        width = 6f;
+                        height = 6f;
+                        shrinkY = 0f;
+                        homingPower = 0.36f;
+                        homingRange = 600f;
+                        lifetime = 300f;
+                        reloadMultiplier = 3f;
+                        ammoMultiplier = 10f;
+                        buildingDamageMultiplier = 0.2f;
+                        pierceDamageFactor = 0.8f;
+                        pierceCap = 5;
+                        ammoMultiplier = 5f;
+
+                        hitColor = backColor = trailColor = Color.valueOf("4684c7");
+                        frontColor = Color.valueOf("3d8fe7");
+                    }}
+            );
+
+            maxAmmo = 10;
+            ammoPerShot = 1;
+            rotateSpeed = 2f;
+            reload = 40f;
+            ammoUseEffect = Fx.casing3Double;
+            recoil = 1f;
+            cooldownTime = reload;
+            shake = 4f;
+            size = 2;
+            unitSort = UnitSorts.weakest;
+            envEnabled |= Env.space;
+            range = 300f;
 
             coolantMultiplier = 0.6f;
             liquidCapacity = 6f;

@@ -1,10 +1,15 @@
 package b919.SFWar.content.blocks;
 
+import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
+import mindustry.entities.UnitSorts;
+import mindustry.entities.bullet.*;
+import mindustry.gen.Sounds;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.ForceProjector;
+import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.blocks.storage.CoreBlock;
 import mindustry.world.meta.BuildVisibility;
@@ -15,6 +20,7 @@ import b919.SFWar.content.units.NebulaeUnits;
 import b919.SFWar.content.SFWarItems;
 import b919.SFWar.content.SFWarLiquids;
 import mindustry.world.blocks.power.*;
+import mindustry.world.meta.Env;
 
 import static mindustry.type.ItemStack.with;
 
@@ -23,10 +29,12 @@ public class NebulaeBlocks {
             // cores
         domusLucis, castellumLucis, arxLucis,
             // production
-        greenStardustPlant, blueStardustPlant, gaseousNyctarPlant,
+        greenStardustPlant, blueStardustFormationPlant, gaseousNyctarPlant,
             // defensive
         luminosityCondenser,
-            // offensive
+            // turrets
+        crescentMoon, heavenPiercer, starScreech, totality,
+            // units
         seminarumStellarum, sartrixNyctar,
             // power
         nyxPanel, nyxPanelSmall;
@@ -88,7 +96,7 @@ public class NebulaeBlocks {
             consumeItems(with());
             consumePower(0.5f);
         }};
-        blueStardustPlant = new GenericCrafter("blue-stardust-plant"){{
+        blueStardustFormationPlant = new GenericCrafter("blue-stardust-formation-plant"){{
             requirements(Category.crafting, with());
             outputItem = new ItemStack(SFWarItems.blueStardust, 1);
             craftTime = 60f;
@@ -112,6 +120,50 @@ public class NebulaeBlocks {
 
             consumeItems(with(Items.coal, 1, SFWarItems.greenStardust, 1));
             consumePower(0.016f);
+        }};
+        crescentMoon = new ItemTurret("crescent-moon"){{
+            float brange = range = 300f;
+
+            requirements(Category.turret, with(Items.silicon, 250, SFWarItems.solidifiedNyctar, 100));
+            ammo(
+                    SFWarItems.crystallizedBlueStardust, new RailBulletType(){{
+                        shootEffect = Fx.instShoot;
+                        hitEffect = Fx.instHit;
+                        pierceEffect = Fx.railHit;
+                        smokeEffect = Fx.smokeCloud;
+                        pointEffect = Fx.instTrail;
+                        despawnEffect = Fx.instBomb;
+                        pointEffectSpace = 8f;
+                        damage = 350;
+                        buildingDamageMultiplier = 0.2f;
+                        pierceDamageFactor = 0.8f;
+                        length = brange;
+                        hitShake = 3f;
+                        ammoMultiplier = 1f;
+                    }}
+            );
+
+            maxAmmo = 42;
+            ammoPerShot = 3;
+            rotateSpeed = 2f;
+            reload = 100f;
+            ammoUseEffect = Fx.casing3Double;
+            recoil = 2f;
+            cooldownTime = reload;
+            shake = 4f;
+            size = 2;
+            shootCone = 2f;
+            shootSound = Sounds.shootForeshadow;
+            unitSort = UnitSorts.strongest;
+            envEnabled |= Env.space;
+
+            coolantMultiplier = 0.6f;
+            liquidCapacity = 60f;
+            scaledHealth = 150;
+
+            coolant = consumeCoolant(1f);
+            depositCooldown = 2.0f;
+            consumePower(10f);
         }};
 
     }

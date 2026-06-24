@@ -2,6 +2,7 @@ package b919.SFWar.world.terran.blocks.population;
 
 import arc.struct.ObjectMap;
 import mindustry.game.Team;
+import mindustry.gen.Building;
 import mindustry.gen.Groups;
 
 public class PopulationManager {
@@ -46,13 +47,32 @@ public class PopulationManager {
     public static boolean canConsumePopulation(Team team, int amount) {
         return get(team).available >= amount;
     }
-    /** Consumes the population (removes amount to available pop) */
+    /** Consumes the population (removes amount to available pop and marks house pop as used) */
     public static void consumePopulation(Team team, int amount) {
         get(team).available -= amount;
+        //funky, I made this originally for a drawer lol
+        int remaining = amount;
+        for (Building b : Groups.build) {
+            if (b instanceof PopulationHouse.PopulationHouseBuild house && b.team == team && house.population > house.usedPopulation) {
+                int toUse = Math.min(house.population - house.usedPopulation, remaining);
+                house.usePopulation(toUse);
+                remaining -= toUse;
+                if (remaining <= 0) break;
+            }
+        }
     }
     /** Adds available population, this adds raw population to the team, doesn't check if there is pending pop*/
     public static void returnPopulation(Team team, int amount) {
         get(team).available += amount;
+        int remaining = amount;
+        for (Building b : Groups.build) {
+            if (b instanceof PopulationHouse.PopulationHouseBuild house && b.team == team && house.usedPopulation > 0) {
+                int toReturn = Math.min(house.usedPopulation, remaining);
+                house.returnPopulation(toReturn);
+                remaining -= toReturn;
+                if (remaining <= 0) break;
+            }
+        }
     }
     /** Adds population capacity*/
     public static void addCapacity(Team team, int amount) {

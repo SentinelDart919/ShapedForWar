@@ -30,7 +30,7 @@ public class TerranBlocks {
             foodItem = SFWarItems.foodRations;
             foodAmount = 1;
             populationTime = 360f;
-            size = 1;
+            size = 2;
             health = 400;
         }};
 

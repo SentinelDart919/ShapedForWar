@@ -497,7 +497,7 @@ public class NebulaeBlocks {
                         homingRange = 600f;
                         lifetime = 300f;
                         splashDamageRadius = 150f;
-                        splashDamage = 250f;
+                        splashDamage = 25f;
                         reloadMultiplier = 0.8f;
                         ammoMultiplier = 10f;
                         buildingDamageMultiplier = 0.2f;
@@ -510,8 +510,8 @@ public class NebulaeBlocks {
                     }}
             );
 
-            maxAmmo = 10;
-            ammoPerShot = 1;
+            maxAmmo = 40;
+            ammoPerShot = 4;
             rotateSpeed = 2f;
             reload = 50f;
             ammoUseEffect = Fx.casing3Double;
@@ -529,7 +529,7 @@ public class NebulaeBlocks {
 
             coolant = consumeCoolant(1f);
             depositCooldown = 2.0f;
-            consumePower(2.5f);
+            consumePower(5f);
         }};
         heavenPiercer = new ItemTurret("heaven-piercer"){{
             float brange = range = 1200f;
@@ -537,17 +537,18 @@ public class NebulaeBlocks {
             requirements(Category.turret, with(Items.silicon, 250, SFWarItems.solidifiedNyctar, 100));
             ammo(
                     SFWarItems.nyctoSteel, new RailBulletType(){{
-                        trailColor = Color.valueOf("000000");
-                        shootEffect = Fx.instShoot;
-                        hitEffect = Fx.instHit;
+                        shootEffect = CustomFx.instShootHeaven;
+                        hitEffect = CustomFx.instHitCrescent;
                         pierceEffect = Fx.railHit;
                         smokeEffect = Fx.smokeCloud;
-                        pointEffect = Fx.instTrail;
-                        despawnEffect = Fx.instBomb;
+                        pointEffect = CustomFx.instTrailHeaven;
+                        despawnEffect = CustomFx.instBombHeaven;
                         pointEffectSpace = 16f;
                         damage = 35000;
+                        splashDamageRadius = 150f;
+                        splashDamage = 5000f;
                         buildingDamageMultiplier = 0.2f;
-                        pierceDamageFactor = 0.8f;
+                        pierceDamageFactor = 1f;
                         length = brange;
                         hitShake = 3f;
                         ammoMultiplier = 1f;
@@ -570,11 +571,11 @@ public class NebulaeBlocks {
 
             coolantMultiplier = 0.05f;
             liquidCapacity = 60f;
-            scaledHealth = 3050;
+            scaledHealth = 400;
 
             coolant = consumeCoolant(1f);
             depositCooldown = 2.0f;
-            consumePower(34f);
+            consumePower(100f);
         }};
 
 

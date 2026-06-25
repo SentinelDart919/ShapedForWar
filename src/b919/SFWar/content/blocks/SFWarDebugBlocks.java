@@ -345,6 +345,7 @@ public class SFWarDebugBlocks {
             speedBoost = 6f;
             useTime = 500f;
             ambientSoundVolume = 0.16f;
+            scaledHealth = 10000;
             hasBoost = false;
         }};
     }

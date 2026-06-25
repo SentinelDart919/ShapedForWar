@@ -47,23 +47,7 @@ public class CustomFx {
 
         Drawf.light(e.x, e.y, 150f, Color.valueOf("4684c7"), 0.9f * e.fout());
     }),
-    // someone explain why it indents
-            instBombHeaven = new Effect(15f, 100f, e -> {
-                color(Color.valueOf("d4240c"));
-                stroke(e.fout() * 4f);
-                Lines.circle(e.x, e.y, 4f + e.finpow() * 20f);
 
-                for (int i = 0; i < 4; i++) {
-                    Drawf.tri(e.x, e.y, 6f, 80f * e.fout(), i * 90 + 45);
-                }
-
-                color();
-                for (int i = 0; i < 4; i++) {
-                    Drawf.tri(e.x, e.y, 3f, 30f * e.fout(), i * 90 + 45);
-                }
-
-                Drawf.light(e.x, e.y, 150f, Color.valueOf("d4240c"), 0.9f * e.fout());
-            }),
     instTrailCrescent = new Effect(30, e -> {
         for (int i = 0; i < 2; i++) {
             color(i == 0 ? Color.valueOf("4684c7") : Color.valueOf("3d8fe7"));
@@ -78,21 +62,6 @@ public class CustomFx {
 
         Drawf.light(e.x, e.y, 60f, Color.valueOf("4684c7"), 0.6f * e.fout());
     }),
-    // someone explain why it indents please
-            instTrailHeaven = new Effect(30, e -> {
-                for (int i = 0; i < 2; i++) {
-                    color(i == 0 ? Color.valueOf("d4240c") : Color.valueOf("ff6e59"));
-
-                    float m = i == 0 ? 1f : 0.5f;
-
-                    float rot = e.rotation + 180f;
-                    float w = 15f * e.fout() * m;
-                    Drawf.tri(e.x, e.y, w, (30f + Mathf.randomSeedRange(e.id, 15f)) * m, rot);
-                    Drawf.tri(e.x, e.y, w, 10f * m, rot + 180f);
-                }
-
-                Drawf.light(e.x, e.y, 60f, Color.valueOf("d4240c"), 0.6f * e.fout());
-            }),
 
     instShootCrescent = new Effect(24f, e -> {
         e.scaled(10f, b -> {
@@ -110,22 +79,6 @@ public class CustomFx {
 
         Drawf.light(e.x, e.y, 180f, Color.valueOf("4684c7"), 0.9f * e.fout());
     }),
-            instShootHeaven = new Effect(24f, e -> {
-                e.scaled(10f, b -> {
-                    color(Color.white, Color.valueOf("d4240c"), b.fin());
-                    stroke(b.fout() * 3f + 0.2f);
-                    Lines.circle(b.x, b.y, b.fin() * 50f);
-                });
-
-                color(Color.valueOf("d4240c"));
-
-                for (int i : Mathf.signs) {
-                    Drawf.tri(e.x, e.y, 13f * e.fout(), 85f, e.rotation + 90f * i);
-                    Drawf.tri(e.x, e.y, 13f * e.fout(), 50f, e.rotation + 20f * i);
-                }
-
-                Drawf.light(e.x, e.y, 180f, Color.valueOf("d4240c"), 0.9f * e.fout());
-            }),
 
 
     instHitCrescent = new Effect(20f, 200f, e -> {
@@ -159,4 +112,6 @@ public class CustomFx {
     });
 
 
+
 }
+

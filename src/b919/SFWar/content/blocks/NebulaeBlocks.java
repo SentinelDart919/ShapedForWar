@@ -1,6 +1,7 @@
 package b919.SFWar.content.blocks;
 
 import arc.graphics.Color;
+import b919.SFWar.content.HeavenPiercerFx;
 import b919.SFWar.world.terran.nebulae.blocks.power.NebulaePanel;
 import mindustry.content.*;
 import mindustry.entities.UnitSorts;
@@ -537,13 +538,13 @@ public class NebulaeBlocks {
             requirements(Category.turret, with(Items.silicon, 2500, SFWarItems.solidifiedNyctar, 2500, SFWarItems.nyctoSteel, 2500));
             ammo(
                     SFWarItems.nyctoSteel, new RailBulletType(){{
-                        shootEffect = CustomFx.instShootHeaven;
-                        hitEffect = CustomFx.instHitCrescent;
+                        shootEffect = HeavenPiercerFx.instShootHeaven;
+                        hitEffect = HeavenPiercerFx.instHitHeaven;
                         pierceEffect = Fx.railHit;
                         smokeEffect = Fx.smokeCloud;
-                        pointEffect = CustomFx.instTrailHeaven;
-                        despawnEffect = CustomFx.instBombHeaven;
-                        pointEffectSpace = 8f;
+                        pointEffect = HeavenPiercerFx.instTrailHeaven;
+                        despawnEffect = HeavenPiercerFx.instBombHeaven;
+                        pointEffectSpace = 30f;
                         damage = 35000;
                         splashDamageRadius = 150f;
                         splashDamage = 5000f;

@@ -20,6 +20,7 @@ import mindustry.type.Category;
 import mindustry.type.Weapon;
 import mindustry.type.unit.MissileUnitType;
 import mindustry.world.Block;
+import mindustry.world.blocks.defense.Wall;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.consumers.ConsumeLiquid;
 import mindustry.world.draw.DrawTurret;
@@ -30,7 +31,7 @@ import mindustry.world.blocks.defense.OverdriveProjector;
 import static mindustry.type.ItemStack.with;
 
 public class SFWarDebugBlocks {
-    public static Block aliveTree, scathe2, superDuo, scatheNuke, debugTohru;
+    public static Block aliveTree, scathe2, superDuo, scatheNuke, debugTohru, smallBlock;
 
     public static void load(){
         //aliveTree = new ItsKirby69LivingTreeBlock("alive-tree", 2, "#74d660");
@@ -347,6 +348,11 @@ public class SFWarDebugBlocks {
             ambientSoundVolume = 0.16f;
             scaledHealth = 10000;
             hasBoost = false;
+        }};
+        smallBlock = new Wall("small-block"){{
+            requirements(Category.defense, BuildVisibility.shown, with());
+            size = 32;
+            scaledHealth = 1024;
         }};
     }
 }

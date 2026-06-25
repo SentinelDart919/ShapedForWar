@@ -544,7 +544,7 @@ public class NebulaeBlocks {
                         smokeEffect = Fx.smokeCloud;
                         pointEffect = HeavenPiercerFx.instTrailHeaven;
                         despawnEffect = HeavenPiercerFx.instBombHeaven;
-                        pointEffectSpace = 30f;
+                        pointEffectSpace = 16f;
                         damage = 35000;
                         splashDamageRadius = 150f;
                         splashDamage = 5000f;

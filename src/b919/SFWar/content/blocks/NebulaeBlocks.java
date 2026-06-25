@@ -1,7 +1,7 @@
 package b919.SFWar.content.blocks;
 
 import arc.graphics.Color;
-import b919.SFWar.utils.SFWarFX;
+import b919.SFWar.content.HeavenPiercerFx;
 import b919.SFWar.world.terran.nebulae.blocks.power.NebulaePanel;
 import mindustry.content.*;
 import mindustry.entities.UnitSorts;
@@ -19,8 +19,10 @@ import mindustry.world.meta.BuildVisibility;
 import mindustry.type.*; // this will import the classes in this package but not the classes in subpackages
 import mindustry.type.unit.*; // this is not for units this is to set entities, not units
 import b919.SFWar.content.units.NebulaeUnits;
+import b919.SFWar.content.CustomFx;
 import b919.SFWar.content.SFWarItems;
 import b919.SFWar.content.SFWarLiquids;
+import mindustry.world.blocks.power.*;
 import mindustry.world.meta.Env;
 
 import static mindustry.type.ItemStack.with;
@@ -40,7 +42,7 @@ public class NebulaeBlocks {
             // power
         nyxPanel, nyxPanelSmall;
     public static void load(){
-        //CORE REGION
+
         domusLucis = new CoreBlock("domus-lucis"){{
             requirements(Category.effect, BuildVisibility.shown, with(SFWarItems.solidifiedNyctar, 1000));
             health = 10800;
@@ -69,9 +71,6 @@ public class NebulaeBlocks {
             unitCapModifier = 64;
             unitType = UnitTypes.toxopid;
         }};
-        //endregion
-
-        //EFFECT BUILD REGION
         luminosityCondenser = new ForceProjector("luminosity-condenser"){{
             requirements(Category.effect, BuildVisibility.shown, with());
             radius = 300f;
@@ -79,9 +78,6 @@ public class NebulaeBlocks {
             shieldHealth = 3000;
             size = 4;
         }};
-        //endregion
-
-        //POWER RELATED REGION
         nyxPanelSmall = new NebulaePanel("nyx-panel-small"){{
             requirements(Category.power, BuildVisibility.shown, with());
             // reverse solar, basically
@@ -93,9 +89,6 @@ public class NebulaeBlocks {
             size = 3;
             powerProduction = 1.6f;
         }};
-        //endregion
-
-        //CRAFTING REGION
         greenStardustPlant = new GenericCrafter("green-stardust-plant"){{
             requirements(Category.crafting, with());
             outputItem = new ItemStack(SFWarItems.greenStardust, 1);
@@ -132,9 +125,6 @@ public class NebulaeBlocks {
             consumeItems(with(Items.coal, 1, SFWarItems.greenStardust, 1));
             consumePower(0.016f);
         }};
-        //endregion
-
-        //TURRET REGION
         crescentMoon = new ItemTurret("crescent-moon"){{
             float brange = range = 300f;
 
@@ -142,12 +132,12 @@ public class NebulaeBlocks {
             ammo(
                     SFWarItems.crystallizedBlueStardust, new RailBulletType(){{
                         trailColor = Color.valueOf("4684c7");
-                        shootEffect = SFWarFX.instShootCrescent;
-                        hitEffect = SFWarFX.instHitCrescent;
+                        shootEffect = CustomFx.instShootCrescent;
+                        hitEffect = CustomFx.instHitCrescent;
                         pierceEffect = Fx.railHit;
                         smokeEffect = Fx.smokeCloud;
-                        pointEffect = SFWarFX.instTrailCrescent;
-                        despawnEffect = SFWarFX.instBombCrescent;
+                        pointEffect = CustomFx.instTrailCrescent;
+                        despawnEffect = CustomFx.instBombCrescent;
                         pointEffectSpace = 8f;
                         damage = 350;
                         buildingDamageMultiplier = 0.2f;
@@ -542,18 +532,18 @@ public class NebulaeBlocks {
             depositCooldown = 2.0f;
             consumePower(5f);
         }};
-        heavenPiercer = new ItemTurret("heaven-piercer"){{// heaven pierce her reference
+        heavenPiercer = new ItemTurret("heaven-piercer"){{
             float brange = range = 1200f;
 
             requirements(Category.turret, with(Items.silicon, 2500, SFWarItems.solidifiedNyctar, 2500, SFWarItems.nyctoSteel, 2500));
             ammo(
                     SFWarItems.nyctoSteel, new RailBulletType(){{
-                        shootEffect = SFWarFX.instShootHeaven;
-                        hitEffect = SFWarFX.instHitHeaven;
+                        shootEffect = HeavenPiercerFx.instShootHeaven;
+                        hitEffect = HeavenPiercerFx.instHitHeaven;
                         pierceEffect = Fx.railHit;
                         smokeEffect = Fx.smokeCloud;
-                        pointEffect = SFWarFX.instTrailHeaven;
-                        despawnEffect = SFWarFX.instBombHeaven;
+                        pointEffect = HeavenPiercerFx.instTrailHeaven;
+                        despawnEffect = HeavenPiercerFx.instBombHeaven;
                         pointEffectSpace = 30f;
                         damage = 35000;
                         splashDamageRadius = 150f;
@@ -588,6 +578,7 @@ public class NebulaeBlocks {
             depositCooldown = 2.0f;
             consumePower(100f);
         }};
-        //endregion
+
+
     }
 }

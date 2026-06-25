@@ -18,6 +18,7 @@ import mindustry.world.meta.BuildVisibility;
 import mindustry.type.*; // this will import the classes in this package but not the classes in subpackages
 import mindustry.type.unit.*; // this is not for units this is to set entities, not units
 import b919.SFWar.content.units.NebulaeUnits;
+import b919.SFWar.content.CustomFx;
 import b919.SFWar.content.SFWarItems;
 import b919.SFWar.content.SFWarLiquids;
 import mindustry.world.blocks.power.*;
@@ -130,12 +131,12 @@ public class NebulaeBlocks {
             ammo(
                     SFWarItems.crystallizedBlueStardust, new RailBulletType(){{
                         trailColor = Color.valueOf("4684c7");
-                        shootEffect = Fx.instShoot;
-                        hitEffect = Fx.instHit;
+                        shootEffect = CustomFx.instShootCrescent;
+                        hitEffect = CustomFx.instHitCrescent;
                         pierceEffect = Fx.railHit;
                         smokeEffect = Fx.smokeCloud;
-                        pointEffect = Fx.instTrail;
-                        despawnEffect = Fx.instBomb;
+                        pointEffect = CustomFx.instTrailCrescent;
+                        despawnEffect = CustomFx.instBombCrescent;
                         pointEffectSpace = 8f;
                         damage = 350;
                         buildingDamageMultiplier = 0.2f;
@@ -531,7 +532,7 @@ public class NebulaeBlocks {
             consumePower(2.5f);
         }};
         heavenPiercer = new ItemTurret("heaven-piercer"){{
-            float brange = range = 900f;
+            float brange = range = 1200f;
 
             requirements(Category.turret, with(Items.silicon, 250, SFWarItems.solidifiedNyctar, 100));
             ammo(
@@ -543,7 +544,7 @@ public class NebulaeBlocks {
                         smokeEffect = Fx.smokeCloud;
                         pointEffect = Fx.instTrail;
                         despawnEffect = Fx.instBomb;
-                        pointEffectSpace = 80f;
+                        pointEffectSpace = 16f;
                         damage = 35000;
                         buildingDamageMultiplier = 0.2f;
                         pierceDamageFactor = 0.8f;
@@ -553,10 +554,10 @@ public class NebulaeBlocks {
                     }}
             );
 
-            maxAmmo = 100;
-            ammoPerShot = 100;
+            maxAmmo = 1000;
+            ammoPerShot = 250;
             rotateSpeed = 10f;
-            reload = 3600;
+            reload = 60f;
             ammoUseEffect = Fx.casing3Double;
             recoil = 10f;
             cooldownTime = reload;
@@ -573,7 +574,7 @@ public class NebulaeBlocks {
 
             coolant = consumeCoolant(1f);
             depositCooldown = 2.0f;
-            consumePower(10f);
+            consumePower(34f);
         }};
 
 

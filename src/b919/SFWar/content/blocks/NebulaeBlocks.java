@@ -32,7 +32,7 @@ public class NebulaeBlocks {
             // cores
         domusLucis, castellumLucis, arxLucis,
             // production
-        greenStardustPlant, blueStardustFormationPlant, gaseousNyctarPlant,
+        greenStardustPlant, blueStardustFormationPlant, gaseousNyctarPlant, liquidNyctarMixer, nyctarSolidifer,
             // defensive
         luminosityCondenser,
             // turrets
@@ -123,6 +123,19 @@ public class NebulaeBlocks {
             hasLiquids = true;
 
             consumeItems(with(Items.coal, 1, SFWarItems.greenStardust, 1));
+            consumePower(0.016f);
+        }};
+        liquidNyctarMixer = new GenericCrafter("liquid-nyctar-mixer"){{
+            requirements(Category.crafting, with());
+            outputLiquid = new LiquidStack(SFWarLiquids.liquidNyctar, 24f / 60f);
+            craftTime = 60f;
+            liquidCapacity = 60f;
+            size = 2;
+            hasPower = true;
+            hasLiquids = true;
+
+            consumeItems(with( SFWarItems.blueStardust, 1));
+            consumeLiquids(LiquidStack.with(Liquids.oil, 24f / 60f, SFWarLiquids.gaseousNyctar, 12f / 60f));
             consumePower(0.016f);
         }};
         crescentMoon = new ItemTurret("crescent-moon"){{

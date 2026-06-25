@@ -451,7 +451,7 @@ public class NebulaeBlocks {
         }};
         asteroid = new ItemTurret("asteroid"){{
 
-            requirements(Category.turret, with(Items.titanium, 125, Items.lead, 250, SFWarItems.crystallizedGreenStardust, 150, SFWarItems.blueStardust, 150));
+            requirements(Category.turret, with(SFWarItems.solidifiedNyctar, 325, Items.lead, 650, SFWarItems.crystallizedGreenStardust, 150, SFWarItems.blueStardust, 150));
             ammo(
                     Items.titanium, new MissileBulletType(2f, 350){{
                         width = 34f;
@@ -534,7 +534,7 @@ public class NebulaeBlocks {
         heavenPiercer = new ItemTurret("heaven-piercer"){{
             float brange = range = 1200f;
 
-            requirements(Category.turret, with(Items.silicon, 250, SFWarItems.solidifiedNyctar, 100));
+            requirements(Category.turret, with(Items.silicon, 2500, SFWarItems.solidifiedNyctar, 2500, SFWarItems.nyctoSteel, 2500));
             ammo(
                     SFWarItems.nyctoSteel, new RailBulletType(){{
                         shootEffect = CustomFx.instShootHeaven;
@@ -543,7 +543,7 @@ public class NebulaeBlocks {
                         smokeEffect = Fx.smokeCloud;
                         pointEffect = CustomFx.instTrailHeaven;
                         despawnEffect = CustomFx.instBombHeaven;
-                        pointEffectSpace = 16f;
+                        pointEffectSpace = 8f;
                         damage = 35000;
                         splashDamageRadius = 150f;
                         splashDamage = 5000f;
@@ -558,7 +558,7 @@ public class NebulaeBlocks {
             maxAmmo = 1000;
             ammoPerShot = 250;
             rotateSpeed = 10f;
-            reload = 60f;
+            reload = 180f;
             ammoUseEffect = Fx.casing3Double;
             recoil = 10f;
             cooldownTime = reload;
@@ -571,7 +571,7 @@ public class NebulaeBlocks {
 
             coolantMultiplier = 0.05f;
             liquidCapacity = 60f;
-            scaledHealth = 400;
+            scaledHealth = 25000f / 36f;
 
             coolant = consumeCoolant(1f);
             depositCooldown = 2.0f;

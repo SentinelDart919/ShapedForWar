@@ -129,6 +129,7 @@ public class NebulaeBlocks {
             requirements(Category.turret, with(Items.silicon, 250, SFWarItems.solidifiedNyctar, 100));
             ammo(
                     SFWarItems.crystallizedBlueStardust, new RailBulletType(){{
+                        trailColor = Color.valueOf("4684c7");
                         shootEffect = Fx.instShoot;
                         hitEffect = Fx.instHit;
                         pierceEffect = Fx.railHit;
@@ -142,7 +143,6 @@ public class NebulaeBlocks {
                         length = brange;
                         hitShake = 3f;
                         ammoMultiplier = 1f;
-                        trailColor = Color.valueOf("4684c7");
                     }}
             );
 
@@ -344,7 +344,7 @@ public class NebulaeBlocks {
 
             requirements(Category.turret, with(Items.titanium, 125, Items.lead, 250, SFWarItems.crystallizedGreenStardust, 150, SFWarItems.blueStardust, 150));
             ammo(
-                    Items.titanium, new MissileBulletType(2f, 75){{
+                    Items.titanium, new MissileBulletType(2f, 175){{
                         width = 20f;
                         height = 20f;
                         shrinkY = 0f;
@@ -360,7 +360,7 @@ public class NebulaeBlocks {
                         hitColor = backColor = trailColor = Color.valueOf("919fe7");
                         frontColor = Color.valueOf("a4b8fa");
                     }},
-                    Items.metaglass, new MissileBulletType(2.6f, 75){{
+                    Items.metaglass, new MissileBulletType(2.6f, 150){{
                         width = 20f;
                         height = 20f;
                         shrinkY = 0f;
@@ -376,7 +376,7 @@ public class NebulaeBlocks {
                         hitColor = backColor = trailColor = Pal.glassAmmoBack;
                         frontColor = Pal.glassAmmoFront;
                     }},
-                    Items.graphite, new MissileBulletType(1f, 100){{
+                    Items.graphite, new MissileBulletType(1f, 300){{
                         width = 22f;
                         height = 22f;
                         shrinkY = 0f;
@@ -408,7 +408,7 @@ public class NebulaeBlocks {
                         hitColor = backColor = trailColor = Pal.siliconAmmoBack;
                         frontColor = Pal.siliconAmmoFront;
                     }},
-                    SFWarItems.blueStardust, new MissileBulletType(6f, 90){{
+                    SFWarItems.blueStardust, new MissileBulletType(6f, 50){{
                         width = 6f;
                         height = 6f;
                         shrinkY = 0f;
@@ -430,7 +430,7 @@ public class NebulaeBlocks {
             maxAmmo = 10;
             ammoPerShot = 1;
             rotateSpeed = 2f;
-            reload = 40f;
+            reload = 60f;
             ammoUseEffect = Fx.casing3Double;
             recoil = 1f;
             cooldownTime = reload;
@@ -440,13 +440,140 @@ public class NebulaeBlocks {
             envEnabled |= Env.space;
             range = 300f;
 
-            coolantMultiplier = 0.6f;
+            coolantMultiplier = 0.4f;
             liquidCapacity = 6f;
-            scaledHealth = 100;
+            scaledHealth = 400;
 
             coolant = consumeCoolant(1f);
             depositCooldown = 2.0f;
-            consumePower(0.5f);
+            consumePower(2.5f);
+        }};
+        asteroid = new ItemTurret("asteroid"){{
+
+            requirements(Category.turret, with(Items.titanium, 125, Items.lead, 250, SFWarItems.crystallizedGreenStardust, 150, SFWarItems.blueStardust, 150));
+            ammo(
+                    Items.titanium, new MissileBulletType(2f, 350){{
+                        width = 34f;
+                        height = 34f;
+                        shrinkY = 0f;
+                        homingPower = 0.10f;
+                        homingRange = 400f;
+                        lifetime = 300f;
+                        splashDamageRadius = 100f;
+                        splashDamage = 100f;
+                        buildingDamageMultiplier = 0.2f;
+                        pierceDamageFactor = 1f;
+                        pierceCap = 5;
+                        ammoMultiplier = 1f;
+                        collidesAir = false;
+
+                        hitColor = backColor = trailColor = Color.valueOf("919fe7");
+                        frontColor = Color.valueOf("a4b8fa");
+                    }},
+                    Items.graphite, new MissileBulletType(1f, 600){{
+                        width = 36f;
+                        height = 36f;
+                        shrinkY = 0f;
+                        homingPower = 0.18f;
+                        homingRange = 600f;
+                        lifetime = 300f;
+                        splashDamageRadius = 50f;
+                        splashDamage = 50f;
+                        reloadMultiplier = 0.6f;
+                        buildingDamageMultiplier = 0.2f;
+                        pierceDamageFactor = 1f;
+                        pierceCap = 5;
+                        ammoMultiplier = 1f;
+
+                        hitColor = backColor = trailColor = Pal.graphiteAmmoBack;
+                        frontColor = Pal.graphiteAmmoFront;
+                    }},
+                    SFWarItems.nyctoSteel, new MissileBulletType(3f, 1000){{
+                        width = 42f;
+                        height = 42f;
+                        shrinkY = 0f;
+                        homingPower = 0.36f;
+                        homingRange = 600f;
+                        lifetime = 300f;
+                        splashDamageRadius = 150f;
+                        splashDamage = 250f;
+                        reloadMultiplier = 0.8f;
+                        ammoMultiplier = 10f;
+                        buildingDamageMultiplier = 0.2f;
+                        pierceDamageFactor = 1f;
+                        pierceCap = 5;
+                        ammoMultiplier = 1f;
+
+                        hitColor = backColor = trailColor = Color.valueOf("8e00c2");
+                        frontColor = Color.valueOf("ab1ae0");
+                    }}
+            );
+
+            maxAmmo = 10;
+            ammoPerShot = 1;
+            rotateSpeed = 2f;
+            reload = 50f;
+            ammoUseEffect = Fx.casing3Double;
+            recoil = 1f;
+            cooldownTime = reload;
+            shake = 4f;
+            size = 3;
+            unitSort = UnitSorts.weakest;
+            envEnabled |= Env.space;
+            range = 300f;
+
+            coolantMultiplier = 0.1f;
+            liquidCapacity = 6f;
+            scaledHealth = 700;
+
+            coolant = consumeCoolant(1f);
+            depositCooldown = 2.0f;
+            consumePower(2.5f);
+        }};
+        heavenPiercer = new ItemTurret("heaven-piercer"){{
+            float brange = range = 900f;
+
+            requirements(Category.turret, with(Items.silicon, 250, SFWarItems.solidifiedNyctar, 100));
+            ammo(
+                    SFWarItems.nyctoSteel, new RailBulletType(){{
+                        trailColor = Color.valueOf("000000");
+                        shootEffect = Fx.instShoot;
+                        hitEffect = Fx.instHit;
+                        pierceEffect = Fx.railHit;
+                        smokeEffect = Fx.smokeCloud;
+                        pointEffect = Fx.instTrail;
+                        despawnEffect = Fx.instBomb;
+                        pointEffectSpace = 80f;
+                        damage = 35000;
+                        buildingDamageMultiplier = 0.2f;
+                        pierceDamageFactor = 0.8f;
+                        length = brange;
+                        hitShake = 3f;
+                        ammoMultiplier = 1f;
+                    }}
+            );
+
+            maxAmmo = 100;
+            ammoPerShot = 100;
+            rotateSpeed = 10f;
+            reload = 3600;
+            ammoUseEffect = Fx.casing3Double;
+            recoil = 10f;
+            cooldownTime = reload;
+            shake = 4f;
+            size = 6;
+            shootCone = 2f;
+            shootSound = Sounds.shootForeshadow;
+            unitSort = UnitSorts.strongest;
+            envEnabled |= Env.space;
+
+            coolantMultiplier = 0.05f;
+            liquidCapacity = 60f;
+            scaledHealth = 3050;
+
+            coolant = consumeCoolant(1f);
+            depositCooldown = 2.0f;
+            consumePower(10f);
         }};
 
 

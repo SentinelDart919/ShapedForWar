@@ -70,7 +70,7 @@ public class PopulationManager {
                 int toReturn = Math.min(house.usedPopulation, remaining);
                 house.returnPopulation(toReturn);
                 remaining -= toReturn;
-                if (remaining <= 0) break;
+                if (remaining == 0) break;
             }
         }
     }

@@ -5,6 +5,7 @@ import b919.SFWar.content.SFWarItems;
 import b919.SFWar.world.terran.blocks.population.PopulationHouse;
 import b919.SFWar.world.terran.blocks.population.PopulationUnitFactory;
 import b919.SFWar.world.terran.blocks.population.RationsDistributor;
+import b919.SFWar.world.terran.blocks.storage.TerranCommandCenter;
 import b919.SFWar.world.production.SolarCrafter;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
@@ -18,12 +19,31 @@ import static mindustry.type.ItemStack.with;
 
 public class TerranBlocks {
     public static Block
+            terranCommandCenter,
             terranHouse,
             terranBarracks,
             terranRationsDistributor,
             terranGreenHouse;
 
     public static void load() {
+        terranCommandCenter = new TerranCommandCenter("terran-command-center") {{
+            requirements(Category.effect, BuildVisibility.shown, with());
+            populationCapacity = 8;
+            requiresFood = false;
+            populationTime = 360f;
+            plans = Seq.with(
+                    new UnitPlan(UnitTypes.mono, 600f, 1,
+                            ItemStack.with(Items.copper, 15, Items.lead, 10)),
+                    new UnitPlan(UnitTypes.poly, 800f, 1,
+                            ItemStack.with(Items.copper, 30, Items.lead, 60))
+            );
+            size = 5;
+            health = 6000;
+            unitType = UnitTypes.mega;
+            itemCapacity = 8000;
+            unitCapModifier = 32;
+        }};
+
         terranHouse = new PopulationHouse("terran-house") {{
             requirements(Category.production, BuildVisibility.shown, with());
             populationCapacity = 4;

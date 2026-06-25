@@ -15,6 +15,7 @@ import mindustry.world.Tile;
 /** Connects To Population Houses to distribute items / food items*/
 public class RationsDistributor extends Block {
     //TODO add a radius draw to the radius that the Distributor works, add a way to manually connect houses
+    // NEEDS FULL REFACTOR
     public int maxConnections = 8;
     public float range = 80f;
     public float transferTime = 60f;

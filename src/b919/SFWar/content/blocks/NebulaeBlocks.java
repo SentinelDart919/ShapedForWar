@@ -1,6 +1,8 @@
 package b919.SFWar.content.blocks;
 
 import arc.graphics.Color;
+import b919.SFWar.content.bullets.NukeBulletType;
+import b919.SFWar.content.bullets.SuperRaulCannonBullet;
 import b919.SFWar.utils.SFWarFX;
 import b919.SFWar.world.terran.nebulae.blocks.power.NebulaePanel;
 import mindustry.content.*;
@@ -536,7 +538,7 @@ public class NebulaeBlocks {
 
             requirements(Category.turret, with(Items.silicon, 2500, SFWarItems.solidifiedNyctar, 2500, SFWarItems.nyctoSteel, 2500));
             ammo(
-                    SFWarItems.nyctoSteel, new RailBulletType(){{
+                    SFWarItems.nyctoSteel, new SuperRaulCannonBullet(){{
                         shootEffect = SFWarFX.instShootHeaven;
                         hitEffect = SFWarFX.instHitHeaven;
                         pierceEffect = Fx.railHit;

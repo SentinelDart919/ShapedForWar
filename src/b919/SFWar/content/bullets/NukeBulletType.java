@@ -94,6 +94,10 @@ public class NukeBulletType extends BasicBulletType{
     }
 
     public static void createNukeExplosion(float x, float y, Team team, float rotation){
+        createNukeExplosion(x, y, team, rotation, 480f, 53f, Color.white, null);
+    }
+
+    public static void createNukeExplosion(float x, float y, Team team, float rotation, float explosionRadius, float frameIntensity, Color color, Color impactColor){
 
         if(SFWarSounds.desNukeHit != null){
             int sid1 = SFWarSounds.desNukeHit.at(x, y, 1f, 2f);
@@ -104,8 +108,8 @@ public class NukeBulletType extends BasicBulletType{
         }
 
         float[] arr = new float[360 * 3];
-        SFWarUtils.rayCastCircle(x, y, 480f, t -> (t.block().isStatic() || t.block() instanceof Wall) && !Mathf.within(x, y, t.worldx(), t.worldy(), 150f), t -> {
-            float dst = 1f - Mathf.clamp(Mathf.dst(x, y, t.x * Vars.tilesize, t.y * Vars.tilesize) / 480f);
+        SFWarUtils.rayCastCircle(x, y, explosionRadius, t -> (t.block().isStatic() || t.block() instanceof Wall) && !Mathf.within(x, y, t.worldx(), t.worldy(), 150f), t -> {
+            float dst = 1f - Mathf.clamp(Mathf.dst(x, y, t.x * Vars.tilesize, t.y * Vars.tilesize) / explosionRadius);
             if(Mathf.chance(Mathf.pow(dst, 2f) * 0.75f)) Fires.create(t);
         }, t -> {
             float nx = t.x * Vars.tilesize, ny = t.y * Vars.tilesize;
@@ -126,7 +130,7 @@ public class NukeBulletType extends BasicBulletType{
             }
         }, arr);
 
-        SFWarUtils.scanEnemies(team, x, y, 480f, true, true, t -> {
+        SFWarUtils.scanEnemies(team, x, y, explosionRadius, true, true, t -> {
             if(t instanceof Unit u){
                 float damageScl = SFWarUtils.inRayCastCircle(x, y, arr, u);
 
@@ -166,11 +170,12 @@ public class NukeBulletType extends BasicBulletType{
         });
 
         Effect.shake(60f, 120f, x, y);
-        SFWarFX.desNukeShockwave.at(x, y, 480f);
-        SFWarFX.desNuke.at(x, y, 479f, arr);
+        SFWarFX.desNukeShockwave.at(x, y, explosionRadius);
+        SFWarFX.desNuke.at(x, y, explosionRadius - 1f, arr);
 
         if(SFWarSFX.inst != null){
-            SFWarSFX.inst.impactFrames(x, y, rotation, 53f, false, () -> {
+            SFWarSFX.inst.impactFrames(x, y, rotation, frameIntensity, false, impactColor, () -> {
+                Draw.color(color);
                 for(int i = 0; i < arr.length; i++){
                     float len1 = arr[i], len2 = arr[(i + 1) % arr.length];
                     float ang1 = (i / (float)arr.length) * 360f;
@@ -181,10 +186,12 @@ public class NukeBulletType extends BasicBulletType{
 
                     Fill.tri(x, y, x + x1, y + y1, x + x2, y + y2);
                 }
+                Draw.color();
             });
         }
 
         Draw.draw(Layer.end - 1, () -> {
+            Draw.color(color);
             for(int i = 0; i < arr.length; i++){
                 float len1 = arr[i], len2 = arr[(i + 1) % arr.length];
                 float ang1 = (i / (float)arr.length) * 360f;
@@ -195,6 +202,7 @@ public class NukeBulletType extends BasicBulletType{
 
                 Fill.tri(x, y, x + x1, y + y1, x + x2, y + y2);
             }
+            Draw.color();
         });
     }
 }

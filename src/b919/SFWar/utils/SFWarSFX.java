@@ -118,7 +118,8 @@ public class SFWarSFX implements ApplicationListener{
                     float y = impact.y;
                     float intensity = impact.intensity;
 
-                    Draw.color(impact.directional ? Color.white : Pal.lightOrange, Color.gray, 0.5f);
+                    Color baseColor = impact.directional ? Color.white : (impact.impactColor != null ? impact.impactColor : Pal.lightOrange);
+                    Draw.color(baseColor, Color.gray, 0.5f);
                     int ints = (int)(intensity) + 8;
                     for(int i = 0; i < ints; i++){
                         float angle = impact.directional ? impact.rotation + (Interp.pow2In.apply(Mathf.random(1f)) * 180f * Mathf.randomSign()) : Mathf.random(360f);
@@ -138,6 +139,9 @@ public class SFWarSFX implements ApplicationListener{
     }
 
     public void impactFrames(float x, float y, float rotation, float intensity, boolean directional, Runnable run){
+        impactFrames(x, y, rotation, intensity, directional,null, run);
+    }
+    public void impactFrames(float x, float y, float rotation, float intensity, boolean directional,Color impactColor, Runnable run){
         ImpactFrameDrawer i = impFramePool.obtain();
         i.run = run;
         i.intensity = intensity;
@@ -145,11 +149,15 @@ public class SFWarSFX implements ApplicationListener{
         i.y = y;
         i.rotation = rotation;
         i.directional = directional;
+        i.impactColor = impactColor;
 
         impFrameEntities.add(i);
         impFrameTime = Math.max(impFrameTime, 6f);
     }
     public void impactFrames(Drawc d, float x, float y, float rotation, float intensity, boolean directional){
+        impactFrames(d, x, y, rotation, intensity, directional, null);
+    }
+    public void impactFrames(Drawc d, float x, float y, float rotation, float intensity, boolean directional, Color impactColor){
         ImpactFrameDrawer i = impFramePool.obtain();
         i.draw = d;
         i.intensity = intensity;
@@ -157,6 +165,7 @@ public class SFWarSFX implements ApplicationListener{
         i.y = y;
         i.rotation = rotation;
         i.directional = directional;
+        i.impactColor = impactColor;
 
         impFrameEntities.add(i);
         impFrameTime = Math.max(impFrameTime, 6f);
@@ -300,12 +309,14 @@ public class SFWarSFX implements ApplicationListener{
         float x, y, rotation;
         boolean directional;
         float intensity;
+        Color impactColor;
 
         void reset(){
             draw = null;
             run = null;
             directional = false;
             rotation = intensity = x = y = 0;
+            impactColor = null;
         }
     }
 

@@ -1,7 +1,7 @@
 package b919.SFWar.content.blocks;
 
 import arc.graphics.Color;
-import b919.SFWar.content.HeavenPiercerFx;
+import b919.SFWar.utils.SFWarFX;
 import b919.SFWar.world.terran.nebulae.blocks.power.NebulaePanel;
 import mindustry.content.*;
 import mindustry.entities.UnitSorts;
@@ -19,7 +19,6 @@ import mindustry.world.meta.BuildVisibility;
 import mindustry.type.*; // this will import the classes in this package but not the classes in subpackages
 import mindustry.type.unit.*; // this is not for units this is to set entities, not units
 import b919.SFWar.content.units.NebulaeUnits;
-import b919.SFWar.content.CustomFx;
 import b919.SFWar.content.SFWarItems;
 import b919.SFWar.content.SFWarLiquids;
 import mindustry.world.blocks.power.*;
@@ -132,12 +131,12 @@ public class NebulaeBlocks {
             ammo(
                     SFWarItems.crystallizedBlueStardust, new RailBulletType(){{
                         trailColor = Color.valueOf("4684c7");
-                        shootEffect = CustomFx.instShootCrescent;
-                        hitEffect = CustomFx.instHitCrescent;
+                        shootEffect = SFWarFX.instShootCrescent;
+                        hitEffect = SFWarFX.instHitCrescent;
                         pierceEffect = Fx.railHit;
                         smokeEffect = Fx.smokeCloud;
-                        pointEffect = CustomFx.instTrailCrescent;
-                        despawnEffect = CustomFx.instBombCrescent;
+                        pointEffect = SFWarFX.instTrailCrescent;
+                        despawnEffect = SFWarFX.instBombCrescent;
                         pointEffectSpace = 8f;
                         damage = 350;
                         buildingDamageMultiplier = 0.2f;
@@ -538,12 +537,12 @@ public class NebulaeBlocks {
             requirements(Category.turret, with(Items.silicon, 2500, SFWarItems.solidifiedNyctar, 2500, SFWarItems.nyctoSteel, 2500));
             ammo(
                     SFWarItems.nyctoSteel, new RailBulletType(){{
-                        shootEffect = HeavenPiercerFx.instShootHeaven;
-                        hitEffect = HeavenPiercerFx.instHitHeaven;
+                        shootEffect = SFWarFX.instShootHeaven;
+                        hitEffect = SFWarFX.instHitHeaven;
                         pierceEffect = Fx.railHit;
                         smokeEffect = Fx.smokeCloud;
-                        pointEffect = HeavenPiercerFx.instTrailHeaven;
-                        despawnEffect = HeavenPiercerFx.instBombHeaven;
+                        pointEffect = SFWarFX.instTrailHeaven;
+                        despawnEffect = SFWarFX.instBombHeaven;
                         pointEffectSpace = 30f;
                         damage = 35000;
                         splashDamageRadius = 150f;

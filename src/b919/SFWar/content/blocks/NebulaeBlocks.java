@@ -129,7 +129,7 @@ public class NebulaeBlocks {
             consumeLiquid(Liquids.water, 0.1f);
         }};
         purpleStardustGrinder = new GenericCrafter("purple-stardust-grinder"){{
-            requirements(Category.crafting, with(SFWarItems.blueStardust, SFWarItems.crystallizedGreenStardust, 50, 75, Items.titanium, 100, Items.plastanium, 25));
+            requirements(Category.crafting, with(SFWarItems.blueStardust, 50, SFWarItems.crystallizedGreenStardust, 75, Items.titanium, 100, Items.plastanium, 25));
             outputItem = new ItemStack(Items.copper, 1);
             craftTime = 360f;
             liquidCapacity = 60f;
@@ -174,7 +174,7 @@ public class NebulaeBlocks {
             size = 6;
             hasPower = hasLiquids;
             hasLiquids = true;
-            // Dumbass long name for the white stardust. Exclusively for Magnum Opus; Artes Magnae.
+            // Dumbass long name for the white stardust. Exclusively for Magnum Opus; Artes Magnae and its lone unit.
             // placeholder consumption
             consumeItems(with(Items.lead, 1000*1000));
             consumePower(1000000f / 60f);

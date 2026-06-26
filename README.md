@@ -1,6 +1,8 @@
 # Shaped For War Mod
 A Java Mindustry mod that works on PC. 
-
+## Credits
+- To [Nullotte](https://github.com/nullotte/) for letting me use [Carpe Diem](https://github.com/nullotte/Carpe-Diem) multirecipe crafters class.
+- To [EyeOfDarkness](https://github.com/EyeOfDarkness) for making [FlameOut](https://github.com/EyeOfDarkness/FlameOut) (all visuals of ShapedForWar are a custom version of the visuals of this mod, same for the nukes)
 ## Building for Desktop Testing
 
 1. Install JDK **17**.

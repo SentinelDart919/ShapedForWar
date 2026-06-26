@@ -32,16 +32,28 @@ public class NebulaeBlocks {
     public static Block
             // cores
         domusLucis, castellumLucis, arxLucis,
-            // production
-        greenStardustPlant, blueStardustFormationPlant, gaseousNyctarPlant, stardustCrystallizer,
+            // raw production
+        greenStardustPlant, blueStardustFormationPlant,
+            // Nyctar
+        gaseousNyctarMixer, liquidNyctarMixer, nyctarSolidifier, nyctoSteelFoundry, pureNyctarRefinery,
+            // Stardust
+        stardustCrystallizer, purpleStardustGrinder, yellowStardustFoundry, redStardustManufactorer, idealizedStardustManifestationChamber,
+            // Other
+        calibrePress, soulCuller,
             // defensive
         luminosityCondenser,
             // turrets
-        crescentMoon, heavenPiercer, starScreech, pathOfTotality, meteoroid, comet, asteroid,
-            // delete these later
-        demonstrationAlpha, demonstrationBeta,
-            // units
+        crescentMoon, starScreech, pathOfTotality, meteoroid, comet, asteroid,
+            // "Supreme" turret
+        heavenPiercer,
+            // units, T1-3
         seminarumStellarum, sartrixNyctar,
+            // units, T4-6
+        cosmicCradle, magnaSartrixNyctar,
+            // units, T7
+        nexusStellarum, nyctarNexus,
+            // Supreme unit
+        magnumOpusArtesMagnae,
             // power
         nyxPanel, nyxPanelSmall;
     public static void load(){
@@ -116,17 +128,67 @@ public class NebulaeBlocks {
             consumePower(1f);
             consumeLiquid(Liquids.water, 0.1f);
         }};
-        gaseousNyctarPlant = new GenericCrafter("gaseous-nyctar-plant"){{
+        purpleStardustGrinder = new GenericCrafter("purple-stardust-grinder"){{
+            requirements(Category.crafting, with(SFWarItems.blueStardust, SFWarItems.crystallizedGreenStardust, 50, 75, Items.titanium, 100, Items.plastanium, 25));
+            outputItem = new ItemStack(Items.copper, 1);
+            craftTime = 360f;
+            liquidCapacity = 60f;
+            size = 3;
+            hasPower = hasLiquids;
+            hasLiquids = true;
+
+            consumeItems(with(Items.titanium, 1, Items.lead, 1));
+            consumePower(2f);
+        }};
+        yellowStardustFoundry = new GenericCrafter("yellow-stardust-foundry"){{
+            requirements(Category.crafting, with(Items.surgeAlloy, 25, Items.titanium, 125, SFWarItems.solidifiedNyctar, 75));
+            outputItem = new ItemStack(Items.copper, 1);
+            craftTime = 480f;
+            liquidCapacity = 60f;
+            size = 3;
+            hasPower = true;
+
+            consumeItems(with(Items.surgeAlloy, 1));
+            consumePower(4f);
+        }};
+        redStardustManufactorer = new GenericCrafter("red-stardust-manufactorer"){{
+            requirements(Category.crafting, with(SFWarItems.ruby, 25, SFWarItems.nyctoSteel, 125, SFWarItems.solidifiedNyctar, 500, Items.pyratite, 50, Items.blastCompound, 75));
+            outputItem = new ItemStack(Items.copper, 1);
+            craftTime = 600f;
+            liquidCapacity = 60f;
+            size = 4;
+            hasPower = hasLiquids;
+            hasLiquids = true;
+            // Red Stardust has been made slightly more difficult to manufacture than originally planned.
+            consumeItems(with(Items.blastCompound, 1, Items.pyratite, 1, SFWarItems.ruby, 1));
+            consumePower(11.1f);
+            consumeLiquids(LiquidStack.with(Liquids.cryofluid, 0.1f, SFWarLiquids.liquidNyctar, 0.1f));
+        }};
+        idealizedStardustManifestationChamber = new GenericCrafter("idealized-stardust-manifestation-chamber"){{
+            requirements(Category.crafting, with(Items.copper, 1, Items.lead, 1, Items.coal, 1, Items.graphite, 1, Items.silicon, 1, SFWarItems.ruby, 1));
+            outputItem = new ItemStack(Items.copper, 1);
+            // copper as a placeholder since I don't want to edit items since you said you had commits not done yet
+            // this is the gatekeeper item for the supreme unit :3
+            craftTime = 3600f;
+            liquidCapacity = 60f;
+            size = 6;
+            hasPower = hasLiquids;
+            hasLiquids = true;
+            // Dumbass long name for the white stardust. Exclusively for Magnum Opus; Artes Magnae.
+            // placeholder consumption
+            consumeItems(with(Items.lead, 1000*1000));
+            consumePower(1000000f / 60f);
+            consumeLiquids(LiquidStack.with(Liquids.cryofluid, 0.1f, SFWarLiquids.liquidNyctar, 0.1f));
+        }};
+        gaseousNyctarMixer = new GenericCrafter("gaseous-nyctar-mixer"){{
             requirements(Category.crafting, with());
             outputLiquid = new LiquidStack(SFWarLiquids.gaseousNyctar, 6f / 60f);
             craftTime = 60f;
             liquidCapacity = 60f;
             size = 2;
-            hasPower = true;
             hasLiquids = true;
 
             consumeItems(with(Items.coal, 1, SFWarItems.greenStardust, 1));
-            consumePower(0.016f);
         }};
         crescentMoon = new ItemTurret("crescent-moon"){{
             float brange = range = 300f;
@@ -535,7 +597,7 @@ public class NebulaeBlocks {
             depositCooldown = 2.0f;
             consumePower(5f);
         }};
-        heavenPiercer = new ItemTurret("heaven-piercer"){{
+        heavenPiercer = new ItemTurret("taivaitten-lävistäjä"){{
             float brange = range = 1200f;
 
             requirements(Category.turret, with(Items.silicon, 2500, SFWarItems.solidifiedNyctar, 2500, SFWarItems.nyctoSteel, 2500));
@@ -580,51 +642,6 @@ public class NebulaeBlocks {
             coolant = consumeCoolant(1f);
             depositCooldown = 2.0f;
             consumePower(100f);
-        }};
-        demonstrationAlpha = new ItemTurret("demon-a"){{
-
-            requirements(Category.turret, with(Items.titanium, 125, Items.lead, 250, SFWarItems.crystallizedGreenStardust, 150, SFWarItems.blueStardust, 150));
-            ammo(
-
-                    SFWarItems.commonAmmo, new MissileBulletType(6f, 10){{
-                        width = 6f;
-                        height = 6f;
-                        shrinkY = 0f;
-                        homingPower = 0.36f;
-                        homingRange = 600f;
-                        lifetime = 300f;
-                        reloadMultiplier = 1f;
-                        ammoMultiplier = 25f;
-                        buildingDamageMultiplier = 0.2f;
-                        pierceDamageFactor = 0.8f;
-                        pierceCap = 5;
-                        ammoMultiplier = 5f;
-
-                        hitColor = backColor = trailColor = Pal.siliconAmmoBack;
-                        frontColor = Pal.siliconAmmoFront;
-                    }}
-            );
-
-            maxAmmo = 50;
-            ammoPerShot = 1;
-            rotateSpeed = 2f;
-            reload = 15f;
-            ammoUseEffect = Fx.casing3Double;
-            recoil = 1f;
-            cooldownTime = reload;
-            shake = 1f;
-            size = 2;
-            unitSort = UnitSorts.weakest;
-            envEnabled |= Env.space;
-            range = 300f;
-
-            coolantMultiplier = 3f;
-            liquidCapacity = 6f;
-            scaledHealth = 400;
-
-            coolant = consumeCoolant(1f);
-            depositCooldown = 2.0f;
-            consumePower(2.5f);
         }};
 
 

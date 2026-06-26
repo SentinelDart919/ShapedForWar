@@ -22,10 +22,14 @@ public class TerranBlocks {
             terranCommandCenter,
             terranHouse,
             terranBarracks,
-            terranRationsDistributor,
+            //distribution
+            terranBasicConveyor, terranAdvancedConveyor, terranJunction, terranNecessaryEvil, terranRationsDistributor,
+            //crafting and production
             terranGreenHouse;
+            //power related
 
     public static void load() {
+        //Core
         terranCommandCenter = new TerranCommandCenter("terran-command-center") {{
             requirements(Category.effect, BuildVisibility.shown, with());
             populationCapacity = 8;
@@ -44,6 +48,7 @@ public class TerranBlocks {
             unitCapModifier = 32;
         }};
 
+        //Population
         terranHouse = new PopulationHouse("terran-house") {{
             requirements(Category.production, BuildVisibility.shown, with());
             populationCapacity = 4;
@@ -54,6 +59,7 @@ public class TerranBlocks {
             health = 400;
         }};
 
+        //Units
         terranBarracks = new PopulationUnitFactory("terran-barracks") {{
             requirements(Category.units, BuildVisibility.shown, with());
             plans = Seq.with(
@@ -68,6 +74,8 @@ public class TerranBlocks {
             health = 800;
         }};
 
+        //Item Distribution related
+
         terranRationsDistributor = new RationsDistributor("terran-rations-distributor") {{
             requirements(Category.distribution, BuildVisibility.shown, with(SFWarItems.steel, 25, SFWarItems.commonAmmo, 10));
             foodItem = SFWarItems.foodRations;
@@ -78,6 +86,7 @@ public class TerranBlocks {
             health = 400;
         }};
 
+        //Item crafting
         terranGreenHouse = new SolarCrafter("terran-green-house"){{
             requirements(Category.production, BuildVisibility.shown, with());
             outputItem = new ItemStack(SFWarItems.foodRations, 1);
@@ -88,5 +97,7 @@ public class TerranBlocks {
             consumeLiquid(Liquids.water, 0.45f / 60f);
             consumePower(2f);
         }};
+
+        //Power Related
     }
 }

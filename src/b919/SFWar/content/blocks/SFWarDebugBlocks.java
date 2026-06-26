@@ -4,6 +4,8 @@ import arc.graphics.Color;
 import arc.math.Interp;
 import arc.math.Mathf;
 import arc.struct.Seq;
+import b919.SFWar.world.production.MultiRecipeCrafter;
+import b919.SFWar.world.production.Recipe;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
@@ -17,6 +19,7 @@ import mindustry.gen.Sounds;
 import mindustry.graphics.Layer;
 import mindustry.graphics.Pal;
 import mindustry.type.Category;
+import mindustry.type.ItemStack;
 import mindustry.type.Weapon;
 import mindustry.type.unit.MissileUnitType;
 import mindustry.world.Block;
@@ -31,7 +34,7 @@ import mindustry.world.blocks.defense.OverdriveProjector;
 import static mindustry.type.ItemStack.with;
 
 public class SFWarDebugBlocks {
-    public static Block aliveTree, scathe2, superDuo, scatheNuke, debugTohru;
+    public static Block aliveTree, scathe2, superDuo, scatheNuke, debugTohru, debugMultiCrafter, debugMultiCrafter2;
 
     public static void load(){
         //aliveTree = new ItsKirby69LivingTreeBlock("alive-tree", 2, "#74d660");
@@ -348,6 +351,48 @@ public class SFWarDebugBlocks {
             ambientSoundVolume = 0.16f;
             scaledHealth = 10000;
             hasBoost = false;
+        }};
+        debugMultiCrafter = new MultiRecipeCrafter("debug-multi-crafter"){{
+            requirements(Category.crafting, BuildVisibility.sandboxOnly, with());
+            consumePower(0.30f);
+            size = 3;
+            itemCapacity = 100;
+            recipes.add(new Recipe[]{
+                    new Recipe(40)
+                            .consumeItems(ItemStack.with(Items.copper, 1, Items.lead, 1))
+                            .outputItem(Items.graphite, 4),
+                    new Recipe(40)
+                            .consumeItems(ItemStack.with(Items.silicon, 1, Items.graphite, 1, Items.titanium, 1))
+                            .outputItem(Items.surgeAlloy, 2),
+                    new Recipe(40)
+                            .consumeItems(ItemStack.with(Items.coal, 2, Items.sand, 6, Items.lead, 4))
+                            .outputItems(ItemStack.with(Items.silicon, 4, Items.metaglass, 4)),
+            });
+        }};
+        debugMultiCrafter2 = new MultiRecipeCrafter("debug-multi-crafter-2"){{
+            requirements(Category.crafting, BuildVisibility.sandboxOnly, with());
+            size = 3;
+            itemCapacity = 100;
+            recipes.add(new Recipe[]{
+                    new Recipe(30)
+                            .consumeItems(ItemStack.with(Items.coal, 1, Items.sand, 2))
+                            .outputItem(Items.silicon, 1),
+                    new Recipe(30)
+                            .consumeItems(ItemStack.with(Items.sand, 2, Items.lead, 1))
+                            .outputItem(Items.metaglass, 1),
+                    new Recipe(50)
+                            .consumeItems(ItemStack.with(Items.coal, 1, Items.lead, 2))
+                            .outputItem(Items.metaglass, 1),
+                    new Recipe(50)
+                            .consumeItems(ItemStack.with(Items.coal, 1, Items.scrap, 2))
+                            .outputItem(Items.silicon, 1),
+                    new Recipe(50)
+                            .consumeItems(ItemStack.with(Items.coal, 1, Items.thorium, 2))
+                            .outputItem(Items.plastanium, 1),
+                    new Recipe(50)
+                            .consumeItems(ItemStack.with(Items.coal, 1, Items.titanium, 2))
+                            .outputItem(Items.plastanium, 1),
+            });
         }};
     }
 }

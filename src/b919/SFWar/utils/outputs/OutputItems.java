@@ -27,6 +27,13 @@ public class OutputItems extends Output {
     }
 
     @Override
+    public void dump(Building build) {
+        for (ItemStack stack : items) {
+            build.dump(stack.item);
+        }
+    }
+
+    @Override
     public void dumpTimed(Building build) {
         for (ItemStack stack : items) {
             build.dump(stack.item);

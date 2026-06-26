@@ -4,6 +4,7 @@ import arc.Core;
 import arc.Events;
 import arc.util.Log;
 import b919.SFWar.content.*;
+import b919.SFWar.content.blocks.BiomassBlocks;
 import b919.SFWar.content.blocks.NebulaeBlocks;
 import b919.SFWar.content.blocks.SFWarDebugBlocks;
 import b919.SFWar.content.blocks.TerranBlocks;
@@ -50,6 +51,7 @@ public class SFWarMain extends Mod{
         SFWarItems.load();
         SFWarLiquids.load();
         //SFWarBlocks.load();
+        BiomassBlocks.load();
         TerranBlocks.load();
         NebulaeBlocks.load();
         SFWarDebugBlocks.load();

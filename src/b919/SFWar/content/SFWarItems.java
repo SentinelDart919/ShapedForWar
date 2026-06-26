@@ -6,7 +6,7 @@ import mindustry.type.Item;
 public class SFWarItems {
     public static Item
             //general items
-            uranium,ruby, enrichedUranium, ferrum, steel, chromium, sulfur, gunpowder,
+            uranium, enrichedUranium, ferrum, steel, chromium, sulfur, gunpowder, ruby,
     //terran
             foodRations, heavyAlloy, armorPlates, heavyArmorPlates, smallCase, mediumCase, bigCase,
             commonAmmo, HEAmmo, APAmmo, ArtilleryRounds, uraniumAmmo,

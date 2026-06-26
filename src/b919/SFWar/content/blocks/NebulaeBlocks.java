@@ -33,11 +33,13 @@ public class NebulaeBlocks {
             // cores
         domusLucis, castellumLucis, arxLucis,
             // production
-        greenStardustPlant, blueStardustFormationPlant, gaseousNyctarPlant,
+        greenStardustPlant, blueStardustFormationPlant, gaseousNyctarPlant, stardustCrystallizer,
             // defensive
         luminosityCondenser,
             // turrets
         crescentMoon, heavenPiercer, starScreech, pathOfTotality, meteoroid, comet, asteroid,
+            // delete these later
+        demonstrationAlpha, demonstrationBeta,
             // units
         seminarumStellarum, sartrixNyctar,
             // power
@@ -91,9 +93,9 @@ public class NebulaeBlocks {
             powerProduction = 1.6f;
         }};
         greenStardustPlant = new GenericCrafter("green-stardust-plant"){{
-            requirements(Category.crafting, with());
+            requirements(Category.crafting, with(Items.copper, 25, Items.lead, 10));
             outputItem = new ItemStack(SFWarItems.greenStardust, 1);
-            craftTime = 30f;
+            craftTime = 120f;
             size = 2;
             hasPower = true;
             hasLiquids = false;
@@ -102,9 +104,9 @@ public class NebulaeBlocks {
             consumePower(0.5f);
         }};
         blueStardustFormationPlant = new GenericCrafter("blue-stardust-formation-plant"){{
-            requirements(Category.crafting, with());
+            requirements(Category.crafting, with(SFWarItems.greenStardust, 75, Items.titanium, 50, Items.metaglass, 25));
             outputItem = new ItemStack(SFWarItems.blueStardust, 1);
-            craftTime = 60f;
+            craftTime = 240f;
             liquidCapacity = 60f;
             size = 2;
             hasPower = hasLiquids;
@@ -210,11 +212,11 @@ public class NebulaeBlocks {
 
             shoot = new ShootBarrel(){{
                 barrels = new float[]{
-                        -8, -2.5f, 0,
-                        -4, -1.25f, 0,
-                        0, 0, 0,
-                        4, -1.25f, 0,
-                        8, -2.5f, 0
+                        -8, 6 -2.5f, 0,
+                        -4, 6 -1.25f, 0,
+                        0, 6, 0,
+                        4, 6 -1.25f, 0,
+                        8, 6 -2.5f, 0
                 };
                 shots = 5;
                 shotDelay = 3f;
@@ -578,6 +580,51 @@ public class NebulaeBlocks {
             coolant = consumeCoolant(1f);
             depositCooldown = 2.0f;
             consumePower(100f);
+        }};
+        demonstrationAlpha = new ItemTurret("demon-a"){{
+
+            requirements(Category.turret, with(Items.titanium, 125, Items.lead, 250, SFWarItems.crystallizedGreenStardust, 150, SFWarItems.blueStardust, 150));
+            ammo(
+
+                    SFWarItems.commonAmmo, new MissileBulletType(6f, 10){{
+                        width = 6f;
+                        height = 6f;
+                        shrinkY = 0f;
+                        homingPower = 0.36f;
+                        homingRange = 600f;
+                        lifetime = 300f;
+                        reloadMultiplier = 1f;
+                        ammoMultiplier = 25f;
+                        buildingDamageMultiplier = 0.2f;
+                        pierceDamageFactor = 0.8f;
+                        pierceCap = 5;
+                        ammoMultiplier = 5f;
+
+                        hitColor = backColor = trailColor = Pal.siliconAmmoBack;
+                        frontColor = Pal.siliconAmmoFront;
+                    }}
+            );
+
+            maxAmmo = 50;
+            ammoPerShot = 1;
+            rotateSpeed = 2f;
+            reload = 15f;
+            ammoUseEffect = Fx.casing3Double;
+            recoil = 1f;
+            cooldownTime = reload;
+            shake = 1f;
+            size = 2;
+            unitSort = UnitSorts.weakest;
+            envEnabled |= Env.space;
+            range = 300f;
+
+            coolantMultiplier = 3f;
+            liquidCapacity = 6f;
+            scaledHealth = 400;
+
+            coolant = consumeCoolant(1f);
+            depositCooldown = 2.0f;
+            consumePower(2.5f);
         }};
 
 

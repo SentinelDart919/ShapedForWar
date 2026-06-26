@@ -9,6 +9,7 @@ import arc.util.*;
 import arc.util.io.*;
 import b919.SFWar.utils.consumers.ConsumeItemsUses.*;
 import b919.SFWar.utils.meta.*;
+    import b919.SFWar.utils.outputs.*;
 import mindustry.*;
 import mindustry.content.*;
 import mindustry.ctype.*;
@@ -257,6 +258,13 @@ public class MultiRecipeCrafter extends Block {
         }
 
         public void matchRecipe() {
+            if (currentRecipeID >= 0 && currentRecipeID < recipes.size) {
+                Recipe current = recipes.get(currentRecipeID);
+                if (hasOutputItems(current)) {
+                    return;
+                }
+            }
+
             for (Recipe recipe : recipes) {
                 if (recipe.valid(this)) {
                     currentRecipeID = recipes.indexOf(recipe);
@@ -265,6 +273,19 @@ public class MultiRecipeCrafter extends Block {
             }
 
             currentRecipeID = -1;
+        }
+
+        private boolean hasOutputItems(Recipe recipe) {
+            for (Output output : recipe.outputs) {
+                if (output instanceof OutputItems oi) {
+                    for (ItemStack stack : oi.items) {
+                        if (items.has(stack.item, stack.amount)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
 
         @Override

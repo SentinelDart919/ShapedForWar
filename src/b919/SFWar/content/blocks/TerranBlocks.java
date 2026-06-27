@@ -13,6 +13,7 @@ import mindustry.content.UnitTypes;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.world.Block;
+import mindustry.world.blocks.distribution.*;
 import mindustry.world.meta.BuildVisibility;
 
 import static mindustry.type.ItemStack.with;
@@ -23,7 +24,8 @@ public class TerranBlocks {
             terranHouse,
             terranBarracks,
             //distribution
-            terranBasicConveyor, terranAdvancedConveyor, terranJunction, terranNecessaryEvil, terranRationsDistributor,
+            terranBasicConveyor, terranArmoredConveyor, terranAdvancedConveyor, terranAdvancedArmoredConveyor,
+                    terranJunction, terranNecessaryEvil, terranRationsDistributor,
             //crafting and production
             terranGreenHouse;
             //power related
@@ -75,7 +77,32 @@ public class TerranBlocks {
         }};
 
         //Item Distribution related
-
+        terranBasicConveyor = new Conveyor("terran-basic-conveyor"){{
+            requirements(Category.distribution, BuildVisibility.shown, with(SFWarItems.ferrum, 1));
+            health = 65;
+            speed = 0.08f;
+            displayedSpeed = 11f;
+        }};
+        terranArmoredConveyor = new ArmoredConveyor("terran-armored-conveyor"){{
+            requirements(Category.distribution, BuildVisibility.shown, with(SFWarItems.ferrum, 2, SFWarItems.steel, 1));
+            health = 240;
+            speed = 0.08f;
+            displayedSpeed = 11f;
+        }};
+        terranAdvancedConveyor = new Conveyor("terran-advanced-conveyor"){{
+            requirements(Category.distribution, BuildVisibility.shown, with(SFWarItems.steel, 2, SFWarItems.heavyAlloy, 1));
+            health = 130;
+            speed = 0.15f;
+            displayedSpeed = 18f;
+        }};
+        terranAdvancedArmoredConveyor = new Conveyor("terran-advanced-armored-conveyor"){{
+            requirements(Category.distribution, BuildVisibility.shown, with(SFWarItems.uraniumPlates, 1, SFWarItems.steel, 2, SFWarItems.heavyAlloy, 1));
+            health = 570;
+            speed = 0.15f;
+            displayedSpeed = 18f;
+        }};
+        terranNecessaryEvil = new Router("terran-router"){{}};
+        terranJunction = new Junction("terran-junction"){{}};
         terranRationsDistributor = new RationsDistributor("terran-rations-distributor") {{
             requirements(Category.distribution, BuildVisibility.shown, with(SFWarItems.steel, 25, SFWarItems.commonAmmo, 10));
             foodItem = SFWarItems.foodRations;

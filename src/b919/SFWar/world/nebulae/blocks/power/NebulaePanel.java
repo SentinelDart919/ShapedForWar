@@ -1,4 +1,4 @@
-package b919.SFWar.world.terran.nebulae.blocks.power;
+package b919.SFWar.world.nebulae.blocks.power;
 
 import arc.math.Mathf;
 import mindustry.world.blocks.power.SolarGenerator;

@@ -1,10 +1,9 @@
 package b919.SFWar.content.blocks;
 
 import arc.graphics.Color;
-import b919.SFWar.content.bullets.NukeBulletType;
 import b919.SFWar.content.bullets.SuperRaulCannonBullet;
 import b919.SFWar.utils.SFWarFX;
-import b919.SFWar.world.terran.nebulae.blocks.power.NebulaePanel;
+import b919.SFWar.world.nebulae.blocks.power.NebulaePanel;
 import mindustry.content.*;
 import mindustry.entities.UnitSorts;
 import mindustry.entities.bullet.*;
@@ -19,11 +18,8 @@ import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.blocks.storage.CoreBlock;
 import mindustry.world.meta.BuildVisibility;
 import mindustry.type.*; // this will import the classes in this package but not the classes in subpackages
-import mindustry.type.unit.*; // this is not for units this is to set entities, not units
-import b919.SFWar.content.units.NebulaeUnits;
 import b919.SFWar.content.SFWarItems;
 import b919.SFWar.content.SFWarLiquids;
-import mindustry.world.blocks.power.*;
 import mindustry.world.meta.Env;
 
 import static mindustry.type.ItemStack.with;

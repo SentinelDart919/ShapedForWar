@@ -101,8 +101,12 @@ public class TerranBlocks {
             speed = 0.15f;
             displayedSpeed = 18f;
         }};
-        terranNecessaryEvil = new Router("terran-router"){{}};
-        terranJunction = new Junction("terran-junction"){{}};
+        terranNecessaryEvil = new Router("terran-router"){{
+            requirements(Category.distribution, BuildVisibility.shown, with(SFWarItems.ferrum, 2));
+        }};
+        terranJunction = new Junction("terran-junction"){{
+            requirements(Category.distribution, BuildVisibility.shown, with(SFWarItems.ferrum, 2));
+        }};
         terranRationsDistributor = new RationsDistributor("terran-rations-distributor") {{
             requirements(Category.distribution, BuildVisibility.shown, with(SFWarItems.steel, 25, SFWarItems.commonAmmo, 10));
             foodItem = SFWarItems.foodRations;

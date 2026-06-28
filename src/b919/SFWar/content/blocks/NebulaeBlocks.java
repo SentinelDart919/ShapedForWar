@@ -124,6 +124,16 @@ public class NebulaeBlocks {
             consumePower(1f);
             consumeLiquid(Liquids.water, 0.1f);
         }};
+        gaseousNyctarMixer = new GenericCrafter("gaseous-nyctar-mixer"){{
+            requirements(Category.crafting, with());
+            outputLiquid = new LiquidStack(SFWarLiquids.gaseousNyctar, 6f / 60f);
+            craftTime = 60f;
+            liquidCapacity = 60f;
+            size = 2;
+            hasLiquids = true;
+
+            consumeItems(with(Items.coal, 1, SFWarItems.greenStardust, 1));
+        }};
         purpleStardustGrinder = new GenericCrafter("purple-stardust-grinder"){{
             requirements(Category.crafting, with(SFWarItems.blueStardust, 50, SFWarItems.crystallizedGreenStardust, 75, Items.titanium, 100, Items.plastanium, 25));
             outputItem = new ItemStack(Items.copper, 1);
@@ -149,16 +159,26 @@ public class NebulaeBlocks {
         }};
         redStardustManufactorer = new GenericCrafter("red-stardust-manufactorer"){{
             requirements(Category.crafting, with(SFWarItems.ruby, 25, SFWarItems.nyctoSteel, 125, SFWarItems.solidifiedNyctar, 500, Items.pyratite, 50, Items.blastCompound, 75));
-            outputItem = new ItemStack(Items.copper, 1);
+            outputItem = new ItemStack(SFWarItems.redStardust, 1);
             craftTime = 600f;
             liquidCapacity = 60f;
             size = 4;
             hasPower = hasLiquids;
             hasLiquids = true;
-            // Red Stardust has been made slightly more difficult to manufacture than originally planned.
-            consumeItems(with(Items.blastCompound, 1, Items.pyratite, 1, SFWarItems.ruby, 1));
+            consumeItems(with(Items.blastCompound, 1, SFWarItems.ruby, 1));
             consumePower(11.1f);
             consumeLiquids(LiquidStack.with(Liquids.cryofluid, 0.1f, SFWarLiquids.liquidNyctar, 0.1f));
+        }};
+        calibrePress = new GenericCrafter("calibre-press"){{
+            requirements(Category.crafting, with(SFWarItems.nyctoSteel, 750, SFWarItems.nyctar, 75, SFWarItems.redStardust, 175));
+            outputItem = new ItemStack(SFWarItems.heavenPiercingShell, 1);
+            craftTime = 1800f;
+            size = 3;
+            hasPower = true;
+            hasLiquids = false;
+
+            consumeItems(with(SFWarItems.nyctoSteel, 250, SFWarItems.nyctar, 20, SFWarItems.redStardust, 100, Items.blastCompound, 30));
+            consumePower(25f);
         }};
         idealizedStardustManifestationChamber = new GenericCrafter("idealized-stardust-manifestation-chamber"){{
             requirements(Category.crafting, with(Items.copper, 1, Items.lead, 1, Items.coal, 1, Items.graphite, 1, Items.silicon, 1, SFWarItems.ruby, 1));
@@ -175,16 +195,6 @@ public class NebulaeBlocks {
             consumeItems(with(Items.lead, 1000*1000));
             consumePower(1000000f / 60f);
             consumeLiquids(LiquidStack.with(Liquids.cryofluid, 0.1f, SFWarLiquids.liquidNyctar, 0.1f));
-        }};
-        gaseousNyctarMixer = new GenericCrafter("gaseous-nyctar-mixer"){{
-            requirements(Category.crafting, with());
-            outputLiquid = new LiquidStack(SFWarLiquids.gaseousNyctar, 6f / 60f);
-            craftTime = 60f;
-            liquidCapacity = 60f;
-            size = 2;
-            hasLiquids = true;
-
-            consumeItems(with(Items.coal, 1, SFWarItems.greenStardust, 1));
         }};
         crescentMoon = new ItemTurret("crescent-moon"){{
             float brange = range = 300f;
@@ -593,7 +603,7 @@ public class NebulaeBlocks {
             depositCooldown = 2.0f;
             consumePower(5f);
         }};
-        heavenPiercer = new ItemTurret("taivaitten-lävistäjä"){{
+        heavenPiercer = new ItemTurret("heaven-piercer"){{
             float brange = range = 1200f;
 
             requirements(Category.turret, with(Items.silicon, 2500, SFWarItems.solidifiedNyctar, 2500, SFWarItems.nyctoSteel, 2500));

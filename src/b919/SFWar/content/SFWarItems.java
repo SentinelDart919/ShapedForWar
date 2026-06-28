@@ -15,8 +15,10 @@ public class SFWarItems {
             flesh, denseTissues, biomass,
     //Precursors?
     //Nebulae
-            nyctoSteel, solidifiedNyctar, crystallizedGreenStardust, greenStardust,
-            crystallizedBlueStardust, blueStardust;
+            nyctoSteel, solidifiedNyctar, nyctar, crystallizedGreenStardust, greenStardust,
+            crystallizedBlueStardust, blueStardust,
+            redStardust, idealizedStardust,
+            heavenPiercingShell;
     public static void load(){
         uranium = new Item("uranium", Color.valueOf("000000")){{
             radioactivity = 100;
@@ -54,5 +56,10 @@ public class SFWarItems {
         greenStardust = new Item("green-stardust", Color.valueOf("27e436")){{}};
         crystallizedBlueStardust = new Item("crystallized-blue-stardust", Color.valueOf("4684c7")){{}};
         blueStardust = new Item("blue-stardust", Color.valueOf("3d8fe7")){{}};
+        heavenPiercingShell = new Item("heaven-piercing-shell", Color.valueOf("8c0000")){{}};
+        redStardust = new Item("heaven-piercing-shell", Color.valueOf("ff0000")){{}};
+        idealizedStardust = new Item("idealized-stardust", Color.valueOf("ffffff")){{}};
+        nyctar = new Item("idealized-stardust", Color.valueOf("000000")){{}};
+        // is meant to be 000000^
     }
 }

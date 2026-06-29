@@ -16,7 +16,8 @@ public class SFWarItems {
     //Precursors?
     //Nebulae
             nyctoSteel, solidifiedNyctar, nyctar, crystallizedGreenStardust, greenStardust,
-            crystallizedBlueStardust, blueStardust,
+            crystallizedBlueStardust, blueStardust, crystallizedPurpleStardust, purpleStardust,
+            crystallizedYellowStardust, yellowStardust,
             redStardust, idealizedStardust,
             heavenPiercingShell;
     public static void load(){
@@ -59,7 +60,11 @@ public class SFWarItems {
         heavenPiercingShell = new Item("heaven-piercing-shell", Color.valueOf("8c0000")){{}};
         redStardust = new Item("red-stardust", Color.valueOf("ff0000")){{}};
         idealizedStardust = new Item("idealized-stardust", Color.valueOf("ffffff")){{}};
+        // is meant to be 000000
         nyctar = new Item("nyctar", Color.valueOf("000000")){{}};
-        // is meant to be 000000^
+        crystallizedPurpleStardust = new Item("crystallized-purple-stardust", Color.valueOf("000000")){{}};
+        purpleStardust = new Item("purple-stardust", Color.valueOf("000000")){{}};
+        crystallizedYellowStardust = new Item("crystallized-yellow-stardust", Color.valueOf("ffff00")){{}};
+        yellowStardust = new Item("yellow-stardust", Color.valueOf("bfbf00")){{}};
     }
 }

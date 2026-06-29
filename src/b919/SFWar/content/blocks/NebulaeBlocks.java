@@ -4,6 +4,8 @@ import arc.graphics.Color;
 import b919.SFWar.content.bullets.SuperRaulCannonBullet;
 import b919.SFWar.utils.SFWarFX;
 import b919.SFWar.world.nebulae.blocks.power.NebulaePanel;
+import b919.SFWar.world.production.MultiRecipeCrafter;
+import b919.SFWar.world.production.Recipe;
 import mindustry.content.*;
 import mindustry.entities.UnitSorts;
 import mindustry.entities.bullet.*;
@@ -134,9 +136,44 @@ public class NebulaeBlocks {
 
             consumeItems(with(Items.coal, 1, SFWarItems.greenStardust, 1));
         }};
+        stardustCrystallizer = new MultiRecipeCrafter("stardust-crystallizer"){{
+            requirements(Category.crafting, with(SFWarItems.blueStardust, 50, SFWarItems.greenStardust, 150, Items.copper, 750, Items.titanium, 250, Items.metaglass, 125, Items.plastanium, 75, Items.graphite, 325));
+            consumePower(4f);
+            size = 4;
+            itemCapacity = 100;
+            recipes.add(new Recipe[]{
+                    new Recipe(20)
+                            .consumeItems(ItemStack.with(SFWarItems.greenStardust, 1, Items.lead, 5))
+                            .consumeLiquid(SFWarLiquids.gaseousNyctar, 0.1f)
+                            .outputItem(SFWarItems.crystallizedGreenStardust, 1),
+                    new Recipe(40)
+                            .consumeItems(ItemStack.with(SFWarItems.blueStardust, 1, Items.titanium, 5))
+                            .consumeLiquid(SFWarLiquids.gaseousNyctar, 0.2f)
+                            .outputItem(SFWarItems.crystallizedBlueStardust, 1),
+                    new Recipe(60)
+                            .consumeItems(ItemStack.with(SFWarItems.purpleStardust, 1, Items.plastanium, 5))
+                            .consumeLiquid(SFWarLiquids.liquidNyctar, 0.25f)
+                            .outputItems(ItemStack.with(SFWarItems.crystallizedPurpleStardust)),
+                    new Recipe(80)
+                            .consumeItems(ItemStack.with(SFWarItems.yellowStardust, 1, Items.surgeAlloy, 5))
+                            .consumeLiquid(SFWarLiquids.liquidNyctar, 0.5f)
+                            .outputItem(SFWarItems.crystallizedYellowStardust)
+            });
+        }};
+        liquidNyctarMixer = new GenericCrafter("liquid-nyctar-mixer"){{
+            requirements(Category.crafting, with());
+            outputLiquid = new LiquidStack(SFWarLiquids.liquidNyctar, 24f / 60f);
+            craftTime = 60f;
+            liquidCapacity = 60f;
+            size = 2;
+            hasLiquids = true;
+
+            consumeItems(with(SFWarItems.blueStardust, 6));
+            consumeLiquids(LiquidStack.with(Liquids.oil, 0.4f, SFWarLiquids.gaseousNyctar, 0.2f));
+        }};
         purpleStardustGrinder = new GenericCrafter("purple-stardust-grinder"){{
             requirements(Category.crafting, with(SFWarItems.blueStardust, 50, SFWarItems.crystallizedGreenStardust, 75, Items.titanium, 100, Items.plastanium, 25));
-            outputItem = new ItemStack(Items.copper, 1);
+            outputItem = new ItemStack(SFWarItems.purpleStardust, 1);
             craftTime = 360f;
             liquidCapacity = 60f;
             size = 3;
@@ -145,10 +182,24 @@ public class NebulaeBlocks {
 
             consumeItems(with(Items.titanium, 1, Items.lead, 1));
             consumePower(2f);
+            consumeLiquid(Liquids.water, 0.2f);
+        }};
+        nyctarSolidifier = new GenericCrafter("nyctar-solidifier"){{
+            requirements(Category.crafting, with(SFWarItems.crystallizedPurpleStardust, 50, Items.plastanium, 75));
+            outputItem = new ItemStack(SFWarItems.solidifiedNyctar, 2);
+            craftTime = 60f;
+            liquidCapacity = 60f;
+            size = 2;
+            hasPower = hasLiquids;
+            hasLiquids = true;
+
+            consumeItems(with(SFWarItems.crystallizedPurpleStardust, 1));
+            consumePower(2f);
+            consumeLiquid(SFWarLiquids.liquidNyctar, 0.2f);
         }};
         yellowStardustFoundry = new GenericCrafter("yellow-stardust-foundry"){{
             requirements(Category.crafting, with(Items.surgeAlloy, 25, Items.titanium, 125, SFWarItems.solidifiedNyctar, 75));
-            outputItem = new ItemStack(Items.copper, 1);
+            outputItem = new ItemStack(SFWarItems.yellowStardust, 1);
             craftTime = 480f;
             liquidCapacity = 60f;
             size = 3;
@@ -156,6 +207,19 @@ public class NebulaeBlocks {
 
             consumeItems(with(Items.surgeAlloy, 1));
             consumePower(4f);
+        }};
+        nyctoSteelFoundry = new GenericCrafter("nyctosteel-foundry"){{
+            requirements(Category.crafting, with(SFWarItems.crystallizedYellowStardust, 50, SFWarItems.solidifiedNyctar, 75));
+            outputItem = new ItemStack(SFWarItems.nyctoSteel, 2);
+            craftTime = 120f;
+            liquidCapacity = 60f;
+            size = 2;
+            hasPower = hasLiquids;
+            hasLiquids = true;
+
+            consumeItems(with(SFWarItems.crystallizedYellowStardust, 6, SFWarItems.solidifiedNyctar, 8));
+            consumePower(500f / 60f);
+            consumeLiquids(LiquidStack.with(SFWarLiquids.liquidNyctar, 0.5f, Liquids.cryofluid, 0.5f));
         }};
         redStardustManufactorer = new GenericCrafter("red-stardust-manufactorer"){{
             requirements(Category.crafting, with(SFWarItems.ruby, 25, SFWarItems.nyctoSteel, 125, SFWarItems.solidifiedNyctar, 500, Items.pyratite, 50, Items.blastCompound, 75));
@@ -172,8 +236,9 @@ public class NebulaeBlocks {
         calibrePress = new GenericCrafter("calibre-press"){{
             requirements(Category.crafting, with(SFWarItems.nyctoSteel, 750, SFWarItems.nyctar, 75, SFWarItems.redStardust, 175));
             outputItem = new ItemStack(SFWarItems.heavenPiercingShell, 1);
+            itemCapacity = 250;
             craftTime = 1800f;
-            size = 3;
+            size = 2;
             hasPower = true;
             hasLiquids = false;
 
@@ -608,7 +673,7 @@ public class NebulaeBlocks {
 
             requirements(Category.turret, with(Items.silicon, 2500, SFWarItems.solidifiedNyctar, 2500, SFWarItems.nyctoSteel, 2500));
             ammo(
-                    SFWarItems.nyctoSteel, new SuperRaulCannonBullet(){{
+                    SFWarItems.heavenPiercingShell, new SuperRaulCannonBullet(){{
                         shootEffect = SFWarFX.instShootHeaven;
                         hitEffect = SFWarFX.instHitHeaven;
                         pierceEffect = Fx.railHit;
@@ -627,8 +692,8 @@ public class NebulaeBlocks {
                     }}
             );
 
-            maxAmmo = 1000;
-            ammoPerShot = 250;
+            maxAmmo = 4;
+            ammoPerShot = 1;
             rotateSpeed = 10f;
             reload = 180f;
             ammoUseEffect = Fx.casing3Double;

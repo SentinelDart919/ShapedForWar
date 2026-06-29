@@ -57,8 +57,12 @@ public class SFWarItems {
         greenStardust = new Item("green-stardust", Color.valueOf("27e436")){{}};
         crystallizedBlueStardust = new Item("crystallized-blue-stardust", Color.valueOf("4684c7")){{}};
         blueStardust = new Item("blue-stardust", Color.valueOf("3d8fe7")){{}};
-        heavenPiercingShell = new Item("heaven-piercing-shell", Color.valueOf("8c0000")){{}};
-        redStardust = new Item("red-stardust", Color.valueOf("ff0000")){{}};
+        heavenPiercingShell = new Item("heaven-piercing-shell", Color.valueOf("8c0000")){{
+            explosiveness = 25f;
+        }};
+        redStardust = new Item("red-stardust", Color.valueOf("ff0000")){{
+            explosiveness = 5f;
+        }};
         idealizedStardust = new Item("idealized-stardust", Color.valueOf("ffffff")){{}};
         // is meant to be 000000
         nyctar = new Item("nyctar", Color.valueOf("000000")){{}};

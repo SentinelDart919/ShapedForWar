@@ -33,7 +33,7 @@ public class TerranBlocks {
     public static void load() {
         //Core
         terranCommandCenter = new TerranCommandCenter("terran-command-center") {{
-            requirements(Category.effect, BuildVisibility.shown, with());
+            requirements(Category.effect, BuildVisibility.shown, with(SFWarItems.ferrum, 5000, Items.lead, 5000, SFWarItems.steel, 5000, SFWarItems.heavyAlloy, 5000));
             populationCapacity = 8;
             requiresFood = false;
             populationTime = 360f;
@@ -52,7 +52,7 @@ public class TerranBlocks {
 
         //Population
         terranHouse = new PopulationHouse("terran-house") {{
-            requirements(Category.production, BuildVisibility.shown, with());
+            requirements(Category.production, BuildVisibility.shown, with(SFWarItems.ferrum, 50, Items.lead, 25));
             populationCapacity = 4;
             foodItem = SFWarItems.foodRations;
             foodAmount = 1;
@@ -63,7 +63,7 @@ public class TerranBlocks {
 
         //Units
         terranBarracks = new PopulationUnitFactory("terran-barracks") {{
-            requirements(Category.units, BuildVisibility.shown, with());
+            requirements(Category.units, BuildVisibility.shown, with(SFWarItems.ferrum, 150, Items.lead, 200));
             plans = Seq.with(
                     new UnitPlan(UnitTypes.dagger, 600f, 1,
                             ItemStack.with(SFWarItems.steel, 15, SFWarItems.commonAmmo, 10)),

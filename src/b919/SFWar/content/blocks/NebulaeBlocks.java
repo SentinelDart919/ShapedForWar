@@ -52,6 +52,8 @@ public class NebulaeBlocks {
         nexusStellarum, nyctarNexus,
             // Supreme unit
         magnumOpusArtesMagnae,
+            // debug items
+        iHaveAnIdea,
             // power
         nyxPanel, nyxPanelSmall;
     public static void load(){
@@ -713,6 +715,49 @@ public class NebulaeBlocks {
             coolant = consumeCoolant(1f);
             depositCooldown = 2.0f;
             consumePower(100f);
+        }};
+        iHaveAnIdea = new ItemTurret("idea"){{
+
+            requirements(Category.logic, with(SFWarItems.idealizedStardust, 250000));
+            ammo(
+                    SFWarItems.idealizedStardust, new MissileBulletType(5f, 50000){{
+                        width = 30f;
+                        height = 30f;
+                        shrinkY = 0f;
+                        homingPower = 0.10f;
+                        homingRange = 4000f;
+                        lifetime = 30000f;
+                        buildingDamageMultiplier = 0.2f;
+                        pierceDamageFactor = 0.8f;
+                        pierceCap = 5000*5000;
+                        ammoMultiplier = 1f;
+                        collidesAir = false;
+
+                        hitColor = backColor = trailColor = Color.valueOf("ffffff");
+                        frontColor = Color.valueOf("ffffff");
+                    }}
+            );
+
+            maxAmmo = 10;
+            ammoPerShot = 1;
+            rotateSpeed = 2f;
+            reload = 40f;
+            ammoUseEffect = Fx.casing3Double;
+            recoil = 1f;
+            cooldownTime = reload;
+            shake = 4f;
+            size = 1;
+            unitSort = UnitSorts.weakest;
+            envEnabled |= Env.space;
+            range = 5000f;
+
+            coolantMultiplier = 0.6f;
+            liquidCapacity = 6f;
+            scaledHealth = 100;
+
+            coolant = consumeCoolant(1f);
+            depositCooldown = 2.0f;
+            consumePower(0.5f);
         }};
 
 

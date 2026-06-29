@@ -16,6 +16,7 @@ import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.ForceProjector;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
+import mindustry.world.blocks.production.Drill;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.blocks.storage.CoreBlock;
 import mindustry.world.meta.BuildVisibility;
@@ -52,8 +53,8 @@ public class NebulaeBlocks {
         nexusStellarum, nyctarNexus,
             // Supreme unit
         magnumOpusArtesMagnae,
-            // debug items
-        iHaveAnIdea,
+            // drills
+        copperDrill, dustDrill, reinforcedDustDrill, crystalDrill, nyctoSteelDrill,
             // power
         nyxPanel, nyxPanelSmall;
     public static void load(){
@@ -104,6 +105,15 @@ public class NebulaeBlocks {
             size = 3;
             powerProduction = 1.6f;
         }};
+        copperDrill = new Drill("copper-drill"){{
+            requirements(Category.production, with(Items.copper, 12));
+            tier = 1;
+            // drill tier is 1 for progression
+            drillTime = 720;
+            size = 2;
+
+            consumeLiquid(Liquids.water, 0.05f).boost();
+        }};
         greenStardustPlant = new GenericCrafter("green-stardust-plant"){{
             requirements(Category.crafting, with(Items.copper, 25, Items.lead, 10));
             outputItem = new ItemStack(SFWarItems.greenStardust, 1);
@@ -115,8 +125,17 @@ public class NebulaeBlocks {
             consumeItems(with());
             consumePower(0.5f);
         }};
+        dustDrill = new Drill("dust-drill"){{
+            requirements(Category.production, with(SFWarItems.greenStardust, 12));
+            tier = 2;
+            // drill tier is 2 for coal
+            drillTime = 400;
+            size = 2;
+
+            consumeLiquid(Liquids.water, 0.15f).boost();
+        }};
         blueStardustFormationPlant = new GenericCrafter("blue-stardust-formation-plant"){{
-            requirements(Category.crafting, with(SFWarItems.greenStardust, 75, Items.titanium, 50, Items.metaglass, 25));
+            requirements(Category.crafting, with(SFWarItems.greenStardust, 75, Items.copper, 50, Items.metaglass, 25));
             outputItem = new ItemStack(SFWarItems.blueStardust, 1);
             craftTime = 240f;
             liquidCapacity = 60f;
@@ -137,6 +156,16 @@ public class NebulaeBlocks {
             hasLiquids = true;
 
             consumeItems(with(Items.coal, 1, SFWarItems.greenStardust, 1));
+        }};
+        reinforcedDustDrill = new Drill("reinforced-dust-drill"){{
+            requirements(Category.production, with(SFWarItems.blueStardust, 10, SFWarItems.greenStardust, 10, Items.copper, 30));
+            tier = 3;
+            // drill tier is 3 for titanium
+            drillTime = 240;
+            size = 2;
+            liquidBoostIntensity = 1.5f;
+
+            consumeLiquid(SFWarLiquids.liquidNyctar, 0.05f).boost();
         }};
         stardustCrystallizer = new MultiRecipeCrafter("stardust-crystallizer"){{
             requirements(Category.crafting, with(SFWarItems.blueStardust, 50, SFWarItems.greenStardust, 150, Items.copper, 750, Items.titanium, 250, Items.metaglass, 125, Items.plastanium, 75, Items.graphite, 325));
@@ -186,6 +215,16 @@ public class NebulaeBlocks {
             consumePower(2f);
             consumeLiquid(Liquids.water, 0.2f);
         }};
+        crystalDrill = new Drill("crystal-drill"){{
+            requirements(Category.production, with(SFWarItems.crystallizedBlueStardust, 20, SFWarItems.crystallizedGreenStardust, 30, SFWarItems.crystallizedPurpleStardust, 10));
+            tier = 4;
+            // drill tier 4 so cool
+            drillTime = 160;
+            size = 3;
+            liquidBoostIntensity = 1.8f;
+
+            consumeLiquid(SFWarLiquids.liquidNyctar, 0.1f).boost();
+        }};
         nyctarSolidifier = new GenericCrafter("nyctar-solidifier"){{
             requirements(Category.crafting, with(SFWarItems.crystallizedPurpleStardust, 50, Items.plastanium, 75));
             outputItem = new ItemStack(SFWarItems.solidifiedNyctar, 2);
@@ -222,6 +261,16 @@ public class NebulaeBlocks {
             consumeItems(with(SFWarItems.crystallizedYellowStardust, 6, SFWarItems.solidifiedNyctar, 8));
             consumePower(500f / 60f);
             consumeLiquids(LiquidStack.with(SFWarLiquids.liquidNyctar, 0.5f, Liquids.cryofluid, 0.5f));
+        }};
+        nyctoSteelDrill = new Drill("nycto-steel-drill"){{
+            requirements(Category.production, with(SFWarItems.nyctoSteel, 10, SFWarItems.solidifiedNyctar, 40));
+            tier = 5;
+            // drill tier 5 even cooler
+            drillTime = 80;
+            size = 4;
+            liquidBoostIntensity = 2.4f;
+
+            consumeLiquid(SFWarLiquids.liquidNyctar, 1.0f).boost();
         }};
         redStardustManufactorer = new GenericCrafter("red-stardust-manufactorer"){{
             requirements(Category.crafting, with(SFWarItems.ruby, 25, SFWarItems.nyctoSteel, 125, SFWarItems.solidifiedNyctar, 500, Items.pyratite, 50, Items.blastCompound, 75));
@@ -715,49 +764,6 @@ public class NebulaeBlocks {
             coolant = consumeCoolant(1f);
             depositCooldown = 2.0f;
             consumePower(100f);
-        }};
-        iHaveAnIdea = new ItemTurret("idea"){{
-
-            requirements(Category.logic, with(SFWarItems.idealizedStardust, 250000));
-            ammo(
-                    SFWarItems.idealizedStardust, new MissileBulletType(5f, 50000){{
-                        width = 30f;
-                        height = 30f;
-                        shrinkY = 0f;
-                        homingPower = 0.10f;
-                        homingRange = 4000f;
-                        lifetime = 30000f;
-                        buildingDamageMultiplier = 0.2f;
-                        pierceDamageFactor = 0.8f;
-                        pierceCap = 5000*5000;
-                        ammoMultiplier = 1f;
-                        collidesAir = false;
-
-                        hitColor = backColor = trailColor = Color.valueOf("ffffff");
-                        frontColor = Color.valueOf("ffffff");
-                    }}
-            );
-
-            maxAmmo = 10;
-            ammoPerShot = 1;
-            rotateSpeed = 2f;
-            reload = 40f;
-            ammoUseEffect = Fx.casing3Double;
-            recoil = 1f;
-            cooldownTime = reload;
-            shake = 4f;
-            size = 1;
-            unitSort = UnitSorts.weakest;
-            envEnabled |= Env.space;
-            range = 5000f;
-
-            coolantMultiplier = 0.6f;
-            liquidCapacity = 6f;
-            scaledHealth = 100;
-
-            coolant = consumeCoolant(1f);
-            depositCooldown = 2.0f;
-            consumePower(0.5f);
         }};
 
 

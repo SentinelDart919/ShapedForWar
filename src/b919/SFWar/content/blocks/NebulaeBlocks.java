@@ -153,11 +153,11 @@ public class NebulaeBlocks {
                     new Recipe(60)
                             .consumeItems(ItemStack.with(SFWarItems.purpleStardust, 1, Items.plastanium, 5))
                             .consumeLiquid(SFWarLiquids.liquidNyctar, 0.25f)
-                            .outputItems(ItemStack.with(SFWarItems.crystallizedPurpleStardust)),
+                            .outputItem(SFWarItems.crystallizedPurpleStardust, 1),
                     new Recipe(80)
                             .consumeItems(ItemStack.with(SFWarItems.yellowStardust, 1, Items.surgeAlloy, 5))
                             .consumeLiquid(SFWarLiquids.liquidNyctar, 0.5f)
-                            .outputItem(SFWarItems.crystallizedYellowStardust)
+                            .outputItem(SFWarItems.crystallizedYellowStardust, 1),
             });
         }};
         liquidNyctarMixer = new GenericCrafter("liquid-nyctar-mixer"){{

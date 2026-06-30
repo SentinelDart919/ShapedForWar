@@ -1,6 +1,7 @@
 package b919.SFWar.content.units;
 
 import mindustry.entities.bullet.BulletType;
+import mindustry.gen.UnitEntity;
 import mindustry.gen.Unitc;
 import mindustry.graphics.Pal;
 import mindustry.type.UnitType;
@@ -16,7 +17,7 @@ public class TerranUnits {
             //controller = u -> new BuilderAI(true, coreFleeRange); - I commented this out, is how the unit is controlled by AI
             isEnemy = false;
             envDisabled = 0;
-
+            constructor = UnitEntity::create;
             range = 65f;
             faceTarget = true;
             targetPriority = -2;

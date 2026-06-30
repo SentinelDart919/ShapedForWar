@@ -48,13 +48,13 @@ public class SFWarMain extends Mod{
 
     @Override
     public void loadContent(){
+        TerranUnits.load();
         SFWarPlanets.load();
         SFWarItems.load();
         SFWarLiquids.load();
         //SFWarBlocks.load();
         BiomassBlocks.load();
         TerranBlocks.load();
-        TerranUnits.load();
         NebulaeBlocks.load();
         SFWarDebugBlocks.load();
         Log.info("Ready for Action");

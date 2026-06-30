@@ -160,6 +160,12 @@ public class UndergroundBelt extends ItemBridge {
         }
 
         @Override
+        protected boolean checkAccept(Building source, Tile other) {
+            if (source instanceof UndergroundBeltBuild) return true;
+            return super.checkAccept(source, other);
+        }
+
+        @Override
         public void draw() {
             Draw.rect(block.region, x, y);
             drawCracks();

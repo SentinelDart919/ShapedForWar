@@ -17,8 +17,10 @@ import mindustry.world.Block;
 import mindustry.world.blocks.defense.ForceProjector;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.blocks.production.Drill;
+import mindustry.world.blocks.production.Fracker;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.blocks.storage.CoreBlock;
+import mindustry.world.meta.Attribute;
 import mindustry.world.meta.BuildVisibility;
 import mindustry.type.*; // this will import the classes in this package but not the classes in subpackages
 import b919.SFWar.content.SFWarItems;
@@ -38,7 +40,7 @@ public class NebulaeBlocks {
             // Stardust
         stardustCrystallizer, purpleStardustGrinder, yellowStardustFoundry, redStardustManufactorer, idealizedStardustManifestationChamber,
             // Other
-        calibrePress, soulCuller,
+        calibrePress, soulCuller, oilBore,
             // defensive
         luminosityCondenser,
             // turrets
@@ -167,7 +169,7 @@ public class NebulaeBlocks {
             consumeLiquid(Liquids.water, 0.05f).boost();
         }};
         stardustCrystallizer = new MultiRecipeCrafter("stardust-crystallizer"){{
-            requirements(Category.crafting, with(SFWarItems.blueStardust, 50, SFWarItems.greenStardust, 150, Items.copper, 750, Items.titanium, 250, Items.metaglass, 125, Items.plastanium, 75, Items.graphite, 325));
+            requirements(Category.crafting, with(SFWarItems.blueStardust, 50, SFWarItems.greenStardust, 150, Items.copper, 750, Items.titanium, 250, Items.metaglass, 125, Items.graphite, 325));
             consumePower(4f);
             size = 4;
             itemCapacity = 100;
@@ -190,17 +192,6 @@ public class NebulaeBlocks {
                             .outputItem(SFWarItems.crystallizedYellowStardust, 1),
             });
         }};
-        liquidNyctarMixer = new GenericCrafter("liquid-nyctar-mixer"){{
-            requirements(Category.crafting, with());
-            outputLiquid = new LiquidStack(SFWarLiquids.liquidNyctar, 24f / 60f);
-            craftTime = 60f;
-            liquidCapacity = 60f;
-            size = 2;
-            hasLiquids = true;
-
-            consumeItems(with(SFWarItems.blueStardust, 6));
-            consumeLiquids(LiquidStack.with(Liquids.oil, 0.4f, SFWarLiquids.gaseousNyctar, 0.2f));
-        }};
         purpleStardustGrinder = new GenericCrafter("purple-stardust-grinder"){{
             requirements(Category.crafting, with(SFWarItems.blueStardust, 50, SFWarItems.crystallizedGreenStardust, 75, Items.titanium, 100, Items.plastanium, 25));
             outputItem = new ItemStack(SFWarItems.purpleStardust, 1);
@@ -213,6 +204,33 @@ public class NebulaeBlocks {
             consumeItems(with(Items.titanium, 1, Items.lead, 1));
             consumePower(2f);
             consumeLiquid(Liquids.water, 0.2f);
+        }};
+        oilBore = new Fracker("oil-bore"){{
+            requirements(Category.production, with(Items.copper, 150, Items.graphite, 175, Items.silicon, 75, SFWarItems.crystallizedBlueStardust, 50));
+            result = Liquids.oil;
+            updateEffect = Fx.pulverize;
+            updateEffectChance = 0.05f;
+            pumpAmount = 0.15f;
+            size = 2;
+            liquidCapacity = 40f;
+            attribute = Attribute.oil;
+            baseEfficiency = 0f;
+            itemUseTime = 40f;
+
+            consumeItem(Items.sand);
+            consumePower(1f);
+            consumeLiquid(SFWarLiquids.gaseousNyctar, 0.15f);
+        }};
+        liquidNyctarMixer = new GenericCrafter("liquid-nyctar-mixer"){{
+            requirements(Category.crafting, with(SFWarItems.crystallizedPurpleStardust, 10, Items.plastanium, 40));
+            outputLiquid = new LiquidStack(SFWarLiquids.liquidNyctar, 24f / 60f);
+            craftTime = 60f;
+            liquidCapacity = 60f;
+            size = 2;
+            hasLiquids = true;
+
+            consumeItems(with(SFWarItems.blueStardust, 6));
+            consumeLiquids(LiquidStack.with(Liquids.oil, 0.4f, SFWarLiquids.gaseousNyctar, 0.2f));
         }};
         crystalDrill = new Drill("crystal-drill"){{
             requirements(Category.production, with(SFWarItems.crystallizedBlueStardust, 20, SFWarItems.crystallizedGreenStardust, 30, SFWarItems.crystallizedPurpleStardust, 10));

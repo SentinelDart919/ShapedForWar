@@ -119,11 +119,10 @@ public class NebulaeBlocks {
             outputItem = new ItemStack(SFWarItems.greenStardust, 1);
             craftTime = 120f;
             size = 2;
-            hasPower = true;
+            hasPower = false;
             hasLiquids = false;
 
             consumeItems(with());
-            consumePower(0.5f);
         }};
         dustDrill = new Drill("dust-drill"){{
             requirements(Category.production, with(SFWarItems.greenStardust, 12));
@@ -161,11 +160,11 @@ public class NebulaeBlocks {
             requirements(Category.production, with(SFWarItems.blueStardust, 10, SFWarItems.greenStardust, 10, Items.copper, 30));
             tier = 3;
             // drill tier is 3 for titanium
-            drillTime = 240;
+            drillTime = 300;
             size = 2;
-            liquidBoostIntensity = 1.5f;
+            liquidBoostIntensity = 1.2f;
 
-            consumeLiquid(SFWarLiquids.liquidNyctar, 0.05f).boost();
+            consumeLiquid(Liquids.water, 0.05f).boost();
         }};
         stardustCrystallizer = new MultiRecipeCrafter("stardust-crystallizer"){{
             requirements(Category.crafting, with(SFWarItems.blueStardust, 50, SFWarItems.greenStardust, 150, Items.copper, 750, Items.titanium, 250, Items.metaglass, 125, Items.plastanium, 75, Items.graphite, 325));
@@ -219,9 +218,9 @@ public class NebulaeBlocks {
             requirements(Category.production, with(SFWarItems.crystallizedBlueStardust, 20, SFWarItems.crystallizedGreenStardust, 30, SFWarItems.crystallizedPurpleStardust, 10));
             tier = 4;
             // drill tier 4 so cool
-            drillTime = 160;
+            drillTime = 200;
             size = 3;
-            liquidBoostIntensity = 1.8f;
+            liquidBoostIntensity = 1.4f;
 
             consumeLiquid(SFWarLiquids.liquidNyctar, 0.1f).boost();
         }};
@@ -266,9 +265,9 @@ public class NebulaeBlocks {
             requirements(Category.production, with(SFWarItems.nyctoSteel, 10, SFWarItems.solidifiedNyctar, 40));
             tier = 5;
             // drill tier 5 even cooler
-            drillTime = 80;
+            drillTime = 150;
             size = 4;
-            liquidBoostIntensity = 2.4f;
+            liquidBoostIntensity = 1.6f;
 
             consumeLiquid(SFWarLiquids.liquidNyctar, 1.0f).boost();
         }};
@@ -735,7 +734,7 @@ public class NebulaeBlocks {
                         damage = 35000;
                         splashDamageRadius = 150f;
                         splashDamage = 5000f;
-                        buildingDamageMultiplier = 0.2f;
+                        buildingDamageMultiplier = 2f;
                         pierceDamageFactor = 1f;
                         length = brange;
                         hitShake = 3f;

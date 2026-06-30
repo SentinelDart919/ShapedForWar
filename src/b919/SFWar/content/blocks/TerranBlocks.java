@@ -49,7 +49,8 @@ public class TerranBlocks {
             );
             size = 5;
             health = 6000;
-            unitType = TerranUnits.administrator;
+            // editing out because it is bugging, placing gamma as placeholder unitType = TerranUnits.administrator;
+            unitType = UnitTypes.gamma;
             itemCapacity = 8000;
             unitCapModifier = 32;
         }};

@@ -139,6 +139,9 @@ public class UndergroundBelt extends ItemBridge {
     }
 
     public class UndergroundBeltBuild extends ItemBridgeBuild {
+        private static int nextGen = 0;
+        public int gen;
+
         public Building target() {
             return Vars.world.build(link);
         }
@@ -146,6 +149,7 @@ public class UndergroundBelt extends ItemBridge {
         @Override
         public void add() {
             super.add();
+            gen = nextGen++;
             allBelts.add(this);
         }
 
@@ -216,7 +220,7 @@ public class UndergroundBelt extends ItemBridge {
 
             for (int i = 0; i < allBelts.size; i++) {
                 UndergroundBeltBuild other = allBelts.get(i);
-                if (other == this || ((UndergroundBelt) other.block).depth != depth) continue;
+                if (other == this || ((UndergroundBelt) other.block).depth != depth || other.gen >= gen) continue;
 
                 Building t = other.target();
                 if (t != null && isRealIntersection(x1, y1, x2, y2, other.x, other.y, t.x, t.y)) {

@@ -6,6 +6,7 @@ import b919.SFWar.world.terran.blocks.population.PopulationHouse;
 import b919.SFWar.world.terran.blocks.population.PopulationUnitFactory;
 import b919.SFWar.world.terran.blocks.population.RationsDistributor;
 import b919.SFWar.world.terran.blocks.storage.TerranCommandCenter;
+import b919.SFWar.world.distribution.UndergroundBelt;
 import b919.SFWar.world.production.SolarCrafter;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
@@ -25,8 +26,10 @@ public class TerranBlocks {
             terranBarracks,
             //distribution
             terranBasicConveyor, terranArmoredConveyor, terranAdvancedConveyor, terranAdvancedArmoredConveyor,
-                    terranJunction, terranNecessaryEvil, terranRationsDistributor,
+            terranJunction, terranNecessaryEvil, terranRationsDistributor,
+            terranUndergroundBeltT1, terranUndergroundBeltT2, terranUndergroundBeltT3,
             //crafting and production
+
             terranGreenHouse;
             //power related
 
@@ -115,6 +118,24 @@ public class TerranBlocks {
             transferTime = 60f;
             size = 1;
             health = 400;
+        }};
+        terranUndergroundBeltT1 = new UndergroundBelt("terran-underground-belt-t1"){{
+            requirements(Category.distribution, BuildVisibility.shown, with(SFWarItems.ferrum, 5, Items.lead, 2));
+            range = 7;
+            depth = 1;
+            health = 100;
+        }};
+        terranUndergroundBeltT2 = new UndergroundBelt("terran-underground-belt-t2"){{
+            requirements(Category.distribution, BuildVisibility.shown, with(SFWarItems.steel, 10, SFWarItems.ferrum, 5));
+            range = 5;
+            depth = 2;
+            health = 150;
+        }};
+        terranUndergroundBeltT3 = new UndergroundBelt("terran-underground-belt-t3"){{
+            requirements(Category.distribution, BuildVisibility.shown, with(SFWarItems.heavyAlloy,5, SFWarItems.steel, 10));
+            range = 3;
+            depth = 3;
+            health = 200;
         }};
 
         //Item crafting

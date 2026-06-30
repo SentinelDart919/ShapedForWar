@@ -2,6 +2,7 @@ package b919.SFWar.content.blocks;
 
 import arc.struct.Seq;
 import b919.SFWar.content.SFWarItems;
+import b919.SFWar.content.units.TerranUnits;
 import b919.SFWar.world.terran.blocks.population.PopulationHouse;
 import b919.SFWar.world.terran.blocks.population.PopulationUnitFactory;
 import b919.SFWar.world.terran.blocks.population.RationsDistributor;
@@ -48,7 +49,7 @@ public class TerranBlocks {
             );
             size = 5;
             health = 6000;
-            unitType = UnitTypes.mega;
+            unitType = TerranUnits.administrator;
             itemCapacity = 8000;
             unitCapModifier = 32;
         }};

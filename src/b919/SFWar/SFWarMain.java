@@ -8,6 +8,7 @@ import b919.SFWar.content.blocks.BiomassBlocks;
 import b919.SFWar.content.blocks.NebulaeBlocks;
 import b919.SFWar.content.blocks.SFWarDebugBlocks;
 import b919.SFWar.content.blocks.TerranBlocks;
+import b919.SFWar.content.units.TerranUnits;
 import b919.SFWar.ui.PopulationDisplay;
 import b919.SFWar.utils.SFWarSFX;
 import b919.SFWar.utils.SFWarSounds;
@@ -53,6 +54,7 @@ public class SFWarMain extends Mod{
         //SFWarBlocks.load();
         BiomassBlocks.load();
         TerranBlocks.load();
+        TerranUnits.load();
         NebulaeBlocks.load();
         SFWarDebugBlocks.load();
         Log.info("Ready for Action");

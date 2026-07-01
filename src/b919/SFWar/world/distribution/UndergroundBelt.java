@@ -10,6 +10,8 @@ import arc.math.geom.Intersector;
 import arc.math.geom.Vec2;
 import arc.struct.Seq;
 import arc.util.Time;
+import arc.util.io.Reads;
+import arc.util.io.Writes;
 import mindustry.Vars;
 import mindustry.game.EventType;
 import mindustry.gen.Building;
@@ -25,10 +27,22 @@ public class UndergroundBelt extends ItemBridge {
     public static Color[] depthColors = {Color.cyan, Color.gold, Color.magenta, Color.orange, Color.lime, Color.purple};
     public static Seq<UndergroundBeltBuild> allBelts = new Seq<>();
     private static final Vec2 isect = new Vec2();
+    private static int nextGen = 0;
     static {
         Events.on(EventType.WorldLoadBeginEvent.class, e -> {
             allBelts.clear();
+            nextGen = 0;
         });
+    }
+
+    private static int allocGen() {
+        return nextGen++;
+    }
+
+    private static void ensureNextGen(int gen) {
+        if (gen >= nextGen) {
+            nextGen = gen + 1;
+        }
     }
 
     public UndergroundBelt(String name) {
@@ -139,7 +153,6 @@ public class UndergroundBelt extends ItemBridge {
     }
 
     public class UndergroundBeltBuild extends ItemBridgeBuild {
-        private static int nextGen = 0;
         public int gen;
 
         public Building target() {
@@ -149,7 +162,7 @@ public class UndergroundBelt extends ItemBridge {
         @Override
         public void add() {
             super.add();
-            gen = nextGen++;
+            gen = allocGen();
             allBelts.add(this);
         }
 
@@ -157,6 +170,26 @@ public class UndergroundBelt extends ItemBridge {
         public void remove() {
             super.remove();
             allBelts.remove(this);
+        }
+
+        @Override
+        public byte version() {
+            return 2;
+        }
+
+        @Override
+        public void write(Writes write) {
+            super.write(write);
+            write.i(gen);
+        }
+
+        @Override
+        public void read(Reads read, byte revision) {
+            super.read(read, revision);
+            if (revision >= 2) {
+                gen = read.i();
+            }
+            ensureNextGen(gen);
         }
 
         @Override

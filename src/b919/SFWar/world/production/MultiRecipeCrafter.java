@@ -316,10 +316,8 @@ public class MultiRecipeCrafter extends Block {
                 multiplier *= consume.efficiencyMultiplier(this);
             }
 
-            Recipe currentRecipe = getCurrentRecipe();
-
-            if (currentRecipe != null) {
-                multiplier *= currentRecipe.efficiencyMultiplier(this);
+            if (currentRecipeID >= 0 && currentRecipeID < recipes.size) {
+                multiplier *= recipes.get(currentRecipeID).efficiencyMultiplier(this);
             }
 
             return multiplier;

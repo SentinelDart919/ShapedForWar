@@ -173,6 +173,8 @@ public class NebulaeBlocks {
             consumePower(4f);
             size = 4;
             itemCapacity = 100;
+            hasLiquids = true;
+            liquidCapacity = 200;
             recipes.add(new Recipe[]{
                     new Recipe(20)
                             .consumeItems(ItemStack.with(SFWarItems.greenStardust, 1, Items.lead, 5))

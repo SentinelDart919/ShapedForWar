@@ -143,6 +143,12 @@ public class MultiRecipeCrafter extends Block {
         });
 
         super.init();
+
+        for (Recipe recipe : recipes) {
+            for (Consume consume : recipe.consumes) {
+                consume.apply(this);
+            }
+        }
     }
 
     @Override

@@ -143,12 +143,6 @@ public class MultiRecipeCrafter extends Block {
         });
 
         super.init();
-
-        for (Recipe recipe : recipes) {
-            for (Consume consume : recipe.consumes) {
-                consume.apply(this);
-            }
-        }
     }
 
     @Override
@@ -272,13 +266,28 @@ public class MultiRecipeCrafter extends Block {
             }
 
             for (Recipe recipe : recipes) {
-                if (recipe.valid(this)) {
+                if (hasInputs(recipe)) {
                     currentRecipeID = recipes.indexOf(recipe);
                     return;
                 }
             }
 
             currentRecipeID = -1;
+        }
+
+        private boolean hasInputs(Recipe recipe) {
+            for (Consume consume : recipe.consumes) {
+                if (consume instanceof ConsumeItems ci) {
+                    if (!items.has(ci.items, 1f)) return false;
+                } else if (consume instanceof ConsumeLiquids cl) {
+                    for (LiquidStack ls : cl.liquids) {
+                        if (liquids.get(ls.liquid) <= 0f) return false;
+                    }
+                } else if (!(consume.efficiency(this) > 0f)) {
+                    return false;
+                }
+            }
+            return true;
         }
 
         private boolean hasOutputItems(Recipe recipe) {

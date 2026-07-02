@@ -111,8 +111,8 @@ public class NebulaeBlocks {
             requirements(Category.production, with(Items.copper, 12));
             tier = 1;
             // drill tier is 1 for progression
-            drillTime = 720;
-            size = 2;
+            drillTime = 600;
+            size = 1;
 
             consumeLiquid(Liquids.water, 0.05f).boost();
         }};
@@ -130,7 +130,7 @@ public class NebulaeBlocks {
             requirements(Category.production, with(SFWarItems.greenStardust, 12));
             tier = 2;
             // drill tier is 2 for coal
-            drillTime = 400;
+            drillTime = 360;
             size = 2;
 
             consumeLiquid(Liquids.water, 0.15f).boost();
@@ -162,7 +162,7 @@ public class NebulaeBlocks {
             requirements(Category.production, with(SFWarItems.blueStardust, 10, SFWarItems.greenStardust, 10, Items.copper, 30));
             tier = 3;
             // drill tier is 3 for titanium
-            drillTime = 300;
+            drillTime = 270;
             size = 2;
             liquidBoostIntensity = 1.2f;
 
@@ -217,7 +217,7 @@ public class NebulaeBlocks {
             liquidCapacity = 40f;
             attribute = Attribute.oil;
             baseEfficiency = 0f;
-            itemUseTime = 40f;
+            itemUseTime = 80f;
 
             consumeItem(Items.sand);
             consumePower(1f);
@@ -238,7 +238,7 @@ public class NebulaeBlocks {
             requirements(Category.production, with(SFWarItems.crystallizedBlueStardust, 20, SFWarItems.crystallizedGreenStardust, 30, SFWarItems.crystallizedPurpleStardust, 10));
             tier = 4;
             // drill tier 4 so cool
-            drillTime = 200;
+            drillTime = 180;
             size = 3;
             liquidBoostIntensity = 1.4f;
 
@@ -285,7 +285,7 @@ public class NebulaeBlocks {
             requirements(Category.production, with(SFWarItems.nyctoSteel, 10, SFWarItems.solidifiedNyctar, 40));
             tier = 5;
             // drill tier 5 even cooler
-            drillTime = 150;
+            drillTime = 135;
             size = 4;
             liquidBoostIntensity = 1.6f;
 

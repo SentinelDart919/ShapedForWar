@@ -27,7 +27,7 @@ public class MoonGenerator extends PlanetGenerator {
     float heightYOffset = 42.7f;
     float waterOffset = 0.02f;
     public float getSizeScl(){
-        return 8500;
+        return 6500;
     }
 
     Block[][] mapfloor = {

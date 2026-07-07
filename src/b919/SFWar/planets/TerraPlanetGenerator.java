@@ -30,13 +30,14 @@ import static mindustry.Vars.*;
 
 public class TerraPlanetGenerator extends PlanetGenerator {
     //BaseGenerator baseGen = new BaseGenerator();
-    float heightYOffset = 42.7f;
-    float scl = 8;
-    float waterOffset = 0.07f;
-    float heightScl = 1.01f;
+    float heightYOffset = 42.9f;
+    float scl = 8.2f;
+    float waterOffset = 0.075f;
+    float heightScl = 1.05f;
+    int seed = 919;
     boolean genLakes = true;
     public float getSizeScl(){
-        return 11000;
+        return 8000;
     }
 
     float rawHeight(Vec3 position){

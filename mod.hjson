@@ -5,19 +5,19 @@ displayName: "Shaped For War"
 name: "b919-SFWar"
 
 #your name
-author: "yourmom"
+author: "B919, Kravanthana"
 
 #the fully qualified main class of the mod
 main: "b919.SFWar.SFWarMain"
 
 #the mod description as seen in the mod dialog
-description: "Mod"
+description: "The meaning of our existence is all war, we are born for war, we are made for war, and we will die for war. We are just Shaped For War"
 
 #the mod version
 version: 1.0
 
 #the minimum game build required to run this mod
-minGameVersion: 158
+minGameVersion: 159
 
 #this is a java mod
 java: true

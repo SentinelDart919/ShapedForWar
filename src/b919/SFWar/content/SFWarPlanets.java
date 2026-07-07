@@ -61,7 +61,7 @@ public class SFWarPlanets {
             ruleSetter = r -> {
                 r.waveTeam = Team.blue;
                 r.placeRangeCheck = false;
-                r.showSpawns = true;
+                //r.showSpawns = true; - compile error idk why
                 r.coreDestroyClear = true;
             };
             showRtsAIRule = true;

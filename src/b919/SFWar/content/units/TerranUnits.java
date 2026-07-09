@@ -1,8 +1,12 @@
 package b919.SFWar.content.units;
 
+import arc.struct.Seq;
 import mindustry.ai.UnitCommand;
+import mindustry.ai.types.MinerAI;
+import mindustry.ai.types.RepairAI;
 import mindustry.entities.bullet.BulletType;
 import mindustry.gen.MechUnit;
+import mindustry.gen.Unit;
 import mindustry.gen.UnitEntity;
 import mindustry.gen.Unitc;
 import mindustry.graphics.Pal;
@@ -97,9 +101,11 @@ public class TerranUnits {
         }};
         worker = new UnitType("worker"){{
             defaultCommand = UnitCommand.mineCommand;
+            commands = new Seq<UnitCommand>().add(UnitCommand.repairCommand, UnitCommand.mineCommand, UnitCommand.rebuildCommand, UnitCommand.moveCommand);
             constructor = MechUnit::create;
             canBoost = true;
             boostMultiplier = 1.25f;
+            faceTarget = true;
             speed = 0.65f;
             hitSize = 8f;
             health = 120f;
@@ -108,29 +114,26 @@ public class TerranUnits {
             isEnemy = false;
             mineTier = 1;
             mineSpeed = 2.5f;
-            weapons.add(new RepairBeamWeapon("worker-beam"){{
-                widthSinMag = 0.11f;
+            weapons.add(new RepairBeamWeapon("b919-SFWar-mining-weapon"){{
+                top = false;
                 reload = 20f;
                 x = 4.5f;
                 alternate = true;
                 rotate = true;
-                rotationLimit = 80f;
+                rotationLimit = 90f;
                 shootY = 2f;
                 beamWidth = 0.7f;
-                mirror = true;
 
                 repairSpeed = 3.6f / 2f;
                 fractionRepairSpeed = 0.03f;
 
                 targetUnits = false;
-                targetBuildings = true;
-                autoTarget = true;
-                controllable = true;
+                //targetBuildings = true;
                 laserColor = Pal.bulletYellow;
                 healColor = Pal.heal;
 
                 bullet = new BulletType(){{
-                    maxRange = 65f;
+                    maxRange = 95f;
                 }};
             }});
         }};

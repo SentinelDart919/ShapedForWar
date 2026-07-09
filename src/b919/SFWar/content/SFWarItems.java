@@ -6,7 +6,7 @@ import mindustry.type.Item;
 public class SFWarItems {
     public static Item
             //general items
-            uranium, enrichedUranium, ferrum, steel, chromium, sulfur, gunpowder, ruby,
+            uranium/*U238*/, enrichedUranium/*U235*/, uraninite/*natural uranium*/, ferrum, steel, chromium, sulfur, gunpowder, ruby,
     //terran
             foodRations, heavyAlloy, armorPlates, heavyArmorPlates, smallCase, mediumCase, bigCase,
             commonAmmo, HEAmmo, APAmmo, ArtilleryRounds, uraniumAmmo,
@@ -21,11 +21,16 @@ public class SFWarItems {
             redStardust, idealizedStardust,
             heavenPiercingShell;
     public static void load(){
-        uranium = new Item("uranium", Color.valueOf("000000")){{
-            radioactivity = 100;
+        uraninite = new Item("uraninite", Color.valueOf("77897a")){{//Ore
+            radioactivity = 0.05f;
+        }};
+        uranium = new Item("uranium", Color.valueOf("369e46")){{//U238
+            radioactivity = 0.4f;
+        }};
+        enrichedUranium = new Item("enriched-uranium", Color.valueOf("000000")){{//U235
+            radioactivity = 1.4f;
         }};
         ruby = new Item("ruby", Color.valueOf("000000")){{}};
-        enrichedUranium = new Item("enriched-uranium", Color.valueOf("000000")){{}};
         ferrum = new Item("ferrum", Color.valueOf("000000")){{}};
         steel = new Item("steel", Color.valueOf("000000")){{}};
         chromium = new Item("chromium", Color.valueOf("000000")){{}};

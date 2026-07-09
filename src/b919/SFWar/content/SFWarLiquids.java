@@ -6,9 +6,16 @@ import mindustry.type.Liquid;
 
 public class SFWarLiquids {
     public static Liquid
+            sulfuricAcid,
             blood,
             liquidNyctar ,gaseousNyctar;
     public static void load(){
+        sulfuricAcid = new Liquid("sulfuric-acid", Color.valueOf("000000")){{
+            temperature = 0.5f;
+            heatCapacity = 0;
+            viscosity = 0.45f;
+            coolant = false;
+        }};
         blood = new Liquid("blood", Color.valueOf("000000")){{}};
         liquidNyctar = new Liquid("liquid-nyctar", Color.valueOf("7d00ab")){{
             temperature = 0.1f;

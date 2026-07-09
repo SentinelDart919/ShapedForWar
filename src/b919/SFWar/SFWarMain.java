@@ -52,7 +52,7 @@ public class SFWarMain extends Mod{
         SFWarPlanets.load();
         SFWarItems.load();
         SFWarLiquids.load();
-        //SFWarBlocks.load();
+        SFWarBlocks.load();
         BiomassBlocks.load();
         TerranBlocks.load();
         NebulaeBlocks.load();

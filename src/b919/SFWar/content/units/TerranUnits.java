@@ -1,6 +1,8 @@
 package b919.SFWar.content.units;
 
+import mindustry.ai.UnitCommand;
 import mindustry.entities.bullet.BulletType;
+import mindustry.gen.MechUnit;
 import mindustry.gen.UnitEntity;
 import mindustry.gen.Unitc;
 import mindustry.graphics.Pal;
@@ -8,9 +10,21 @@ import mindustry.type.UnitType;
 import mindustry.type.weapons.RepairBeamWeapon;
 
 import static mindustry.Vars.tilesize;
+/* Constructor examples:
 
+flying - UnitEntity::create - normal flying units
+mech - MechUnit::create - walker units aka mechs (Dagger, Mace, Nova)
+legs - LegsUnit::create - unit with legs (toxopid, Corvus, etc)
+naval - UnitWaterMove::create - boat
+payload - PayloadUnit::create - payload?
+missile - TimedKillUnit::create - literally fucking dies
+tank - TankUnit::create - tonk
+hover - ElevationMoveUnit::create - ground unit that hover above liquids and other terrains
+tether - BuildingTetherPayloadUnit::create - no fucking idea what this is?
+crawl - CrawlUnit::create - no is not for crawlers */
 public class TerranUnits {
-    public static UnitType administrator;
+    public static UnitType administrator,
+    worker, marine, scout, medic, hellWalker;
     public static void load(){
         administrator = new UnitType("administrator"){{
             coreUnitDock = true;
@@ -75,6 +89,45 @@ public class TerranUnits {
                 controllable = true;
                 laserColor = Pal.accent;
                 healColor = Pal.accent;
+
+                bullet = new BulletType(){{
+                    maxRange = 65f;
+                }};
+            }});
+        }};
+        worker = new UnitType("worker"){{
+            defaultCommand = UnitCommand.mineCommand;
+            constructor = MechUnit::create;
+            canBoost = true;
+            boostMultiplier = 1.25f;
+            speed = 0.65f;
+            hitSize = 8f;
+            health = 120f;
+            buildSpeed = 0.4f;
+            armor = 1f;
+            isEnemy = false;
+            mineTier = 1;
+            mineSpeed = 2.5f;
+            weapons.add(new RepairBeamWeapon("worker-beam"){{
+                widthSinMag = 0.11f;
+                reload = 20f;
+                x = 4.5f;
+                alternate = true;
+                rotate = true;
+                rotationLimit = 80f;
+                shootY = 2f;
+                beamWidth = 0.7f;
+                mirror = true;
+
+                repairSpeed = 3.6f / 2f;
+                fractionRepairSpeed = 0.03f;
+
+                targetUnits = false;
+                targetBuildings = true;
+                autoTarget = true;
+                controllable = true;
+                laserColor = Pal.bulletYellow;
+                healColor = Pal.heal;
 
                 bullet = new BulletType(){{
                     maxRange = 65f;

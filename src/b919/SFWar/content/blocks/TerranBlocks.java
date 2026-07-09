@@ -37,15 +37,16 @@ public class TerranBlocks {
     public static void load() {
         //Core
         terranCommandCenter = new TerranCommandCenter("terran-command-center") {{
-            requirements(Category.effect, BuildVisibility.shown, with(SFWarItems.ferrum, 5000, Items.lead, 5000, SFWarItems.steel, 5000, SFWarItems.heavyAlloy, 5000));
+            requirements(Category.effect, BuildVisibility.shown, with(SFWarItems.ferrum, 5000, Items.lead, 5000,
+                    SFWarItems.steel, 5000, SFWarItems.heavyAlloy, 5000));
             populationCapacity = 8;
             requiresFood = false;
             populationTime = 360f;
             plans = Seq.with(
-                    new UnitPlan(UnitTypes.mono, 600f, 1,
-                            ItemStack.with(Items.copper, 15, Items.lead, 10)),
+                    new UnitPlan(TerranUnits.worker, 600f, 1,
+                            ItemStack.with(SFWarItems.ferrum, 15))/*
                     new UnitPlan(UnitTypes.poly, 800f, 1,
-                            ItemStack.with(Items.copper, 30, Items.lead, 60))
+                            ItemStack.with(Items.copper, 30, Items.lead, 60))*/
             );
             size = 5;
             health = 6000;

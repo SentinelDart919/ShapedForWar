@@ -47,7 +47,7 @@ public class SFWarLiquids {
             moveThroughBlocks = false;
             incinerable = false;
         }};
-        sulfuricAcid = new Liquid("strong-acid", Color.valueOf("7a7a7a")){{
+        sulfuricAcid = new Liquid("sulfuric-acid", Color.valueOf("7a7a7a")){{
             // placeholder because I wanted
             effect = StatusEffects.melting;
             viscosity = 0.05f;

@@ -14,7 +14,9 @@ import mindustry.gen.Sounds;
 import mindustry.graphics.Pal;
 import mindustry.type.Category;
 import mindustry.world.Block;
+import mindustry.game.*;
 import mindustry.world.blocks.defense.ForceProjector;
+import mindustry.world.blocks.defense.Wall;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.blocks.production.Drill;
 import mindustry.world.blocks.production.Fracker;
@@ -42,7 +44,7 @@ public class NebulaeBlocks {
             // Other
         calibrePress, soulCuller, oilBore,
             // defensive
-        luminosityCondenser,
+        luminosityCondenser, blueCrystallizedStardustWall, blueCrystallizedStardustWallLarge, nyctoSteelWall, nyctoSteelWallLarge,
             // turrets
         crescentMoon, starScreech, pathOfTotality, meteoroid, comet, asteroid,
             // "Supreme" turret
@@ -194,6 +196,16 @@ public class NebulaeBlocks {
                             .outputItem(SFWarItems.crystallizedYellowStardust, 1),
             });
         }};
+        blueCrystallizedStardustWall = new Wall("crystallized-blue-stardust-wall"){{
+            requirements(Category.defense, with(SFWarItems.crystallizedBlueStardust, 6));
+            health = 1880;
+        }};
+
+        blueCrystallizedStardustWallLarge = new Wall("crystallized-blue-stardust-wall-large"){{
+            requirements(Category.defense, ItemStack.mult(blueCrystallizedStardustWall.requirements, 4));
+            health = 1880 * 4;
+            size = 2;
+        }};
         purpleStardustGrinder = new GenericCrafter("purple-stardust-grinder"){{
             requirements(Category.crafting, with(SFWarItems.blueStardust, 50, SFWarItems.crystallizedGreenStardust, 75, Items.titanium, 100, Items.plastanium, 25));
             outputItem = new ItemStack(SFWarItems.purpleStardust, 1);
@@ -290,6 +302,16 @@ public class NebulaeBlocks {
             liquidBoostIntensity = 1.6f;
 
             consumeLiquid(SFWarLiquids.liquidNyctar, 1.0f).boost();
+        }};
+        nyctoSteelWall = new Wall("nycto-steel-wall"){{
+            requirements(Category.defense, with(SFWarItems.nyctoSteel, 6));
+            health = 10000;
+        }};
+
+        nyctoSteelWallLarge = new Wall("nycto-steel-wall-large"){{
+            requirements(Category.defense, ItemStack.mult(nyctoSteelWall.requirements, 4));
+            health = 10000 * 4;
+            size = 2;
         }};
         redStardustManufactorer = new GenericCrafter("red-stardust-manufactorer"){{
             requirements(Category.crafting, with(SFWarItems.ruby, 25, SFWarItems.nyctoSteel, 125, SFWarItems.solidifiedNyctar, 500, Items.pyratite, 50, Items.blastCompound, 75));

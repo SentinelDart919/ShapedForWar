@@ -317,7 +317,7 @@ public class NebulaeBlocks {
         }};
         idealizedStardustManifestationChamber = new GenericCrafter("idealized-stardust-manifestation-chamber"){{
             requirements(Category.crafting, with(Items.copper, 1, Items.lead, 1, Items.coal, 1, Items.graphite, 1, Items.silicon, 1, SFWarItems.ruby, 1));
-            outputItem = new ItemStack(Items.copper, 1);
+            outputItem = new ItemStack(SFWarItems.idealizedStardust, 1);
             // copper as a placeholder since I don't want to edit items since you said you had commits not done yet
             // this is the gatekeeper item for the supreme unit :3
             craftTime = 3600f;

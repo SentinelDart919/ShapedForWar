@@ -10,11 +10,12 @@ public class SFWarLiquids {
             blood,
             liquidNyctar ,gaseousNyctar;
     public static void load(){
-        sulfuricAcid = new Liquid("sulfuric-acid", Color.valueOf("000000")){{
+        sulfuricAcid = new Liquid("sulfuric-acid", Color.valueOf("7a7a7a")){{
             temperature = 0.5f;
             heatCapacity = 0;
             viscosity = 0.45f;
             coolant = false;
+            lightColor = Color.valueOf("0b0b0b").a(0.4f);
         }};
         blood = new Liquid("blood", Color.valueOf("bb1d44")){{
             // decided to colour blood in a bit
@@ -46,12 +47,6 @@ public class SFWarLiquids {
             coolant = true;
             moveThroughBlocks = false;
             incinerable = false;
-        }};
-        sulfuricAcid = new Liquid("sulfuric-acid", Color.valueOf("7a7a7a")){{
-            // placeholder because I wanted
-            effect = StatusEffects.melting;
-            viscosity = 0.05f;
-            lightColor = Color.valueOf("0b0b0b").a(0.4f);
         }};
     }
 }

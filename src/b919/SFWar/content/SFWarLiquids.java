@@ -16,7 +16,11 @@ public class SFWarLiquids {
             viscosity = 0.45f;
             coolant = false;
         }};
-        blood = new Liquid("blood", Color.valueOf("000000")){{}};
+        blood = new Liquid("blood", Color.valueOf("bb1d44")){{
+            // decided to colour blood in a bit
+            viscosity = 0.55f;
+            lightColor = Color.valueOf("ee174d").a(0.3f);
+        }};
         liquidNyctar = new Liquid("liquid-nyctar", Color.valueOf("7d00ab")){{
             temperature = 0.1f;
             flammability = 0;
@@ -29,6 +33,7 @@ public class SFWarLiquids {
             moveThroughBlocks = false;
             incinerable = false;
             effect = StatusEffects.shocked;
+            lightColor = Color.valueOf("9e1bd2").a(0.5f);
         }};
         gaseousNyctar = new Liquid("gaseous-nyctar", Color.valueOf("ab1ae0")){{
             gas = true;
@@ -41,6 +46,12 @@ public class SFWarLiquids {
             coolant = true;
             moveThroughBlocks = false;
             incinerable = false;
+        }};
+        sulfuricAcid = new Liquid("strong-acid", Color.valueOf("7a7a7a")){{
+            // placeholder because I wanted
+            effect = StatusEffects.melting;
+            viscosity = 0.05f;
+            lightColor = Color.valueOf("0b0b0b").a(0.4f);
         }};
     }
 }

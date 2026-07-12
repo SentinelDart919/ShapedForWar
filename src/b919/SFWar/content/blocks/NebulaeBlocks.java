@@ -112,7 +112,7 @@ public class NebulaeBlocks {
             tier = 1;
             // drill tier is 1 for progression
             drillTime = 600;
-            size = 1;
+            size = 2;
 
             consumeLiquid(Liquids.water, 0.05f).boost();
         }};
@@ -164,7 +164,7 @@ public class NebulaeBlocks {
             // drill tier is 3 for titanium
             drillTime = 270;
             size = 2;
-            liquidBoostIntensity = 1.2f;
+            liquidBoostIntensity = 1.8f;
 
             consumeLiquid(Liquids.water, 0.05f).boost();
         }};

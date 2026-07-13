@@ -796,7 +796,7 @@ public class NebulaeBlocks {
             shootType = new ContinuousLaserBulletType(78){{
                 length = 440;
                 hitEffect = Fx.hitMeltdown;
-                hitColor = Color.valueOf("00000");
+                hitColor = Color.valueOf("000000");
                 status = StatusEffects.melting;
                 drawSize = 420f;
                 timescaleDamage = true;

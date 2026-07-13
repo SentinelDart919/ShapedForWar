@@ -1,6 +1,7 @@
 package b919.SFWar.content.blocks;
 
 import arc.graphics.Color;
+import b919.SFWar.content.SFWarBlocks;
 import b919.SFWar.content.bullets.SuperRaulCannonBullet;
 import b919.SFWar.utils.SFWarFX;
 import b919.SFWar.world.nebulae.blocks.power.NebulaePanel;
@@ -18,6 +19,8 @@ import mindustry.game.*;
 import mindustry.world.blocks.defense.ForceProjector;
 import mindustry.world.blocks.defense.Wall;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
+import mindustry.world.blocks.defense.turrets.LaserTurret;
+import mindustry.world.blocks.defense.turrets.TractorBeamTurret;
 import mindustry.world.blocks.production.Drill;
 import mindustry.world.blocks.production.Fracker;
 import mindustry.world.blocks.production.GenericCrafter;
@@ -46,7 +49,7 @@ public class NebulaeBlocks {
             // defensive
         luminosityCondenser, blueCrystallizedStardustWall, blueCrystallizedStardustWallLarge, nyctoSteelWall, nyctoSteelWallLarge,
             // turrets
-        crescentMoon, starScreech, pathOfTotality, meteoroid, comet, asteroid,
+        crescentMoon, starScreech, pathOfTotality, meteoroid, comet, asteroid, moonlight,
             // "Supreme" turret
         heavenPiercer,
             // units, T1-3
@@ -198,12 +201,12 @@ public class NebulaeBlocks {
         }};
         blueCrystallizedStardustWall = new Wall("crystallized-blue-stardust-wall"){{
             requirements(Category.defense, with(SFWarItems.crystallizedBlueStardust, 6));
-            health = 1880;
+            health = 880;
         }};
 
         blueCrystallizedStardustWallLarge = new Wall("crystallized-blue-stardust-wall-large"){{
             requirements(Category.defense, ItemStack.mult(blueCrystallizedStardustWall.requirements, 4));
-            health = 1880 * 4;
+            health = 880 * 4;
             size = 2;
         }};
         purpleStardustGrinder = new GenericCrafter("purple-stardust-grinder"){{
@@ -568,7 +571,7 @@ public class NebulaeBlocks {
 
             coolant = consumeCoolant(1f);
             depositCooldown = 2.0f;
-            consumePower(0.5f);
+            consumesPower = false;
         }};
         comet = new ItemTurret("comet"){{
 
@@ -678,6 +681,20 @@ public class NebulaeBlocks {
             depositCooldown = 2.0f;
             consumePower(2.5f);
         }};
+        moonlight = new TractorBeamTurret("moonlight"){{
+            requirements(Category.turret, with(Items.silicon, 160, Items.titanium, 110, SFWarItems.crystallizedPurpleStardust, 50));
+
+            hasPower = true;
+            size = 3;
+            force = 10;
+            scaledForce = 5;
+            range = 400f;
+            damage = 10f;
+            scaledHealth = 420;
+            rotateSpeed = 24;
+
+            consumePower(3.3f);
+        }};
         asteroid = new ItemTurret("asteroid"){{
 
             requirements(Category.turret, with(SFWarItems.solidifiedNyctar, 325, Items.lead, 650, SFWarItems.crystallizedGreenStardust, 150, SFWarItems.blueStardust, 150));
@@ -750,7 +767,7 @@ public class NebulaeBlocks {
             size = 3;
             unitSort = UnitSorts.weakest;
             envEnabled |= Env.space;
-            range = 300f;
+            range = 360f;
 
             coolantMultiplier = 0.1f;
             liquidCapacity = 6f;
@@ -760,6 +777,42 @@ public class NebulaeBlocks {
             depositCooldown = 2.0f;
             consumePower(5f);
         }};
+        pathOfTotality = new LaserTurret("path-of-totality"){{
+            requirements(Category.turret, with(Items.copper, 1200, Items.lead, 350, Items.graphite, 300, Items.surgeAlloy, 325, Items.silicon, 325));
+            shootEffect = Fx.shootBigSmoke2;
+            shootCone = 40f;
+            recoil = 4f;
+            size = 4;
+            shake = 2f;
+            range = 420;
+            reload = 90f;
+            firingMoveFract = 0.5f;
+            shootDuration = 230f;
+            shootSound = Sounds.shootMeltdown;
+            loopSound = Sounds.beamMeltdown;
+            loopSoundVolume = 2f;
+            envEnabled |= Env.space;
+
+            shootType = new ContinuousLaserBulletType(78){{
+                length = 440;
+                hitEffect = Fx.hitMeltdown;
+                hitColor = Color.valueOf("00000");
+                status = StatusEffects.melting;
+                drawSize = 420f;
+                timescaleDamage = true;
+
+                incendChance = 0.4f;
+                incendSpread = 5f;
+                incendAmount = 1;
+                ammoMultiplier = 1f;
+            }};
+
+            scaledHealth = 200;
+            liquidCapacity = 60f;
+            coolant = consumeCoolant(0.5f);
+            consumePower(17f);
+        }};
+
         heavenPiercer = new ItemTurret("heaven-piercer"){{
             float brange = range = 1200f;
 

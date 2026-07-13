@@ -25,6 +25,7 @@ import mindustry.world.blocks.production.Drill;
 import mindustry.world.blocks.production.Fracker;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.blocks.storage.CoreBlock;
+import mindustry.world.draw.*;
 import mindustry.world.meta.Attribute;
 import mindustry.world.meta.BuildVisibility;
 import mindustry.type.*; // this will import the classes in this package but not the classes in subpackages
@@ -45,11 +46,11 @@ public class NebulaeBlocks {
             // Stardust
         stardustCrystallizer, purpleStardustGrinder, yellowStardustFoundry, redStardustManufactorer, idealizedStardustManifestationChamber,
             // Other
-        calibrePress, soulCuller, oilBore,
+        calibrePress, soulCuller, oilBore, starKiln, heavyGraphitePress,
             // defensive
         luminosityCondenser, blueCrystallizedStardustWall, blueCrystallizedStardustWallLarge, nyctoSteelWall, nyctoSteelWallLarge,
             // turrets
-        crescentMoon, starScreech, pathOfTotality, meteoroid, comet, asteroid, moonlight,
+        crescentMoon, starScreech, solarEruption, meteoroid, comet, asteroid, moonlight,
             // "Supreme" turret
         heavenPiercer,
             // units, T1-3
@@ -140,6 +141,20 @@ public class NebulaeBlocks {
 
             consumeLiquid(Liquids.water, 0.15f).boost();
         }};
+        starKiln = new GenericCrafter("star-kiln"){{
+            requirements(Category.crafting, with(Items.copper, 60, SFWarItems.greenStardust, 30, Items.lead, 30));
+            craftEffect = Fx.smeltsmoke;
+            outputItem = new ItemStack(Items.metaglass, 2);
+            craftTime = 60f;
+            size = 2;
+            hasPower = hasItems = true;
+            drawer = new DrawMulti(new DrawDefault(), new DrawFlame(Color.valueOf("32dc3d")));
+            ambientSound = Sounds.loopSmelter;
+            ambientSoundVolume = 0.07f;
+
+            consumeItems(with(Items.lead, 3, Items.sand, 3));
+            consumePower(0.60f);
+        }};
         blueStardustFormationPlant = new GenericCrafter("blue-stardust-formation-plant"){{
             requirements(Category.crafting, with(SFWarItems.greenStardust, 75, Items.copper, 50, Items.metaglass, 25));
             outputItem = new ItemStack(SFWarItems.blueStardust, 1);
@@ -172,6 +187,18 @@ public class NebulaeBlocks {
             liquidBoostIntensity = 1.8f;
 
             consumeLiquid(Liquids.water, 0.05f).boost();
+        }};
+        heavyGraphitePress = new GenericCrafter("heavy-graphite-press"){{
+            requirements(Category.crafting, with(Items.titanium, 75, Items.lead, 30));
+
+            craftEffect = Fx.pulverizeMedium;
+            outputItem = new ItemStack(Items.graphite, 8);
+            craftTime = 90f;
+            size = 3;
+            hasItems = true;
+            itemCapacity = 20;
+
+            consumeItem(Items.coal, 10);
         }};
         stardustCrystallizer = new MultiRecipeCrafter("stardust-crystallizer"){{
             requirements(Category.crafting, with(SFWarItems.blueStardust, 50, SFWarItems.greenStardust, 150, Items.copper, 750, Items.titanium, 250, Items.metaglass, 125, Items.graphite, 325));
@@ -689,7 +716,7 @@ public class NebulaeBlocks {
             force = 10;
             scaledForce = 5;
             range = 400f;
-            damage = 10f;
+            damage = 5;
             scaledHealth = 420;
             rotateSpeed = 24;
 
@@ -777,17 +804,17 @@ public class NebulaeBlocks {
             depositCooldown = 2.0f;
             consumePower(5f);
         }};
-        pathOfTotality = new LaserTurret("path-of-totality"){{
+        solarEruption = new LaserTurret("solar-eruption"){{
             requirements(Category.turret, with(Items.copper, 1200, Items.lead, 350, Items.graphite, 300, Items.surgeAlloy, 325, Items.silicon, 325));
             shootEffect = Fx.shootBigSmoke2;
             shootCone = 40f;
-            recoil = 4f;
-            size = 4;
+            recoil = 6f;
+            size = 5;
             shake = 2f;
             range = 420;
             reload = 90f;
             firingMoveFract = 0.5f;
-            shootDuration = 230f;
+            shootDuration = 600f;
             shootSound = Sounds.shootMeltdown;
             loopSound = Sounds.beamMeltdown;
             loopSoundVolume = 2f;
@@ -796,7 +823,7 @@ public class NebulaeBlocks {
             shootType = new ContinuousLaserBulletType(78){{
                 length = 440;
                 hitEffect = Fx.hitMeltdown;
-                hitColor = Color.valueOf("000000");
+                hitColor = Pal.meltdownHit;
                 status = StatusEffects.melting;
                 drawSize = 420f;
                 timescaleDamage = true;

@@ -47,7 +47,7 @@ public class NebulaeBlocks {
             // Stardust
         stardustCrystallizer, purpleStardustGrinder, yellowStardustFoundry, redStardustManufactorer, idealizedStardustManifestationChamber,
             // Other
-        calibrePress, soulCuller, oilBore, starKiln, heavyGraphitePress, nyctoSporeCultivator,
+        calibrePress, soulCuller, oilBore, starKiln, heavyGraphitePress, nyctoSporeCultivator, dimensionDrill,
             // defensive
         luminosityCondenser,
             // walls
@@ -136,7 +136,7 @@ public class NebulaeBlocks {
             consumeItems(with());
         }};
         dustDrill = new Drill("dust-drill"){{
-            requirements(Category.production, with(SFWarItems.greenStardust, 12));
+            requirements(Category.production, with(SFWarItems.greenStardust, 12, SFWarItems.ferrum, 10));
             tier = 2;
             // drill tier is 2 for coal
             drillTime = 360;
@@ -144,18 +144,23 @@ public class NebulaeBlocks {
 
             consumeLiquid(Liquids.water, 0.15f).boost();
         }};
-        starKiln = new GenericCrafter("star-kiln"){{
+        starKiln = new MultiRecipeCrafter("star-kiln"){{
             requirements(Category.crafting, with(Items.copper, 60, SFWarItems.greenStardust, 30, Items.lead, 30));
             craftEffect = Fx.smeltsmoke;
-            outputItem = new ItemStack(Items.metaglass, 2);
-            craftTime = 60f;
+            recipes.add(new Recipe[]{
+                    new Recipe(20)
+                            .consumeItems(ItemStack.with(Items.lead, 1, Items.sand, 1))
+                            .outputItem(Items.metaglass, 1),
+                    new Recipe(40)
+                            .consumeItems(ItemStack.with(SFWarItems.ferrum, 3, Items.coal, 1))
+                            .consumeLiquid(Liquids.water, 0.2f)
+                            .outputItem(SFWarItems.steel, 3),
+            });
             size = 2;
             hasPower = hasItems = true;
             drawer = new DrawMulti(new DrawDefault(), new DrawFlame(Color.valueOf("32dc3d")));
             ambientSound = Sounds.loopSmelter;
             ambientSoundVolume = 0.07f;
-
-            consumeItems(with(Items.lead, 3, Items.sand, 3));
             consumePower(0.60f);
         }};
         blueStardustFormationPlant = new GenericCrafter("blue-stardust-formation-plant"){{
@@ -279,7 +284,7 @@ public class NebulaeBlocks {
             consumeLiquids(LiquidStack.with(Liquids.oil, 0.4f, SFWarLiquids.gaseousNyctar, 0.2f));
         }};
         nyctoSporeCultivator = new AttributeCrafter("nycto-spore-cultivator"){{
-            requirements(Category.production, with(Items.plastanium, 25, SFWarItems.purpleStardust, 25, Items.silicon, 10));
+            requirements(Category.production, with(Items.plastanium, 25, SFWarItems.purpleStardust, 25, Items.silicon, 10, SFWarItems.chromium, 15));
             outputItem = new ItemStack(Items.sporePod, 2);
             craftTime = 75;
             size = 2;
@@ -360,16 +365,64 @@ public class NebulaeBlocks {
             consumeItems(with(Items.surgeAlloy, 1));
             consumePower(4f);
         }};
+        soulCuller = new GenericCrafter("soul-culler"){{
+            requirements(Category.production, with(SFWarItems.crystallizedYellowStardust, 200, SFWarItems.chromium, 300));
+            outputItem = new ItemStack(SFWarItems.soul, 1);
+            craftTime = 600f;
+            size = 5;
+            consumePower(11.1f);
+        }};
+        dimensionDrill = new MultiRecipeCrafter("dimension-Drill"){{
+            requirements(Category.production, with(SFWarItems.crystallizedYellowStardust, 200, SFWarItems.chromium, 300));
+            size = 5;
+            recipes.add(new Recipe[]{
+                    new Recipe(180)
+                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, Items.copper, 1))
+                            .outputItem(Items.copper, 40),
+                    new Recipe(180)
+                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, Items.lead, 1))
+                            .outputItem(Items.lead, 40),
+                    new Recipe(180)
+                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, Items.titanium, 1))
+                            .outputItem(Items.titanium, 40),
+                    new Recipe(180)
+                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, Items.coal, 1))
+                            .outputItem(Items.coal, 40),
+                    new Recipe(180)
+                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, SFWarItems.ferrum, 1))
+                            .outputItem(SFWarItems.ferrum, 40),
+                    new Recipe(180)
+                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, SFWarItems.chromium, 1))
+                            .outputItem(SFWarItems.chromium, 40),
+                    new Recipe(180)
+                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, Items.graphite, 1))
+                            .consumeLiquid(Liquids.water, 0.5f)
+                            .outputItem(Items.tungsten, 40),
+            });
+            consumePower(11.1f);
+        }};
+        redStardustManufactorer = new GenericCrafter("red-stardust-manufactorer"){{
+            requirements(Category.crafting, with(SFWarItems.ruby, 25, SFWarItems.solidifiedNyctar, 500, Items.pyratite, 50, Items.blastCompound, 75, SFWarItems.crystallizedYellowStardust, 25));
+            outputItem = new ItemStack(SFWarItems.redStardust, 1);
+            craftTime = 600f;
+            liquidCapacity = 60f;
+            size = 4;
+            hasPower = hasLiquids;
+            hasLiquids = true;
+            consumeItems(with(Items.blastCompound, 1, SFWarItems.ruby, 1, SFWarItems.soul, 1));
+            consumePower(11.1f);
+            consumeLiquids(LiquidStack.with(Liquids.cryofluid, 0.1f, SFWarLiquids.liquidNyctar, 0.1f));
+        }};
         nyctoSteelFoundry = new GenericCrafter("nyctosteel-foundry"){{
             requirements(Category.crafting, with(SFWarItems.crystallizedYellowStardust, 50, SFWarItems.solidifiedNyctar, 75));
             outputItem = new ItemStack(SFWarItems.nyctoSteel, 2);
             craftTime = 120f;
             liquidCapacity = 60f;
-            size = 2;
+            size = 5;
             hasPower = hasLiquids;
             hasLiquids = true;
 
-            consumeItems(with(SFWarItems.crystallizedYellowStardust, 6, SFWarItems.solidifiedNyctar, 8));
+            consumeItems(with(SFWarItems.crystallizedYellowStardust, 6, SFWarItems.solidifiedNyctar, 8, Items.tungsten, 10));
             consumePower(500f / 60f);
             consumeLiquids(LiquidStack.with(SFWarLiquids.liquidNyctar, 0.5f, Liquids.cryofluid, 0.5f));
         }};
@@ -387,23 +440,10 @@ public class NebulaeBlocks {
             requirements(Category.defense, with(SFWarItems.nyctoSteel, 12));
             health = 10000;
         }};
-
         nyctoSteelWallLarge = new Wall("nycto-steel-wall-large"){{
             requirements(Category.defense, ItemStack.mult(nyctoSteelWall.requirements, 4));
             health = 10000 * 4;
             size = 2;
-        }};
-        redStardustManufactorer = new GenericCrafter("red-stardust-manufactorer"){{
-            requirements(Category.crafting, with(SFWarItems.ruby, 25, SFWarItems.nyctoSteel, 125, SFWarItems.solidifiedNyctar, 500, Items.pyratite, 50, Items.blastCompound, 75));
-            outputItem = new ItemStack(SFWarItems.redStardust, 1);
-            craftTime = 600f;
-            liquidCapacity = 60f;
-            size = 4;
-            hasPower = hasLiquids;
-            hasLiquids = true;
-            consumeItems(with(Items.blastCompound, 1, SFWarItems.ruby, 1));
-            consumePower(11.1f);
-            consumeLiquids(LiquidStack.with(Liquids.cryofluid, 0.1f, SFWarLiquids.liquidNyctar, 0.1f));
         }};
         calibrePress = new GenericCrafter("calibre-press"){{
             requirements(Category.crafting, with(SFWarItems.nyctoSteel, 750, SFWarItems.nyctar, 75, SFWarItems.redStardust, 175));

@@ -18,7 +18,7 @@ public class SFWarItems {
             nyctoSteel, solidifiedNyctar, nyctar, crystallizedGreenStardust, greenStardust,
             crystallizedBlueStardust, blueStardust, crystallizedPurpleStardust, purpleStardust,
             crystallizedYellowStardust, yellowStardust,
-            redStardust, idealizedStardust,
+            redStardust, idealizedStardust, soul,
             heavenPiercingShell;
     public static void load(){
         uraninite = new Item("uraninite", Color.valueOf("77897a")){{//Ore
@@ -118,6 +118,7 @@ public class SFWarItems {
         idealizedStardust = new Item("idealized-stardust", Color.valueOf("ffffff")){{}};
         // is meant to be 000000
         nyctar = new Item("nyctar", Color.valueOf("000000")){{}};
+        soul = new Item("soul", Color.valueOf("2ccbef")){{}};
         crystallizedPurpleStardust = new Item("crystallized-purple-stardust", Color.valueOf("000000")){{}};
         purpleStardust = new Item("purple-stardust", Color.valueOf("000000")){{}};
         crystallizedYellowStardust = new Item("crystallized-yellow-stardust", Color.valueOf("ffff00")){{}};

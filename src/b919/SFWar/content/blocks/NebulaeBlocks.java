@@ -119,6 +119,7 @@ public class NebulaeBlocks {
         copperDrill = new Drill("copper-drill"){{
             requirements(Category.production, with(Items.copper, 12));
             tier = 1;
+            itemCapacity = 2*2*10;
             // drill tier is 1 for progression
             drillTime = 600;
             size = 2;
@@ -138,6 +139,7 @@ public class NebulaeBlocks {
         dustDrill = new Drill("dust-drill"){{
             requirements(Category.production, with(SFWarItems.greenStardust, 12, SFWarItems.ferrum, 10));
             tier = 2;
+            itemCapacity = 2*2*10;
             // drill tier is 2 for coal
             drillTime = 360;
             size = 2;
@@ -189,6 +191,7 @@ public class NebulaeBlocks {
         reinforcedDustDrill = new Drill("reinforced-dust-drill"){{
             requirements(Category.production, with(SFWarItems.blueStardust, 10, SFWarItems.greenStardust, 10, Items.copper, 30));
             tier = 3;
+            itemCapacity = 2*2*10;
             // drill tier is 3 for titanium
             drillTime = 270;
             size = 2;
@@ -324,6 +327,7 @@ public class NebulaeBlocks {
         }};
         crystalDrill = new Drill("crystal-drill"){{
             requirements(Category.production, with(SFWarItems.crystallizedBlueStardust, 20, SFWarItems.crystallizedGreenStardust, 30, SFWarItems.crystallizedPurpleStardust, 10));
+            itemCapacity = 3*3*10;
             tier = 4;
             // drill tier 4 so cool
             drillTime = 180;
@@ -370,24 +374,33 @@ public class NebulaeBlocks {
             outputItem = new ItemStack(SFWarItems.soul, 1);
             craftTime = 600f;
             size = 5;
+            consumeItems(ItemStack.with(SFWarItems.crystallizedYellowStardust, 10, Items.sporePod, 10));
+            consumeLiquid(SFWarLiquids.liquidNyctar, 1f);
             consumePower(11.1f);
         }};
         dimensionDrill = new MultiRecipeCrafter("dimension-Drill"){{
             requirements(Category.production, with(SFWarItems.crystallizedYellowStardust, 200, SFWarItems.chromium, 300));
             size = 5;
+            itemCapacity = 120;
             recipes.add(new Recipe[]{
                     new Recipe(180)
-                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, Items.copper, 1))
+                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, Items.lead, 1))
                             .outputItem(Items.copper, 40),
                     new Recipe(180)
-                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, Items.lead, 1))
+                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, Items.coal, 1))
                             .outputItem(Items.lead, 40),
                     new Recipe(180)
-                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, Items.titanium, 1))
+                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, Items.copper, 1))
                             .outputItem(Items.titanium, 40),
                     new Recipe(180)
-                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, Items.coal, 1))
+                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, Items.titanium, 1))
                             .outputItem(Items.coal, 40),
+                    new Recipe(180)
+                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, Items.metaglass, 1))
+                            .outputItem(Items.silicon, 40),
+                    new Recipe(180)
+                            .consumeItems(ItemStack.with(SFWarItems.soul, 1, Items.silicon, 1))
+                            .outputItem(Items.metaglass, 40),
                     new Recipe(180)
                             .consumeItems(ItemStack.with(SFWarItems.soul, 1, SFWarItems.ferrum, 1))
                             .outputItem(SFWarItems.ferrum, 40),
@@ -416,6 +429,7 @@ public class NebulaeBlocks {
         nyctoSteelFoundry = new GenericCrafter("nyctosteel-foundry"){{
             requirements(Category.crafting, with(SFWarItems.crystallizedYellowStardust, 50, SFWarItems.solidifiedNyctar, 75));
             outputItem = new ItemStack(SFWarItems.nyctoSteel, 2);
+            itemCapacity = 2*2*10;
             craftTime = 120f;
             liquidCapacity = 60f;
             size = 5;
@@ -428,6 +442,7 @@ public class NebulaeBlocks {
         }};
         nyctoSteelDrill = new Drill("nycto-steel-drill"){{
             requirements(Category.production, with(SFWarItems.nyctoSteel, 10, SFWarItems.solidifiedNyctar, 40));
+            itemCapacity = 4*4*10;
             tier = 5;
             // drill tier 5 even cooler
             drillTime = 135;

@@ -21,6 +21,7 @@ import mindustry.world.blocks.defense.Wall;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.blocks.defense.turrets.LaserTurret;
 import mindustry.world.blocks.defense.turrets.TractorBeamTurret;
+import mindustry.world.blocks.production.AttributeCrafter;
 import mindustry.world.blocks.production.Drill;
 import mindustry.world.blocks.production.Fracker;
 import mindustry.world.blocks.production.GenericCrafter;
@@ -46,9 +47,11 @@ public class NebulaeBlocks {
             // Stardust
         stardustCrystallizer, purpleStardustGrinder, yellowStardustFoundry, redStardustManufactorer, idealizedStardustManifestationChamber,
             // Other
-        calibrePress, soulCuller, oilBore, starKiln, heavyGraphitePress,
+        calibrePress, soulCuller, oilBore, starKiln, heavyGraphitePress, nyctoSporeCultivator,
             // defensive
-        luminosityCondenser, blueCrystallizedStardustWall, blueCrystallizedStardustWallLarge, nyctoSteelWall, nyctoSteelWallLarge,
+        luminosityCondenser,
+            // walls
+        blueCrystallizedStardustWall, blueCrystallizedStardustWallLarge, nyctoSteelWall, nyctoSteelWallLarge, nyctoSporeWall, nyctoSporeWallLarge, sporeWall, sporeWallLarge,
             // turrets
         crescentMoon, starScreech, solarEruption, meteoroid, comet, asteroid, moonlight,
             // "Supreme" turret
@@ -217,7 +220,7 @@ public class NebulaeBlocks {
                             .consumeLiquid(SFWarLiquids.gaseousNyctar, 0.2f)
                             .outputItem(SFWarItems.crystallizedBlueStardust, 1),
                     new Recipe(60)
-                            .consumeItems(ItemStack.with(SFWarItems.purpleStardust, 1, Items.plastanium, 5))
+                            .consumeItems(ItemStack.with(SFWarItems.purpleStardust, 1, Items.plastanium, 2, Items.sporePod, 3))
                             .consumeLiquid(SFWarLiquids.liquidNyctar, 0.25f)
                             .outputItem(SFWarItems.crystallizedPurpleStardust, 1),
                     new Recipe(80)
@@ -230,7 +233,6 @@ public class NebulaeBlocks {
             requirements(Category.defense, with(SFWarItems.crystallizedBlueStardust, 6));
             health = 880;
         }};
-
         blueCrystallizedStardustWallLarge = new Wall("crystallized-blue-stardust-wall-large"){{
             requirements(Category.defense, ItemStack.mult(blueCrystallizedStardustWall.requirements, 4));
             health = 880 * 4;
@@ -266,7 +268,7 @@ public class NebulaeBlocks {
             consumeLiquid(SFWarLiquids.gaseousNyctar, 0.15f);
         }};
         liquidNyctarMixer = new GenericCrafter("liquid-nyctar-mixer"){{
-            requirements(Category.crafting, with(SFWarItems.crystallizedPurpleStardust, 10, Items.plastanium, 40));
+            requirements(Category.crafting, with(SFWarItems.purpleStardust, 10, Items.plastanium, 40));
             outputLiquid = new LiquidStack(SFWarLiquids.liquidNyctar, 24f / 60f);
             craftTime = 60f;
             liquidCapacity = 60f;
@@ -275,6 +277,45 @@ public class NebulaeBlocks {
 
             consumeItems(with(SFWarItems.blueStardust, 6));
             consumeLiquids(LiquidStack.with(Liquids.oil, 0.4f, SFWarLiquids.gaseousNyctar, 0.2f));
+        }};
+        nyctoSporeCultivator = new AttributeCrafter("nycto-spore-cultivator"){{
+            requirements(Category.production, with(Items.plastanium, 25, SFWarItems.purpleStardust, 25, Items.silicon, 10));
+            outputItem = new ItemStack(Items.sporePod, 2);
+            craftTime = 75;
+            size = 2;
+            hasLiquids = true;
+            hasPower = true;
+            hasItems = true;
+            liquidCapacity = 80f;
+
+            craftEffect = Fx.none;
+            envRequired |= Env.spores;
+            attribute = Attribute.spores;
+
+            ambientSound = Sounds.loopCultivator;
+            ambientSoundVolume = 0.075f;
+
+            legacyReadWarmup = true;
+            drawer = new DrawMulti(
+                    new DrawRegion("-bottom"),
+                    new DrawLiquidTile(SFWarLiquids.liquidNyctar),
+                    new DrawDefault(),
+                    new DrawCultivator(),
+                    new DrawRegion("-top")
+            );
+            maxBoost = 2f;
+
+            consumePower(80f / 60f);
+            consumeLiquid(Liquids.water, 18f / 60f);
+        }};
+        sporeWall = new Wall("spore-wall"){{
+            requirements(Category.defense, with(Items.sporePod, 3));
+            health = 1250;
+        }};
+        sporeWallLarge = new Wall("spore-wall-large"){{
+            requirements(Category.defense, ItemStack.mult(sporeWall.requirements, 4));
+            health = 1250 * 4;
+            size = 2;
         }};
         crystalDrill = new Drill("crystal-drill"){{
             requirements(Category.production, with(SFWarItems.crystallizedBlueStardust, 20, SFWarItems.crystallizedGreenStardust, 30, SFWarItems.crystallizedPurpleStardust, 10));
@@ -298,6 +339,15 @@ public class NebulaeBlocks {
             consumeItems(with(SFWarItems.crystallizedPurpleStardust, 1));
             consumePower(2f);
             consumeLiquid(SFWarLiquids.liquidNyctar, 0.2f);
+        }};
+        nyctoSporeWall = new Wall("nycto-spore-wall"){{
+            requirements(Category.defense, with(Items.sporePod, 3, SFWarItems.solidifiedNyctar, 3));
+            health = 2000;
+        }};
+        nyctoSporeWallLarge = new Wall("nycto-spore-wall-large"){{
+            requirements(Category.defense, ItemStack.mult(nyctoSporeWall.requirements, 4));
+            health = 2000 * 4;
+            size = 2;
         }};
         yellowStardustFoundry = new GenericCrafter("yellow-stardust-foundry"){{
             requirements(Category.crafting, with(Items.surgeAlloy, 25, Items.titanium, 125, SFWarItems.solidifiedNyctar, 75));
@@ -334,7 +384,7 @@ public class NebulaeBlocks {
             consumeLiquid(SFWarLiquids.liquidNyctar, 1.0f).boost();
         }};
         nyctoSteelWall = new Wall("nycto-steel-wall"){{
-            requirements(Category.defense, with(SFWarItems.nyctoSteel, 6));
+            requirements(Category.defense, with(SFWarItems.nyctoSteel, 12));
             health = 10000;
         }};
 

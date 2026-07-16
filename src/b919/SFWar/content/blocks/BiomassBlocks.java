@@ -88,7 +88,8 @@ public class BiomassBlocks {
 
         biomassGenerator = new BiomassCrafter("biomass-generator") {{
             requirements(Category.crafting, BuildVisibility.shown, with());
-            size = 2;
+            size = 3;
+            squareSprite = false;
             outputItem = new ItemStack(SFWarItems.biomass, 1);
             craftEffect = Fx.smeltsmoke;
             updateEffect = Fx.plasticburn;

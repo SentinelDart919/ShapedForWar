@@ -8,11 +8,13 @@ import b919.SFWar.content.blocks.BiomassBlocks;
 import b919.SFWar.content.blocks.NebulaeBlocks;
 import b919.SFWar.content.blocks.SFWarDebugBlocks;
 import b919.SFWar.content.blocks.TerranBlocks;
+import b919.SFWar.content.units.DebugUnit;
 import b919.SFWar.content.units.TerranUnits;
 import b919.SFWar.ui.PopulationDisplay;
 import b919.SFWar.utils.SFWarSFX;
 import b919.SFWar.utils.SFWarSounds;
 import b919.SFWar.world.terran.blocks.population.PopulationManager;
+import b919.SFWar.world.upgrade.UpgradeManager;
 import mindustry.Vars;
 import mindustry.game.EventType;
 import mindustry.mod.*;
@@ -23,7 +25,10 @@ public class SFWarMain extends Mod{
         Log.info("Shaped For War loaded.");
         //unit population stuff required, without this it is impossible to remove population when a unit dies, there are simple ways
         //but can be buggy or inefficient,
-        Events.on(EventType.WorldLoadBeginEvent.class, e -> PopulationManager.clear());
+        Events.on(EventType.WorldLoadBeginEvent.class, e -> {
+            PopulationManager.clear();
+            UpgradeManager.clear();
+        });
         Events.on(EventType.WorldLoadEndEvent.class, e -> Core.app.post(PopulationManager::reloadUnitCosts));
         Events.on(EventType.UnitDestroyEvent.class, e -> {
             int cost = PopulationManager.getUnitTypeCost(e.unit.type.name);
@@ -48,7 +53,9 @@ public class SFWarMain extends Mod{
 
     @Override
     public void loadContent(){
+        SFWarUpgrades.load();
         TerranUnits.load();
+        DebugUnit.load();
         SFWarPlanets.load();
         SFWarItems.load();
         SFWarLiquids.load();

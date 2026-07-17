@@ -4,8 +4,12 @@ import arc.graphics.Color;
 import arc.math.Interp;
 import arc.math.Mathf;
 import arc.struct.Seq;
+import b919.SFWar.content.SFWarUpgrades;
+import b919.SFWar.content.units.DebugUnit;
+import b919.SFWar.content.units.TerranUnits;
 import b919.SFWar.world.production.MultiRecipeCrafter;
 import b919.SFWar.world.production.Recipe;
+import b919.SFWar.world.upgrade.UpgraderBlock;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
@@ -25,6 +29,7 @@ import mindustry.type.unit.MissileUnitType;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.Wall;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
+import mindustry.world.blocks.units.UnitFactory;
 import mindustry.world.consumers.ConsumeLiquid;
 import mindustry.world.draw.DrawTurret;
 import mindustry.world.meta.BuildVisibility;
@@ -34,7 +39,8 @@ import mindustry.world.blocks.defense.OverdriveProjector;
 import static mindustry.type.ItemStack.with;
 
 public class SFWarDebugBlocks {
-    public static Block aliveTree, scathe2, superDuo, scatheNuke, debugTohru, debugMultiCrafter, debugMultiCrafter2;
+    public static Block aliveTree, scathe2, superDuo, scatheNuke, debugTohru, debugMultiCrafter, debugMultiCrafter2,
+        debugUpgrader, debugUnitFactory;
 
     public static void load(){
         //aliveTree = new ItsKirby69LivingTreeBlock("alive-tree", 2, "#74d660");
@@ -393,6 +399,18 @@ public class SFWarDebugBlocks {
                             .consumeItems(ItemStack.with(Items.coal, 1, Items.titanium, 2))
                             .outputItem(Items.plastanium, 1),
             });
+        }};
+        debugUpgrader = new UpgraderBlock("debug-upgrader"){{
+            requirements(Category.effect, BuildVisibility.sandboxOnly, with());
+            size = 3;
+            health = 99999;
+            upgrades.addAll(SFWarUpgrades.damageUpgrade, SFWarUpgrades.healthUpgrade);
+        }};
+        debugUnitFactory = new UnitFactory("debug-unit-factory"){{
+            requirements(Category.units, BuildVisibility.sandboxOnly, with());
+            size = 3;
+            plans = new Seq<>();
+            plans.add(new UnitFactory.UnitPlan(DebugUnit.debugDagger, 300f, ItemStack.with(Items.copper, 20)));
         }};
     }
 }

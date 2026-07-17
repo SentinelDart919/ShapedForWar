@@ -139,12 +139,12 @@ public class PopulationUnitFactory extends PopulationBlock {
             registerPlanTypeCosts();
         }
 
-        public boolean addToQueue(int planIndex) {
+        public void addToQueue(int planIndex) {
             UnitPlan plan = plans.get(planIndex);
-            if (!hasRequirements(plan)) return false;
+            if (!hasRequirements(plan)) return;
 
             Building core = team.core();
-            if (core == null) return false;
+            if (core == null) return;
 
             for (ItemStack req : plan.requirements) {
                 core.items.remove(req.item, req.amount);
@@ -152,7 +152,6 @@ public class PopulationUnitFactory extends PopulationBlock {
 
             PopulationManager.registerUnitTypeCost(plan.unit.name, plan.populationCost);
             queue.add(planIndex);
-            return true;
         }
 
         public void craft(UnitPlan plan) {

@@ -128,8 +128,11 @@ public class TerranUnits {
                 fractionRepairSpeed = 0.03f;
 
                 targetUnits = false;
-                //targetBuildings = true;
-                laserColor = Pal.bulletYellow;
+                targetBuildings = true;
+                autoTarget = false;
+                controllable = true;
+                aiControllable = true;
+                laserColor = Pal.engine;
                 healColor = Pal.heal;
 
                 bullet = new BulletType(){{

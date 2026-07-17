@@ -8,38 +8,55 @@ import arc.util.*;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.type.*;
+import mindustry.world.*;
+import mindustry.world.blocks.*;
 import mindustry.world.blocks.distribution.Conveyor;
 
+import static arc.Core.atlas;
 import static mindustry.Vars.*;
 import static mindustry.gen.Sounds.none;
 
 public class Veins extends Conveyor {
+    public TextureRegion[] autotileRegions;
+
     public Veins(String name) {
         super(name);
         ambientSound = none;
     }
 
+    @Override
+    public boolean blends(Tile tile, int rotation, int otherx, int othery, int otherrot, Block otherblock) {
+        if (otherblock == this) return true;
+        return (otherblock.outputsItems() || otherblock.hasItems)
+            && lookingAtEither(tile, rotation, otherx, othery, otherrot, otherblock);
+    }
+
+    @Override
+    public void load() {
+        super.load();
+        autotileRegions = TileBitmask.load(name);
+    }
+
     public class VeinsConveyorBuild extends ConveyorBuild {
-        private static final Color itemColor = Color.valueOf("ae070748");
+        private static final Color itemColor = Color.valueOf("8c5b3ca6");
         public float visualScl = 1f;
 
         @Override
         public void draw() {
             visualScl = Mathf.lerpDelta(visualScl, len > 0 ? 1.2f : 1f, 0.7f);
 
-            int variant = Mathf.randomSeed(tile.pos(), 0, 3);
-
-            Draw.z(Layer.blockUnder);
-            for (int i = 0; i < 4; i++) {
-                if ((blending & (1 << i)) != 0) {
-                    int dir = rotation - i;
-                    float rot = i == 0 ? rotation * 90 : (dir) * 90;
-                    Draw.rect(sliced(regions[0][variant], i != 0 ? SliceMode.bottom : SliceMode.top), x + Geometry.d4x(dir) * tilesize * 0.75f, y + Geometry.d4y(dir) * tilesize * 0.75f, rot);
+            int bits = 0;
+            for (int i = 0; i < 8; i++) {
+                Tile other = tile.nearby(Geometry.d8[i]);
+                if (other != null && other.build != null && other.build.team == team) {
+                    if (blends(tile, rotation, other.x, other.y, other.build.rotation, other.block())) {
+                        bits |= (1 << i);
+                    }
                 }
             }
 
             Draw.z(Layer.block - 0.2f);
-            Draw.rect(regions[blendbits][variant], x, y, tilesize * blendsclx * visualScl, tilesize * blendscly * visualScl, rotation * 90);
+            Draw.rect(autotileRegions[TileBitmask.values[bits]], x, y, tilesize * visualScl, tilesize * visualScl, 0);
 
             Draw.z(Layer.block - 0.1f);
             float layer = Layer.block - 0.1f, wwidth = world.unitWidth(), wheight = world.unitHeight(), scaling = 0.01f;

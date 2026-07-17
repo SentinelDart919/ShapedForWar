@@ -56,7 +56,8 @@ public class SFWarItems {
             explosiveness = 0.9876f;
             flammability = 0.7f;
         }};
-        foodRations = new Item("food-rations", Color.valueOf("000000")){{}};
+        foodRations = new Item("food-rations", Color.valueOf("000000"));
+
         heavyAlloy = new Item("heavy-alloy", Color.valueOf("000000")){{
             cost = 1.5f;
         }};

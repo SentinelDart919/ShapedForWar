@@ -1,5 +1,6 @@
 package b919.SFWar.content.units;
 
+import arc.graphics.Color;
 import arc.struct.Seq;
 import mindustry.ai.UnitCommand;
 import mindustry.ai.types.MinerAI;
@@ -27,7 +28,7 @@ public class NebulaeUnits {
             isEnemy = false;
             envDisabled = 0;
             constructor = UnitEntity::create;
-            range = 130f;
+            range = 100f;
             faceTarget = false;
             targetPriority = -2;
             lowAltitude = false;
@@ -75,11 +76,11 @@ public class NebulaeUnits {
                 targetBuildings = true;
                 autoTarget = false;
                 controllable = true;
-                laserColor = Pal.accent;
-                healColor = Pal.accent;
+                laserColor = Color.valueOf("bf92f9");
+                healColor = Color.valueOf("bf92f9");
 
                 bullet = new BulletType(){{
-                    maxRange = 130;
+                    maxRange = 100;
                 }};
             }});
         }};

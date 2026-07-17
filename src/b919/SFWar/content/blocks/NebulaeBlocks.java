@@ -602,7 +602,7 @@ public class NebulaeBlocks {
 
             requirements(Category.turret, with(Items.copper, 25, Items.lead, 25, SFWarItems.greenStardust, 50));
             ammo(
-                    Items.copper, new MissileBulletType(2f, 25){{
+                    Items.copper, new MissileBulletType(2f*3f, 25){{
                         width = 20f;
                         height = 20f;
                         shrinkY = 0f;
@@ -612,13 +612,13 @@ public class NebulaeBlocks {
                         buildingDamageMultiplier = 0.2f;
                         pierceDamageFactor = 0.8f;
                         pierceCap = 5;
-                        ammoMultiplier = 1f;
+                        ammoMultiplier = 2f;
                         collidesAir = false;
 
                         hitColor = backColor = trailColor = Pal.copperAmmoBack;
                         frontColor = Pal.copperAmmoFront;
                     }},
-                    Items.lead, new MissileBulletType(2.6f, 25){{
+                    Items.lead, new MissileBulletType(2.6f*3f, 25){{
                         width = 20f;
                         height = 20f;
                         shrinkY = 0f;
@@ -628,13 +628,13 @@ public class NebulaeBlocks {
                         buildingDamageMultiplier = 0.2f;
                         pierceDamageFactor = 0.8f;
                         pierceCap = 5;
-                        ammoMultiplier = 1f;
+                        ammoMultiplier = 2f;
                         collidesGround = false;
 
                         hitColor = backColor = trailColor = Pal.darkerMetal;
                         frontColor = Pal.darkMetal;
                     }},
-                    Items.graphite, new MissileBulletType(1f, 60){{
+                    Items.graphite, new MissileBulletType(1.1f*3f, 60){{
                         width = 22f;
                         height = 22f;
                         shrinkY = 0f;
@@ -645,12 +645,12 @@ public class NebulaeBlocks {
                         buildingDamageMultiplier = 0.2f;
                         pierceDamageFactor = 0.8f;
                         pierceCap = 5;
-                        ammoMultiplier = 1f;
+                        ammoMultiplier = 2f;
 
                         hitColor = backColor = trailColor = Pal.graphiteAmmoBack;
                         frontColor = Pal.graphiteAmmoFront;
                     }},
-                    Items.silicon, new MissileBulletType(3f, 30){{
+                    Items.silicon, new MissileBulletType(3f*3f, 30){{
                         width = 22f;
                         height = 22f;
                         shrinkY = 0f;
@@ -666,7 +666,7 @@ public class NebulaeBlocks {
                         hitColor = backColor = trailColor = Pal.siliconAmmoBack;
                         frontColor = Pal.siliconAmmoFront;
                     }},
-                    SFWarItems.greenStardust, new MissileBulletType(6f, 18){{
+                    SFWarItems.greenStardust, new MissileBulletType(6f*3f, 18){{
                         width = 6f;
                         height = 6f;
                         shrinkY = 0f;
@@ -710,7 +710,7 @@ public class NebulaeBlocks {
 
             requirements(Category.turret, with(Items.titanium, 125, Items.lead, 250, SFWarItems.crystallizedGreenStardust, 150, SFWarItems.blueStardust, 150));
             ammo(
-                    Items.titanium, new MissileBulletType(2f, 175){{
+                    Items.titanium, new MissileBulletType(2f*3f, 175){{
                         width = 20f;
                         height = 20f;
                         shrinkY = 0f;
@@ -726,7 +726,7 @@ public class NebulaeBlocks {
                         hitColor = backColor = trailColor = Color.valueOf("919fe7");
                         frontColor = Color.valueOf("a4b8fa");
                     }},
-                    Items.metaglass, new MissileBulletType(2.6f, 150){{
+                    Items.metaglass, new MissileBulletType(2.6f*3f, 150){{
                         width = 20f;
                         height = 20f;
                         shrinkY = 0f;
@@ -742,7 +742,7 @@ public class NebulaeBlocks {
                         hitColor = backColor = trailColor = Pal.glassAmmoBack;
                         frontColor = Pal.glassAmmoFront;
                     }},
-                    Items.graphite, new MissileBulletType(1f, 300){{
+                    Items.graphite, new MissileBulletType(1.1f*3f, 300){{
                         width = 22f;
                         height = 22f;
                         shrinkY = 0f;
@@ -753,12 +753,12 @@ public class NebulaeBlocks {
                         buildingDamageMultiplier = 0.2f;
                         pierceDamageFactor = 0.8f;
                         pierceCap = 5;
-                        ammoMultiplier = 1f;
+                        ammoMultiplier = 2f;
 
                         hitColor = backColor = trailColor = Pal.graphiteAmmoBack;
                         frontColor = Pal.graphiteAmmoFront;
                     }},
-                    Items.silicon, new MissileBulletType(3f, 90){{
+                    Items.silicon, new MissileBulletType(3f*3f, 90){{
                         width = 22f;
                         height = 22f;
                         shrinkY = 0f;
@@ -774,7 +774,7 @@ public class NebulaeBlocks {
                         hitColor = backColor = trailColor = Pal.siliconAmmoBack;
                         frontColor = Pal.siliconAmmoFront;
                     }},
-                    SFWarItems.blueStardust, new MissileBulletType(6f, 50){{
+                    SFWarItems.blueStardust, new MissileBulletType(6f*3f, 50){{
                         width = 6f;
                         height = 6f;
                         shrinkY = 0f;
@@ -832,7 +832,7 @@ public class NebulaeBlocks {
 
             requirements(Category.turret, with(SFWarItems.solidifiedNyctar, 325, Items.lead, 650, SFWarItems.crystallizedGreenStardust, 150, SFWarItems.blueStardust, 150));
             ammo(
-                    Items.titanium, new MissileBulletType(2f, 350){{
+                    Items.titanium, new MissileBulletType(2f*3f, 350){{
                         width = 34f;
                         height = 34f;
                         shrinkY = 0f;
@@ -844,13 +844,13 @@ public class NebulaeBlocks {
                         buildingDamageMultiplier = 0.2f;
                         pierceDamageFactor = 1f;
                         pierceCap = 5;
-                        ammoMultiplier = 1f;
+                        ammoMultiplier = 2f;
                         collidesAir = false;
 
                         hitColor = backColor = trailColor = Color.valueOf("919fe7");
                         frontColor = Color.valueOf("a4b8fa");
                     }},
-                    Items.graphite, new MissileBulletType(1f, 600){{
+                    Items.graphite, new MissileBulletType(1.1f*3f, 600){{
                         width = 36f;
                         height = 36f;
                         shrinkY = 0f;
@@ -863,12 +863,12 @@ public class NebulaeBlocks {
                         buildingDamageMultiplier = 0.2f;
                         pierceDamageFactor = 1f;
                         pierceCap = 5;
-                        ammoMultiplier = 1f;
+                        ammoMultiplier = 2f;
 
                         hitColor = backColor = trailColor = Pal.graphiteAmmoBack;
                         frontColor = Pal.graphiteAmmoFront;
                     }},
-                    SFWarItems.nyctoSteel, new MissileBulletType(3f, 1000){{
+                    SFWarItems.nyctoSteel, new MissileBulletType(3f*3f, 1000){{
                         width = 42f;
                         height = 42f;
                         shrinkY = 0f;
@@ -882,7 +882,7 @@ public class NebulaeBlocks {
                         buildingDamageMultiplier = 0.2f;
                         pierceDamageFactor = 1f;
                         pierceCap = 5;
-                        ammoMultiplier = 1f;
+                        ammoMultiplier = 2f;
 
                         hitColor = backColor = trailColor = Color.valueOf("8e00c2");
                         frontColor = Color.valueOf("ab1ae0");

@@ -3,6 +3,7 @@ package b919.SFWar.content.blocks;
 import arc.graphics.Color;
 import b919.SFWar.content.SFWarBlocks;
 import b919.SFWar.content.bullets.SuperRaulCannonBullet;
+import b919.SFWar.content.units.NebulaeUnits;
 import b919.SFWar.utils.SFWarFX;
 import b919.SFWar.world.nebulae.blocks.power.NebulaePanel;
 import b919.SFWar.world.production.MultiRecipeCrafter;
@@ -77,7 +78,7 @@ public class NebulaeBlocks {
             size = 6;
 
             unitCapModifier = 32;
-            unitType = UnitTypes.toxopid;
+            unitType = NebulaeUnits.blackWasp;
             // toxopid placeholder, replace with Nebulae core unit when possible
         }};
         castellumLucis = new CoreBlock("castellum-lucis"){{

@@ -29,7 +29,7 @@ public class NebulaeUnits {
             envDisabled = 0;
             constructor = UnitEntity::create;
             range = 100f;
-            faceTarget = false;
+            faceTarget = true;
             targetPriority = -2;
             lowAltitude = false;
             mineWalls = true;
@@ -39,7 +39,7 @@ public class NebulaeUnits {
             mineSpeed = 10f;
             mineTier = 6;
             buildSpeed = 5f;
-            drag = 0.00f;
+            drag = 0.16f;
             speed = 7f;
             rotateSpeed = 8f;
             accel = 0.08f;

@@ -104,25 +104,25 @@ public class SFWarItems {
         denseTissues = new Item("dense-tissues", Color.valueOf("000000")){{}};
         biomass = new Item("biomass", Color.valueOf("000000")){{}};
         //Nebulae
-        nyctoSteel = new Item("nycto-steel", Color.valueOf("ab1ae0")){{}};
-        solidifiedNyctar = new Item("solidified-nyctar", Color.valueOf("8e00c2")){{}};
-        crystallizedGreenStardust = new Item("crystallized-green-stardust", Color.valueOf("4bd452")){{}};
         greenStardust = new Item("green-stardust", Color.valueOf("27e436")){{}};
-        crystallizedBlueStardust = new Item("crystallized-blue-stardust", Color.valueOf("4684c7")){{}};
+        crystallizedGreenStardust = new Item("crystallized-green-stardust", Color.valueOf("4bd452")){{}};
         blueStardust = new Item("blue-stardust", Color.valueOf("3d8fe7")){{}};
-        heavenPiercingShell = new Item("heaven-piercing-shell", Color.valueOf("8c0000")){{
-            explosiveness = 25f;
-        }};
+        crystallizedBlueStardust = new Item("crystallized-blue-stardust", Color.valueOf("4684c7")){{}};
+        purpleStardust = new Item("purple-stardust", Color.valueOf("000000")){{}};
+        crystallizedPurpleStardust = new Item("crystallized-purple-stardust", Color.valueOf("000000")){{}};
+        yellowStardust = new Item("yellow-stardust", Color.valueOf("bfbf00")){{}};
+        solidifiedNyctar = new Item("solidified-nyctar", Color.valueOf("8e00c2")){{}};
+        crystallizedYellowStardust = new Item("crystallized-yellow-stardust", Color.valueOf("ffff00")){{}};
         redStardust = new Item("red-stardust", Color.valueOf("ff0000")){{
             explosiveness = 5f;
         }};
-        idealizedStardust = new Item("idealized-stardust", Color.valueOf("ffffff")){{}};
+        nyctoSteel = new Item("nycto-steel", Color.valueOf("ab1ae0")){{}};
+        soul = new Item("soul", Color.valueOf("2ccbef")){{}};
         // is meant to be 000000
         nyctar = new Item("nyctar", Color.valueOf("000000")){{}};
-        soul = new Item("soul", Color.valueOf("2ccbef")){{}};
-        crystallizedPurpleStardust = new Item("crystallized-purple-stardust", Color.valueOf("000000")){{}};
-        purpleStardust = new Item("purple-stardust", Color.valueOf("000000")){{}};
-        crystallizedYellowStardust = new Item("crystallized-yellow-stardust", Color.valueOf("ffff00")){{}};
-        yellowStardust = new Item("yellow-stardust", Color.valueOf("bfbf00")){{}};
+        idealizedStardust = new Item("idealized-stardust", Color.valueOf("ffffff")){{}};
+        heavenPiercingShell = new Item("heaven-piercing-shell", Color.valueOf("8c0000")){{
+            explosiveness = 25f;
+        }};
     }
 }

@@ -22,6 +22,8 @@ import mindustry.world.blocks.defense.Wall;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.blocks.defense.turrets.LaserTurret;
 import mindustry.world.blocks.defense.turrets.TractorBeamTurret;
+import mindustry.world.blocks.distribution.Conveyor;
+import mindustry.world.blocks.distribution.Duct;
 import mindustry.world.blocks.production.AttributeCrafter;
 import mindustry.world.blocks.production.Drill;
 import mindustry.world.blocks.production.Fracker;
@@ -41,6 +43,8 @@ public class NebulaeBlocks {
     public static Block
             // cores
         domusLucis, castellumLucis, arxLucis,
+            // conveyors & ducts
+        dustConveyor, stainlessDuct, nyctoDuct,
             // raw production
         greenStardustPlant, blueStardustFormationPlant,
             // Nyctar
@@ -48,7 +52,7 @@ public class NebulaeBlocks {
             // Stardust
         stardustCrystallizer, purpleStardustGrinder, yellowStardustFoundry, redStardustManufactorer, idealizedStardustManifestationChamber,
             // Other
-        calibrePress, soulCuller, oilBore, starKiln, heavyGraphitePress, nyctoSporeCultivator, dimensionDrill,
+        calibrePress, soulCuller, oilBore, starKiln, heavyGraphitePress, electricSiliconCrucible, nyctoSporeCultivator, dimensionDrill,
             // defensive
         luminosityCondenser,
             // walls
@@ -98,6 +102,22 @@ public class NebulaeBlocks {
 
             unitCapModifier = 64;
             unitType = UnitTypes.toxopid;
+        }};
+        dustConveyor = new Conveyor("dust-conveyor"){{
+            requirements(Category.distribution, with(Items.copper, 1, SFWarItems.greenStardust, 1));
+            health = 225;
+            speed = 0.1010f;
+            displayedSpeed = 13f;
+        }};
+        stainlessDuct = new Duct("stainless-duct"){{
+            requirements(Category.distribution, with(SFWarItems.ferrum, 1, SFWarItems.chromium, 1));
+            health = 450;
+            speed = 6f;
+        }};
+        nyctoDuct = new Duct("nycto-duct"){{
+            requirements(Category.distribution, with(SFWarItems.ferrum, 1, SFWarItems.chromium, 1));
+            health = 1250;
+            speed = 7f;
         }};
         luminosityCondenser = new ForceProjector("luminosity-condenser"){{
             requirements(Category.effect, BuildVisibility.shown, with());
@@ -208,10 +228,22 @@ public class NebulaeBlocks {
             craftTime = 90f;
             size = 3;
             hasItems = true;
-            itemCapacity = 20;
+            itemCapacity = 80;
 
             consumeItem(Items.coal, 10);
         }};
+        /*electricSiliconCrucible = new GenericCrafter("electric-silicon-crucible"){{
+            requirements(Category.crafting, with(Items.titanium, 75, Items.graphite, 25, SFWarItems.blueStardust, 25));
+
+            outputItem = new ItemStack(Items.silicon, 1);
+            size = 3;
+            itemCapacity = 25;
+            craftTime = 15f;
+            consumesPower = true;
+
+            consumeItem(Items.sand, 1);
+            consumePower(5f);
+        }};*/
         stardustCrystallizer = new MultiRecipeCrafter("stardust-crystallizer"){{
             requirements(Category.crafting, with(SFWarItems.blueStardust, 50, SFWarItems.greenStardust, 150, Items.copper, 750, Items.titanium, 250, Items.metaglass, 125, Items.graphite, 325));
             consumePower(4f);
@@ -221,15 +253,15 @@ public class NebulaeBlocks {
             liquidCapacity = 200;
             recipes.add(new Recipe[]{
                     new Recipe(20)
-                            .consumeItems(ItemStack.with(SFWarItems.greenStardust, 1, Items.lead, 5))
+                            .consumeItems(ItemStack.with(SFWarItems.greenStardust, 1, Items.lead, 2))
                             .consumeLiquid(SFWarLiquids.gaseousNyctar, 0.1f)
                             .outputItem(SFWarItems.crystallizedGreenStardust, 1),
                     new Recipe(40)
-                            .consumeItems(ItemStack.with(SFWarItems.blueStardust, 1, Items.titanium, 5))
+                            .consumeItems(ItemStack.with(SFWarItems.blueStardust, 1, Items.titanium, 3))
                             .consumeLiquid(SFWarLiquids.gaseousNyctar, 0.2f)
                             .outputItem(SFWarItems.crystallizedBlueStardust, 1),
                     new Recipe(60)
-                            .consumeItems(ItemStack.with(SFWarItems.purpleStardust, 1, Items.plastanium, 2, Items.sporePod, 3))
+                            .consumeItems(ItemStack.with(SFWarItems.purpleStardust, 1, Items.plastanium, 2, Items.sporePod, 2))
                             .consumeLiquid(SFWarLiquids.liquidNyctar, 0.25f)
                             .outputItem(SFWarItems.crystallizedPurpleStardust, 1),
                     new Recipe(80)

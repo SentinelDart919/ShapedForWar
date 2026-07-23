@@ -44,7 +44,7 @@ public class NebulaeBlocks {
             // cores
         domusLucis, castellumLucis, arxLucis,
             // conveyors & ducts
-        dustConveyor, stainlessDuct, nyctoDuct,
+        dustConveyor, stainlessDuct,
             // raw production
         greenStardustPlant, blueStardustFormationPlant,
             // Nyctar
@@ -107,17 +107,13 @@ public class NebulaeBlocks {
             requirements(Category.distribution, with(Items.copper, 1, SFWarItems.greenStardust, 1));
             health = 225;
             speed = 0.1010f;
-            displayedSpeed = 13f;
+            itemCapacity = 5;
+            displayedSpeed = 15f;
         }};
         stainlessDuct = new Duct("stainless-duct"){{
-            requirements(Category.distribution, with(/*SFWarItems.ferrum, 1, SFWarItems.chromium, 1)*/));
-            health = 450;
-            speed = 4f;
-        }};
-        nyctoDuct = new Duct("nycto-duct"){{
             requirements(Category.distribution, with(SFWarItems.ferrum, 1, SFWarItems.chromium, 1));
-            health = 1250;
-            speed = 3f;
+            health = 450;
+            speed = 60f/18f;
         }};
         luminosityCondenser = new ForceProjector("luminosity-condenser"){{
             requirements(Category.effect, BuildVisibility.shown, with());

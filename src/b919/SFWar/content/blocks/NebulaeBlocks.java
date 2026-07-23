@@ -110,14 +110,14 @@ public class NebulaeBlocks {
             displayedSpeed = 13f;
         }};
         stainlessDuct = new Duct("stainless-duct"){{
-            requirements(Category.distribution, with(SFWarItems.ferrum, 1, SFWarItems.chromium, 1));
+            requirements(Category.distribution, with(/*SFWarItems.ferrum, 1, SFWarItems.chromium, 1)*/));
             health = 450;
-            speed = 6f;
+            speed = 4f;
         }};
         nyctoDuct = new Duct("nycto-duct"){{
             requirements(Category.distribution, with(SFWarItems.ferrum, 1, SFWarItems.chromium, 1));
             health = 1250;
-            speed = 7f;
+            speed = 3f;
         }};
         luminosityCondenser = new ForceProjector("luminosity-condenser"){{
             requirements(Category.effect, BuildVisibility.shown, with());
